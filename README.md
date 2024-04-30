@@ -1,5 +1,3 @@
-# Frontend Project Structure and Integration Guide
-
 This guide provides a detailed overview of setting up a frontend project using React, TypeScript, TailwindCSS, Axios, TanStack Query, Redux Toolkit, and Vite.
 
 ## Project Structure Overview
