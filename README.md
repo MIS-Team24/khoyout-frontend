@@ -11,7 +11,7 @@ This guide provides a detailed overview of setting up a frontend project using R
 - `src/routes/`: App routes.
 - `src/store/`: Redux store configuration.
 - `src/styles/`: Global styles and Tailwind configuration.
-- `src/utils/`: Utility functions.
+- `src/utils/`: Utility fjlgfjywcunctions.
 - `src/views/`: Collect pages components.
 - `main.tsx`: Entry point.
 
