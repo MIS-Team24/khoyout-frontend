@@ -1,16 +1,10 @@
-// import React from 'react';
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
+import { Button, Input } from "@/components/ui";
 
 function App() {
   return (
     <header>
-      <SignedOut>
-        <SignInButton />
-        <SignUpButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+      <Button variant="default">Primary</Button>
+      <Input placeholder="Enter your name" />
     </header>
   );
 }
