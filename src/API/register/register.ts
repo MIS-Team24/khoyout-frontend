@@ -4,11 +4,12 @@ type API_RegisterBody = {
   email: string;
   fullName: string;
   password: string;
-  repeatPassword: string;
+  confirmPassword: string;
 };
 
-export default function register(data: API_RegisterBody) {
+export function register(data: API_RegisterBody) {
   return client.post("/auth/register", {
-    data,
+    ...data,
+    repeatPassword: data.confirmPassword,
   });
 }
