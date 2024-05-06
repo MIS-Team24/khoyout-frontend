@@ -41,6 +41,9 @@ importers:
       framer-motion:
         specifier: ^11.0.28
         version: 11.0.28(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      input-otp:
+        specifier: ^1.2.4
+        version: 1.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       lucide-react:
         specifier: ^0.377.0
         version: 0.377.0(react@18.2.0)
@@ -1361,6 +1364,12 @@ packages:
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
+
+  input-otp@1.2.4:
+    resolution: {integrity: sha512-md6rhmD+zmMnUh5crQNSQxq3keBRYvE3odbr4Qb9g2NWzQv9azi+t1a3X4TBTbh98fsGHgEEJlzbe1q860uGCA==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
 
   is-binary-path@2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
@@ -3268,6 +3277,11 @@ snapshots:
       wrappy: 1.0.2
 
   inherits@2.0.4: {}
+
+  input-otp@1.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
 
   is-binary-path@2.1.0:
     dependencies:

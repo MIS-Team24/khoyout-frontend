@@ -10,3 +10,10 @@ export {
   FormLabel,
   FormMessage,
 } from "./form";
+
+export {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "./input-otp";
