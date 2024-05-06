@@ -18,11 +18,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { API_SuccessfullAuth } from "@/API/auth";
 import { stateSetNewAuthUser, userData } from "@/store/features/users";
 import { useDispatch } from "react-redux";
-import { SystemAPIError } from "@/API/APIError";
 import { LoadingState } from "@/components/customUi";
 
 const formSchema = z
@@ -43,6 +42,7 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 
+// TODO: Remove this function
 function wait(time: number) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -67,47 +67,27 @@ export default function RegisterForm() {
   });
 
   const handleSuccessfulLogin = (data: AxiosResponse<API_SuccessfullAuth>) => {
-    const responseData = data.data as API_SuccessfullAuth;
-    localStorage.setItem("access_token", responseData.access_token);
-    const userData: userData = responseData as userData;
+    const userData: userData = data.data as API_SuccessfullAuth;
     dispatch(stateSetNewAuthUser({ user: userData }));
-    toast({
-      title: "Regsiter Successful",
-      description: "You have successfully Registered.",
-      variant: "default",
-    });
-    navigate({ to: "/" });
-  };
-
-  const handleFailedLogin = (data: Error) => {
-    const AxiosData = data as AxiosError;
-    const responseData = AxiosData.response?.data as SystemAPIError;
-
-    if (responseData) {
-      toast({
-        title: "Failed to Regsiter",
-        description: responseData.error ? responseData.error : "Unknown Error.",
-        variant: "destructive",
-      });
-    } else {
-      toast({
-        title: "Failed to Regsiter",
-        description: "Unexpected Error, please contact the site owner.",
-        variant: "destructive",
-      });
-    }
+    navigate({ to: "/otp" });
   };
 
   const registrationMutation = useMutation({
     mutationFn: register,
+    onSuccess: handleSuccessfulLogin,
+    onError: () => {
+      toast({
+        title: "Registration Failed",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    // TODO: Remove this function
     wait(2000).then(() => console.log(values));
-    // registrationMutation.mutate(values, {
-    //   onSuccess: handleSuccessfulLogin,
-    //   onError: handleFailedLogin,
-    // });
+    // registrationMutation.mutate(values);
   }
 
   return (
