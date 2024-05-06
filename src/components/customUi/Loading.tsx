@@ -1,8 +1,10 @@
-export default function Loading() {
+import { cn } from "@/lib/utils";
+
+export default function Loading({ className }: { className?: string }) {
   return (
     <div className="flex items-center justify-center">
       <svg
-        className="-ml-1 mr-3 h-6 w-6 animate-spin text-white"
+        className={cn("-ml-1 mr-3 h-6 w-6 animate-spin text-white", className)}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
