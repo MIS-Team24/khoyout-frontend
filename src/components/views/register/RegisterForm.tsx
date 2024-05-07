@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { HistoryState, Link, useNavigate } from "@tanstack/react-router";
 import { Mail, UserRound, Lock, EyeOff, Eye } from "lucide-react";
 import { register } from "@/API/register/register";
 import { useMutation } from "@tanstack/react-query";
@@ -42,11 +42,6 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 
-// TODO: Remove this function
-function wait(time: number) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState({
     password: false,
@@ -66,10 +61,14 @@ export default function RegisterForm() {
     },
   });
 
+  interface state extends HistoryState {
+    from: string;
+  }
+
   const handleSuccessfulLogin = (data: AxiosResponse<API_SuccessfullAuth>) => {
     const userData: userData = data.data as API_SuccessfullAuth;
     dispatch(stateSetNewAuthUser({ user: userData }));
-    navigate({ to: "/otp" });
+    navigate({ to: "/otp", state: { from: "/register" } as state });
   };
 
   const registrationMutation = useMutation({
@@ -85,9 +84,7 @@ export default function RegisterForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // TODO: Remove this function
-    wait(2000).then(() => console.log(values));
-    // registrationMutation.mutate(values);
+    registrationMutation.mutate(values);
   }
 
   return (
