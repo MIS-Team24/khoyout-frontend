@@ -1,10 +1,13 @@
 export type API_User = {
-  name: string;
+  fullName: string;
   email: string;
-  emailActivated: boolean;
+  phone: string;
+  createdAt: Date;
 };
 
 export type API_SuccessfullAuth = {
   user: API_User;
-  access_token: string;
+  otp: {
+    keyVal: string;
+  };
 };
