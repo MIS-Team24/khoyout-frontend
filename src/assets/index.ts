@@ -1,4 +1,4 @@
-import SideImg from "./side-img.webp";
+import sideImg from "./side-img.webp";
 import mainLogo from "./Logo.svg";
 
-export { SideImg, mainLogo };
+export { sideImg, mainLogo };
