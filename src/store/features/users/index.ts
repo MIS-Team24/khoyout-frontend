@@ -7,7 +7,9 @@ type UserState = {
 
 export type userData = {
   user: API_User;
-  access_token: string;
+  otp: {
+    keyVal: string;
+  };
 };
 
 const InitialState: UserState = {
@@ -15,7 +17,7 @@ const InitialState: UserState = {
 };
 
 const mainStateReducer = createSlice({
-  name: "user",
+  name: "users",
   initialState: InitialState,
   reducers: {
     stateSetNewAuthUser: (state, action: PayloadAction<UserState>) => {
