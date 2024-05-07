@@ -2,7 +2,7 @@ import { HistoryState, Link, useNavigate } from "@tanstack/react-router";
 import { Mail, UserRound, Lock, EyeOff, Eye } from "lucide-react";
 import { register } from "@/API/register/register";
 import { useMutation } from "@tanstack/react-query";
-import { SideImg, mainLogo } from "@/assets";
+import { sideImg, mainLogo } from "@/assets";
 import {
   Button,
   Input,
@@ -272,7 +272,7 @@ export default function RegisterForm() {
       </div>
       <div className="hidden h-full w-[40%] md:block">
         <img
-          src={SideImg}
+          src={sideImg}
           alt="side-img"
           className="h-full w-full object-cover"
         />

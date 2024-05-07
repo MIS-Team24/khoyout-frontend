@@ -20,7 +20,7 @@ import {
   InputOTPSeparator,
 } from "@/components/ui";
 import { toast } from "@/components/ui/use-toast";
-import { mainLogo, SideImg } from "@/assets";
+import { mainLogo, sideImg } from "@/assets";
 import { useNavigate } from "@tanstack/react-router";
 import { LoadingState } from "@/components/customUi";
 import { useSelector } from "react-redux";
@@ -246,7 +246,7 @@ export default function OTP() {
       </div>
       <div className="hidden h-full w-[40%] md:block">
         <img
-          src={SideImg}
+          src={sideImg}
           alt="side-img"
           className="h-full w-full object-cover"
         />

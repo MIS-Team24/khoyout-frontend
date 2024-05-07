@@ -1,1 +1,1 @@
-export {default as LoadingState} from './Loading';
+export { default as LoadingState } from "@/components/customUi/Loading";
