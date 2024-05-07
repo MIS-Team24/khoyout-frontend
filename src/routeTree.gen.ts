@@ -16,22 +16,10 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
-const RegisterLazyImport = createFileRoute('/register')()
-const OtpLazyImport = createFileRoute('/otp')()
 const ForgetPasswordLazyImport = createFileRoute('/forget-password')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
-
-const RegisterLazyRoute = RegisterLazyImport.update({
-  path: '/register',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/register.lazy').then((d) => d.Route))
-
-const OtpLazyRoute = OtpLazyImport.update({
-  path: '/otp',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/otp.lazy').then((d) => d.Route))
 
 const ForgetPasswordLazyRoute = ForgetPasswordLazyImport.update({
   path: '/forget-password',
@@ -53,14 +41,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/otp': {
-      preLoaderRoute: typeof OtpLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/register': {
-      preLoaderRoute: typeof RegisterLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/forget-password': {
       preLoaderRoute: typeof ForgetPasswordLazyImport
       parentRoute: typeof rootRoute
@@ -76,6 +56,7 @@ export const routeTree = rootRoute.addChildren([
   OtpLazyRoute,
   RegisterLazyRoute,
 ,
+  IndexLazyRoute,
   ForgetPasswordLazyRoute,
 ])
 
