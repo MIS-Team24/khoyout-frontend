@@ -23,6 +23,7 @@ import { API_SuccessfullAuth } from "@/API/auth";
 import { stateSetNewAuthUser, userData } from "@/store/features/users";
 import { useDispatch } from "react-redux";
 import { LoadingState } from "@/components/customUi";
+import { cn } from "@/lib/utils";
 
 const formSchema = z
   .object({
@@ -246,7 +247,11 @@ export default function RegisterForm() {
                   )}
                 />
                 <Button
-                  className="!my-0 !mt-[1.75rem] w-full rounded-2xl bg-primary py-6 text-2xl font-medium"
+                  className={cn(
+                    "!my-0 !mt-[1.75rem] w-full rounded-2xl py-6 text-2xl font-medium",
+                    registrationMutation.isPending &&
+                      "cursor-not-allowed bg-primary/80",
+                  )}
                   type="submit"
                   disabled={registrationMutation.isPending}
                 >
