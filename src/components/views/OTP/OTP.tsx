@@ -18,6 +18,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
   InputOTPSeparator,
+  FormMessage,
 } from "@/components/ui";
 import { toast } from "@/components/ui/use-toast";
 import { mainLogo, sideImg } from "@/assets";
@@ -25,13 +26,16 @@ import { useNavigate } from "@tanstack/react-router";
 import { LoadingState } from "@/components/customUi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { cn } from "@/lib/utils";
 
 interface state extends HistoryState {
   from: string;
 }
 
 const FormSchema = z.object({
-  pin: z.string().min(4),
+  pin: z.string().min(4, {
+    message: "Please enter a valid OTP code.",
+  }),
 });
 
 export default function OTP() {
@@ -50,7 +54,9 @@ export default function OTP() {
     select: (state) => state.location.state as state,
   });
 
-  function comingfromRegister() {
+  console.log(selected);
+
+  function comingFromRoute() {
     if (selected) {
       if (selected.from === "/register") {
         return true;
@@ -62,18 +68,16 @@ export default function OTP() {
   }
 
   function OTPFn(data: z.infer<typeof FormSchema>) {
-    if (comingfromRegister()) {
+    if (comingFromRoute()) {
       return verifyEmail({
-        // TODO: Replace with actual email
-        email: user?.user.email,
-        keyVal: user?.otp.keyVal,
+        email: user?.user.email ?? "",
+        keyVal: user?.otp.keyVal ?? "",
         code: data.pin,
       });
     } else {
       return validateOTP({
-        // TODO: Replace with actual email
-        email: user?.user.email,
-        keyVal: user?.otp.keyVal,
+        email: user?.user.email ?? "",
+        keyVal: user?.otp.keyVal ?? "",
         code: data.pin,
       });
     }
@@ -82,14 +86,14 @@ export default function OTP() {
   const otpMutaiton = useMutation({
     mutationFn: OTPFn,
     onSuccess: () => {
-      if (comingfromRegister()) {
-        comingfromRegister();
+      if (comingFromRoute()) {
+        comingFromRoute();
         toast({
           title: "Regsiter Successful",
           description: "You have successfully Registered.",
           variant: "default",
         });
-        setTimeout(() => navigate({ to: "/" }), 1000);
+        setTimeout(() => navigate({ to: "/login" }), 1000);
       } else {
         navigate({ to: "/reset-password" });
       }
@@ -100,7 +104,7 @@ export default function OTP() {
 
       if (responseData) {
         toast({
-          title: comingfromRegister()
+          title: comingFromRoute()
             ? "Registration Failed"
             : "OTP Verification Failed",
           description: responseData.error
@@ -110,7 +114,7 @@ export default function OTP() {
         });
       } else {
         toast({
-          title: comingfromRegister()
+          title: comingFromRoute()
             ? "Registration Failed"
             : "OTP Verification Failed",
           description: "Unexpected Error, please contact the site owner.",
@@ -136,7 +140,6 @@ export default function OTP() {
     onError: (data: Error) => {
       const AxiosData = data as AxiosError;
       const responseData = AxiosData.response?.data as SystemAPIError;
-
       if (responseData) {
         toast({
           title: "OTP Sending Failed",
@@ -169,7 +172,12 @@ export default function OTP() {
             <h1 className="text-[2.25rem] font-medium leading-none text-[#1F1F29] lg:text-[2.5rem] lg:leading-normal">
               Enter Verification Code
             </h1>
-            <p className="text-base font-normal leading-[1.17188rem] text-secondary lg:text-xl lg:leading-8">
+            <p
+              className={cn(
+                "text-base font-normal leading-[1.17188rem] lg:text-xl lg:leading-8",
+                otpMutaiton.isError ? "text-red-500" : "text-secondary",
+              )}
+            >
               Please check your Email, we have sent you a verification code that
               will allow you to reset password
             </p>
@@ -184,38 +192,41 @@ export default function OTP() {
                   control={form.control}
                   name="pin"
                   render={({ field }) => (
-                    <FormItem className="flex w-full flex-col items-center justify-center">
+                    <FormItem>
                       <FormControl>
                         <InputOTP maxLength={6} {...field}>
-                          <InputOTPGroup>
-                            <InputOTPSlot
-                              index={0}
-                              className="h-[3.3125rem] w-[4.625rem] !rounded-[0.5rem] bg-[#F3EBF1] text-[#1F1F29] ring-primary"
-                            />
-                            <InputOTPSeparator className="text-transparent" />
-                            <InputOTPSlot
-                              index={1}
-                              className="h-[3.3125rem] w-[4.625rem] !rounded-[0.5rem] bg-[#F3EBF1] text-[#1F1F29] ring-primary"
-                            />
-                            <InputOTPSeparator className="text-transparent" />
-                            <InputOTPSlot
-                              index={2}
-                              className="h-[3.3125rem] w-[4.625rem] !rounded-[0.5rem] bg-[#F3EBF1] text-[#1F1F29] ring-primary"
-                            />
-                            <InputOTPSeparator className="text-transparent" />
-                            <InputOTPSlot
-                              index={3}
-                              className="h-[3.3125rem] w-[4.625rem] !rounded-[0.5rem] bg-[#F3EBF1] text-[#1F1F29] ring-primary"
-                            />
+                          <InputOTPGroup className="flex w-full items-center justify-center">
+                            {Array.from({ length: 4 })
+                              .fill(0)
+                              .map((_, index) => (
+                                <div className="flex" key={index}>
+                                  <InputOTPSlot
+                                    key={index}
+                                    index={index}
+                                    className={cn(
+                                      "h-[3.3125rem] w-[4.625rem] !rounded-[0.5rem] bg-[#F3EBF1] text-[1.5rem] font-normal leading-10",
+                                      otpMutaiton.isError
+                                        ? "text-red-500 ring-red-500"
+                                        : "text-[#1F1F29] ring-primary",
+                                    )}
+                                  />
+                                  {index < 3 && (
+                                    <InputOTPSeparator className="text-transparent" />
+                                  )}
+                                </div>
+                              ))}
                           </InputOTPGroup>
                         </InputOTP>
                       </FormControl>
+                      <FormMessage className="ml-4" />
                     </FormItem>
                   )}
                 />
-
                 <Button
-                  className="!my-0 !mt-[1.75rem] w-full rounded-2xl bg-primary py-6 text-2xl font-medium"
+                  className={cn(
+                    "!my-0 !mt-[1.75rem] w-full rounded-2xl py-6 text-2xl font-medium",
+                    otpMutaiton.isPending && "cursor-not-allowed bg-primary/80",
+                  )}
                   type="submit"
                   disabled={otpMutaiton.isPending}
                 >
@@ -236,7 +247,7 @@ export default function OTP() {
             <Button
               variant="link"
               className="p-0 font-semibold text-primary hover:no-underline"
-              onClick={() => sendOtpMutation.mutate()}
+              onClick={() => sendOtpMutation.mutate(user?.user.email ?? "")}
               disabled={sendOtpMutation.isPending}
             >
               Resend Code
