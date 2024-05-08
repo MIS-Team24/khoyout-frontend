@@ -2,6 +2,7 @@ export type API_User = {
   fullName: string;
   email: string;
   phone: string;
+  emailActivated: boolean;
   createdAt: Date;
 };
 
