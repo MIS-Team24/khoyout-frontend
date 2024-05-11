@@ -14,7 +14,7 @@ const NavigationBar = forwardRef(function (_, ref) {
   return (
     <motion.nav
       className={cn(
-        `fixed top-0 z-10 w-full overflow-hidden bg-white shadow-[rgba(33,33,33,0.1)_0px_1px_0px_0px] lg:h-20`,
+        `fixed top-0 z-20 w-full overflow-hidden bg-white shadow-[rgba(33,33,33,0.1)_0px_1px_0px_0px] lg:h-20`,
         isExpanded ? "shadow-[rgba(33,33,33,0.1)_0px_3px_0px_0px] " : "",
       )}
       ref={ref as RefObject<HTMLDivElement>}
