@@ -14,11 +14,11 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
 export default function Inspiration() {
-  const autoplay = useRef(Autoplay({ delay: 100000, stopOnInteraction: true }));
+  const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
     <section className="my-[5rem]">
-      <div className="mx-auto h-[34rem] w-full max-w-[90rem] px-4">
+      <div className="mx-auto min-h-[34rem] w-full max-w-[90rem] px-4">
         <div className="flex w-full items-center justify-between">
           <h2 className="text-[1.3rem] font-normal sm:text-[1.5rem] md:text-[2rem]">
             Inspiration For You
@@ -43,7 +43,7 @@ export default function Inspiration() {
                   key={`inspiration-image-${i}`}
                   className="h-[27.8rem] w-[23rem] basis-full overflow-hidden rounded-[0.5rem] md:basis-1/2 lg:basis-1/3 2xl:basis-1/4"
                 >
-                  <div className="group relative">
+                  <div className="group relative h-full w-full">
                     <img
                       src={src}
                       alt={alt}
@@ -51,8 +51,8 @@ export default function Inspiration() {
                     />
                     <motion.span
                       initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.2 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
                       className="absolute inset-0 z-50 hidden items-end justify-center space-x-1 rounded-[0.5rem] bg-gradient-to-t from-primary/70 to-transparent pb-4 text-[1.3rem] leading-[2rem] text-white group-hover:flex"
                     >
                       <span>Designed by</span>
