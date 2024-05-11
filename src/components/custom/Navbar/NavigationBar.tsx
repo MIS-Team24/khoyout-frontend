@@ -2,24 +2,63 @@ import miniLogo from "@/assets/mini-logo.svg";
 import { Button } from "@/components/ui";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { initialTabs as tabs } from "./NavLinks";
-import { AnimatePresence, motion } from "framer-motion";
-import { RefObject, forwardRef } from "react";
+import { motion } from "framer-motion";
+import { RefObject, forwardRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const NavigationBar = forwardRef(function (_, ref) {
   const router = useRouterState();
   const matches = router.matches;
+  const [isExpanded, setIsExpanded] = useState<boolean>();
 
   return (
-    <nav
-      className="fixed top-0 z-10 h-20 w-full bg-white shadow-[rgba(33,33,33,0.1)_0px_1px_0px_0px]"
+    <motion.nav
+      className={cn(
+        `fixed top-0 z-10 w-full overflow-hidden bg-white shadow-[rgba(33,33,33,0.1)_0px_1px_0px_0px] lg:h-20`,
+        isExpanded ? "shadow-[rgba(33,33,33,0.1)_0px_3px_0px_0px] " : "",
+      )}
       ref={ref as RefObject<HTMLDivElement>}
+      animate={isExpanded ? { height: "auto" } : { height: "70px" }}
     >
-      <div className="mx-auto flex h-full w-4/5 items-center justify-between text-xl">
-        <div className="h-12 w-20">
+      <Button
+        className="absolute right-5 top-0 w-14 translate-y-1/2 rounded-none bg-transparent p-0 hover:bg-transparent lg:hidden"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <motion.div className="flex h-full w-full flex-col gap-2">
+          <motion.div
+            className="h-2 w-full bg-primary"
+            animate={
+              isExpanded
+                ? {
+                    transform: "translateY(14px) rotate(45deg)",
+                    borderRadius: "10rem",
+                  }
+                : { transform: "none" }
+            }
+          ></motion.div>
+          <motion.div
+            className="h-2 w-full bg-primary"
+            animate={isExpanded ? { opacity: 0 } : { opacity: 1 }}
+          ></motion.div>
+          <motion.div
+            className="h-2 w-full bg-primary"
+            animate={
+              isExpanded
+                ? {
+                    transform: " translateY(-18px) rotate(-45deg)",
+                    borderRadius: "10rem",
+                  }
+                : { transform: "none" }
+            }
+          ></motion.div>
+        </motion.div>
+      </Button>
+      <div className="lg: mx-auto mb-8 mt-16 flex flex-col items-center justify-between pb-0 text-xl lg:my-0 lg:h-full lg:w-full lg:flex-row lg:pb-0 xl:w-4/5 xl:px-2">
+        <div className="absolute left-4 top-3 h-12 w-20 lg:static">
           <img className="w-full" src={miniLogo} />
         </div>
         <div>
-          <ul className="flex h-full items-center gap-6">
+          <ul className="flex h-full flex-col items-center gap-6 lg:flex-row">
             {tabs.map((item) => {
               const isMatched =
                 matches.findIndex(
@@ -27,19 +66,22 @@ const NavigationBar = forwardRef(function (_, ref) {
                     e.pathname.toLowerCase() === `${item.path.toLowerCase()}`,
                 ) !== -1;
               return (
-                <li key={item.label} className="relative h-full">
+                <motion.li
+                  key={item.label}
+                  className="relative h-full"
+                  layout
+                  layoutRoot
+                >
                   <Link to={item.path} className="py-8 text-xl">
                     {item.label}
                   </Link>
-                  <AnimatePresence>
-                    {isMatched ? (
-                      <motion.div
-                        className="absolute bottom-[-10px] h-0 w-full rounded-full border-2 border-primary"
-                        layoutId="underline"
-                      />
-                    ) : null}
-                  </AnimatePresence>
-                </li>
+                  {isMatched ? (
+                    <motion.div
+                      className="absolute bottom-[-10px] h-0 w-full rounded-full border-2 border-primary"
+                      layoutId="underline"
+                    />
+                  ) : null}
+                </motion.li>
               );
             })}
           </ul>
@@ -75,7 +117,7 @@ const NavigationBar = forwardRef(function (_, ref) {
           </div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 });
 
