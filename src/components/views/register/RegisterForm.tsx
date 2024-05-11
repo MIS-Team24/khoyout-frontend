@@ -19,11 +19,15 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { AxiosResponse } from "axios";
-import { API_SuccessfullAuth } from "@/API/auth";
-import { stateSetNewAuthUser, userData } from "@/store/features/users";
-import { useDispatch } from "react-redux";
+import { API_SuccessfullRegister } from "@/API/auth";
 import { LoadingState } from "@/components/customUi";
 import { cn } from "@/lib/utils";
+
+type UserDate = {
+  Otp: {
+    keyVal: string;
+  };
+} & API_SuccessfullRegister;
 
 const formSchema = z
   .object({
@@ -49,7 +53,6 @@ export default function RegisterForm() {
     confirmPassword: false,
   });
   const { toast } = useToast();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -66,10 +69,28 @@ export default function RegisterForm() {
     from: string;
   }
 
-  const handleSuccessfulLogin = (data: AxiosResponse<API_SuccessfullAuth>) => {
-    const userData: userData = data.data as API_SuccessfullAuth;
-    dispatch(stateSetNewAuthUser({ user: userData }));
-    navigate({ to: "/otp", state: { from: "/register" } as state });
+  const handleSuccessfulLogin = (
+    data: AxiosResponse<API_SuccessfullRegister>,
+  ) => {
+    const userData: UserDate = data.data as API_SuccessfullRegister;
+    // dispatch(
+    //   stateSetNewAuthUser({
+    //     user: {
+    //       email: userData.user.email,
+    //       fullName: userData.user.fullName,
+    //       phone: userData.user.phone,
+    //       emailActivated: userData.user.emailActivated,
+    //     },
+    //   }),
+    // );
+    navigate({
+      to: "/otp",
+      state: {
+        from: "/register",
+        email: userData.user.email,
+        keyVal: userData.Otp.keyVal,
+      } as state,
+    });
   };
 
   const registrationMutation = useMutation({

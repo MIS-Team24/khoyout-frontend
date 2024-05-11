@@ -30,6 +30,8 @@ import { cn } from "@/lib/utils";
 
 interface state extends HistoryState {
   from: string;
+  email: string;
+  keyVal: string;
 }
 
 const FormSchema = z.object({
@@ -41,7 +43,7 @@ const FormSchema = z.object({
 export default function OTP() {
   const navigate = useNavigate();
 
-  const user = useSelector((state: RootState) => state.users.user);
+  const user = useSelector((state: RootState) => state.user.user);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -54,8 +56,6 @@ export default function OTP() {
     select: (state) => state.location.state as state,
   });
 
-  console.log(selected);
-
   function comingFromRoute() {
     if (selected) {
       if (selected.from === "/register") {
@@ -67,17 +67,19 @@ export default function OTP() {
     return false;
   }
 
+  console.log(selected);
+
   function OTPFn(data: z.infer<typeof FormSchema>) {
     if (comingFromRoute()) {
       return verifyEmail({
-        email: user?.user.email ?? "",
-        keyVal: user?.otp.keyVal ?? "",
+        email: selected?.email ?? "",
+        keyVal: selected?.keyVal ?? "",
         code: data.pin,
       });
     } else {
       return validateOTP({
-        email: user?.user.email ?? "",
-        keyVal: user?.otp.keyVal ?? "",
+        email: selected?.email ?? "",
+        keyVal: selected?.keyVal ?? "",
         code: data.pin,
       });
     }
