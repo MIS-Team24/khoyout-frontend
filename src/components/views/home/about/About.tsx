@@ -13,18 +13,17 @@ const spring = {
 export default function About() {
   return (
     <section className="my-[5rem]">
-      <div className="mx-auto h-[65rem] w-[75rem]">
+      <div className="mx-auto h-full min-h-[65rem] w-full max-w-[75rem]">
         <div className="flex flex-col gap-y-8">
-          <h2 className="text-[2rem] font-normal leading-normal">
+          <h2 className="text-center text-[2rem] font-normal leading-normal xl:text-start">
             About Khoyout
           </h2>
-          <div className="flex w-full items-center justify-between gap-x-[4.75rem]">
-            {/* fade in left */}
+          <div className="flex w-full flex-col items-center justify-between gap-y-10 px-4 xl:flex-row xl:gap-y-0 xl:px-0">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={spring}
-              className="h-[30rem] w-[32rem]"
+              className="w-[25rem] sm:w-[32rem]"
             >
               <img
                 src={aboutImg}
@@ -36,9 +35,9 @@ export default function About() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={spring}
-              className="space-y-[1.5rem]"
+              className="w-full max-w-[37rem] space-y-[1.5rem]"
             >
-              <p className="w-[37rem] text-[1.5rem] font-normal leading-[2rem] text-[#49454F]">
+              <p className="text-center text-[1.3rem] font-normal leading-normal text-[#49454F] md:text-[1.5rem] md:leading-[2rem] xl:text-start">
                 Khoyout is your one-stop destination for effortlessly finding
                 the perfect tailor to suit your needs, anywhere and everywhere
               </p>
@@ -56,21 +55,21 @@ export default function About() {
             </motion.div>
           </div>
 
-          <div className="flex w-full items-center justify-between gap-x-[4.75rem]">
+          <div className="flex w-full flex-col-reverse items-center justify-between gap-y-10 px-4 xl:flex-row xl:gap-y-0 xl:px-0">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={spring}
-              className="flex flex-col items-center justify-center gap-y-[1.5rem]"
+              className="flex w-full max-w-[37rem] flex-col items-center justify-center gap-y-[1.5rem]"
             >
-              <p className="w-[37rem] text-start text-[1.5rem] font-normal leading-[2rem] text-[#49454F]">
+              <p className="text-center text-[1.3rem] font-normal leading-normal text-[#49454F] md:text-[1.5rem] md:leading-[2rem] xl:text-start">
                 It helps you easily schedule appointments with your chosen
                 tailor after exploring and choosing from our wide range of
                 tailors
               </p>
               <Button
                 type="button"
-                className="h-[3rem] w-[23rem] rounded-[1rem] text-[1.5rem] font-medium leading-normal hover:bg-[#9E2B7A]"
+                className="h-[2.5rem] w-[18rem] rounded-[1rem] text-[1.2rem] font-medium leading-normal hover:bg-[#9E2B7A] sm:h-[3rem] sm:w-[23rem] sm:text-[1.5rem]"
               >
                 Book Now
               </Button>
@@ -79,7 +78,7 @@ export default function About() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={spring}
-              className="h-[27.87rem] w-[30rem]"
+              className="w-[23rem] sm:w-[30rem]"
             >
               <img
                 src={bookImg}
