@@ -1,9 +1,9 @@
-import ForgetPass from "@/components/views/forgetPass/ForgetPass";
+import { ForgetPassForm } from "@/components/views/forgetPass";
 
-export default function () {
+export default function ForgetPass() {
   return (
     <main>
-      <ForgetPass />
+      <ForgetPassForm />
     </main>
   );
 }
