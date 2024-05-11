@@ -15,7 +15,7 @@ export default function Hero() {
             </p>
           </div>
           <form className="w-full">
-            <div className="flex h-[4.5rem] items-center justify-center gap-x-0.5 rounded-xl bg-[#F3EBF1] p-4 ring-1 ring-transparent focus-within:ring-primary">
+            <div className="flex h-[4rem] items-center justify-center gap-x-0.5 rounded-xl bg-[#F3EBF1] p-4 ring-1 ring-transparent focus-within:ring-primary">
               <Search size={27} className="text-secondary" />
               <Input
                 type="search"
