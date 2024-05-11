@@ -1,11 +1,12 @@
+import NavigatablePageWrapper from "@/components/custom/NavigatablePageWrapper";
 import { Hero, Inspiration, About } from "@/components/views/home";
 
 export default function Home() {
   return (
-    <main>
+    <NavigatablePageWrapper>
       <Hero />
       <Inspiration />
       <About />
-    </main>
+    </NavigatablePageWrapper>
   );
 }
