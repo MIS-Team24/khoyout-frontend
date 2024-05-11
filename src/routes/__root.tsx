@@ -7,7 +7,7 @@ export const Route = createRootRoute({
     <>
       <Outlet />
       <Toaster
-        position="top-right"
+        position="bottom-right"
         reverseOrder={false}
         toastOptions={{
           duration: 5000,
@@ -15,7 +15,7 @@ export const Route = createRootRoute({
             display: "inline-flex",
             padding: "1.5rem 1rem",
             alignItems: "center",
-            gap: "1rem",
+            gap: "0.25rem",
             borderRadius: "1rem",
             backgroundColor: "#F9F4F4",
           },
