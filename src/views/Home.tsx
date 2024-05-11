@@ -1,10 +1,12 @@
+import NavigatablePageWrapper from "@/components/custom/NavigatablePageWrapper";
+import { Hero, Inspiration, About } from "@/components/views/home";
+
 export default function Home() {
   return (
-    <div>
-      This is the main home page gjiaegjapgjasopge Lorem ipsum dolor sit amet
-      consectetur adipisicing elit. Quis veritatis aspernatur eum doloribus
-      provident minus blanditiis harum, obcaecati eveniet totam nulla deleniti
-      fuga deserunt ducimus ipsum quo est velit? Soluta.
-    </div>
+    <NavigatablePageWrapper>
+      <Hero />
+      <Inspiration />
+      <About />
+    </NavigatablePageWrapper>
   );
 }

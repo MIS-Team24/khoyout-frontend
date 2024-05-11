@@ -16,9 +16,53 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const RegisterLazyImport = createFileRoute('/register')()
+const OtpLazyImport = createFileRoute('/otp')()
+const InspirationLazyImport = createFileRoute('/inspiration')()
+const HomeLazyImport = createFileRoute('/home')()
+const ForgetPasswordLazyImport = createFileRoute('/forget-password')()
+const DesignersLazyImport = createFileRoute('/designers')()
+const ContactLazyImport = createFileRoute('/contact')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const RegisterLazyRoute = RegisterLazyImport.update({
+  path: '/register',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/register.lazy').then((d) => d.Route))
+
+const OtpLazyRoute = OtpLazyImport.update({
+  path: '/otp',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/otp.lazy').then((d) => d.Route))
+
+const InspirationLazyRoute = InspirationLazyImport.update({
+  path: '/inspiration',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/inspiration.lazy').then((d) => d.Route))
+
+const HomeLazyRoute = HomeLazyImport.update({
+  path: '/home',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/home.lazy').then((d) => d.Route))
+
+const ForgetPasswordLazyRoute = ForgetPasswordLazyImport.update({
+  path: '/forget-password',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/forget-password.lazy').then((d) => d.Route),
+)
+
+const DesignersLazyRoute = DesignersLazyImport.update({
+  path: '/designers',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/designers.lazy').then((d) => d.Route))
+
+const ContactLazyRoute = ContactLazyImport.update({
+  path: '/contact',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/contact.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
@@ -33,11 +77,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/contact': {
+      preLoaderRoute: typeof ContactLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/designers': {
+      preLoaderRoute: typeof DesignersLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/forget-password': {
+      preLoaderRoute: typeof ForgetPasswordLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/home': {
+      preLoaderRoute: typeof HomeLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/inspiration': {
+      preLoaderRoute: typeof InspirationLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/otp': {
+      preLoaderRoute: typeof OtpLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/register': {
+      preLoaderRoute: typeof RegisterLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([IndexLazyRoute])
+export const routeTree = rootRoute.addChildren([
+  IndexLazyRoute,
+  ContactLazyRoute,
+  DesignersLazyRoute,
+  ForgetPasswordLazyRoute,
+  HomeLazyRoute,
+  InspirationLazyRoute,
+  OtpLazyRoute,
+  RegisterLazyRoute,
+])
 
 /* prettier-ignore-end */
