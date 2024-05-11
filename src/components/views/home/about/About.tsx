@@ -60,7 +60,7 @@ export default function About() {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={spring}
-              className="flex w-full max-w-[37rem] flex-col items-center justify-center gap-y-[1.5rem]"
+              className="flex w-full max-w-[37rem] flex-col items-start justify-center gap-y-[1.5rem]"
             >
               <p className="text-center text-[1.3rem] font-normal leading-normal text-[#49454F] md:text-[1.5rem] md:leading-[2rem] xl:text-start">
                 It helps you easily schedule appointments with your chosen
