@@ -17,11 +17,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
 import { AxiosResponse } from "axios";
 import { API_SuccessfullRegister } from "@/API/auth";
 import { LoadingState } from "@/components/customUi";
 import { cn } from "@/lib/utils";
+import toast from "react-hot-toast";
 
 type UserDate = {
   Otp: {
@@ -52,7 +52,6 @@ export default function RegisterForm() {
     password: false,
     confirmPassword: false,
   });
-  const { toast } = useToast();
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -83,25 +82,24 @@ export default function RegisterForm() {
     //     },
     //   }),
     // );
-    navigate({
-      to: "/otp",
-      state: {
-        from: "/register",
-        email: userData.user.email,
-        keyVal: userData.Otp.keyVal,
-      } as state,
-    });
+    toast.success("Successful Sign Up");
+    setTimeout(() => {
+      navigate({
+        to: "/otp",
+        state: {
+          from: "/register",
+          email: userData.user.email,
+          keyVal: userData.Otp.keyVal,
+        } as state,
+      });
+    }, 1000);
   };
 
   const registrationMutation = useMutation({
     mutationFn: register,
     onSuccess: handleSuccessfulLogin,
     onError: () => {
-      toast({
-        title: "Registration Failed",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
+      toast.error("Registration Failed");
     },
   });
 

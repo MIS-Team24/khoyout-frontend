@@ -20,7 +20,7 @@ import {
   InputOTPSeparator,
   FormMessage,
 } from "@/components/ui";
-import { toast } from "@/components/ui/use-toast";
+import toast from "react-hot-toast";
 import { mainLogo, sideImg } from "@/assets";
 import { useNavigate } from "@tanstack/react-router";
 import { LoadingState } from "@/components/customUi";
@@ -90,11 +90,8 @@ export default function OTP() {
     onSuccess: () => {
       if (comingFromRoute()) {
         comingFromRoute();
-        toast({
-          title: "Regsiter Successful",
-          description: "You have successfully Registered.",
-          variant: "default",
-        });
+        toast.success("Awesome! Successfully Verified");
+
         setTimeout(() => navigate({ to: "/login" }), 1000);
       } else {
         navigate({ to: "/reset-password" });
@@ -103,25 +100,12 @@ export default function OTP() {
     onError: (data: Error) => {
       const AxiosData = data as AxiosError;
       const responseData = AxiosData.response?.data as SystemAPIError;
-
       if (responseData) {
-        toast({
-          title: comingFromRoute()
-            ? "Registration Failed"
-            : "OTP Verification Failed",
-          description: responseData.error
-            ? responseData.error
-            : "Unknown Error.",
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: comingFromRoute()
-            ? "Registration Failed"
-            : "OTP Verification Failed",
-          description: "Unexpected Error, please contact the site owner.",
-          variant: "destructive",
-        });
+        let error = "";
+        comingFromRoute()
+          ? (error = "Registration Failed")
+          : (error = "OTP Verification Failed");
+        toast.error(error);
       }
     },
   });

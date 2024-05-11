@@ -17,8 +17,8 @@ import { useMutation } from "@tanstack/react-query";
 import { sendOTP } from "@/API/OTP/OTP";
 import { LoadingState } from "@/components/customUi";
 import { cn } from "@/lib/utils";
-import { toast } from "@/components/ui/use-toast";
 import { HistoryState } from "@tanstack/react-router";
+import toast from "react-hot-toast";
 
 interface state extends HistoryState {
   from: string;
@@ -43,21 +43,12 @@ export default function ForgetPass() {
   const forgetPassMutation = useMutation({
     mutationFn: sendOTP,
     onSuccess: () => {
-      toast({
-        title: "Successfully Sent OTP Code to your Email",
-        description: "Verification code sent successfully",
-        variant: "default",
-      });
+      toast.success("Successfully Sent OTP Code to your Email");
       navigate({ to: "/otp", state: { from: "/forget-password" } as state });
     },
 
     onError: (error) => {
-      toast({
-        title: "Error Occurred while sending OTP Code",
-        description:
-          error.message ?? "An error occurred while sending OTP code",
-        variant: "destructive",
-      });
+      toast.error(error.message ?? "An error occurred while sending OTP code");
     },
   });
 
