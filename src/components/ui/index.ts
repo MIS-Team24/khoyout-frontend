@@ -17,3 +17,11 @@ export {
   InputOTPSeparator,
   InputOTPSlot,
 } from "./input-otp";
+
+export {
+  Carousel,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselContent,
+} from "./carousel";
