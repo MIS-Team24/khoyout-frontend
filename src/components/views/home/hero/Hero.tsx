@@ -3,7 +3,7 @@ import { Search, SlidersHorizontal } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="bg-hero-pattern h-screen w-full object-cover">
+    <section className="h-screen w-full bg-hero-pattern object-cover">
       <div className="flex h-full w-full items-center justify-start">
         <div className="flex w-[59%] flex-col gap-y-[4.44rem] pl-0 md:pl-[15.12rem]">
           <div>
@@ -15,7 +15,7 @@ export default function Hero() {
             </p>
           </div>
           <form className="w-full">
-            <div className="flex h-[4.5rem] items-center justify-center gap-x-0.5 rounded-xl bg-[#F3EBF1] p-4 ring-2 ring-transparent focus-within:ring-primary">
+            <div className="flex h-[4.5rem] items-center justify-center gap-x-0.5 rounded-xl bg-[#F3EBF1] p-4 ring-1 ring-transparent focus-within:ring-primary">
               <Search size={27} className="text-secondary" />
               <Input
                 type="search"
