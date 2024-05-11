@@ -16,11 +16,13 @@ export default function Inspiration() {
 
   return (
     <section className="my-[5rem]">
-      <div className="mx-auto h-[34rem] w-[90rem]">
+      <div className="mx-auto h-[34rem] w-full max-w-[90rem] px-4">
         <div className="flex w-full items-center justify-between">
-          <h2 className="text-[2rem] font-normal">Inspiration For You</h2>
+          <h2 className="text-[1.3rem] font-normal sm:text-[1.5rem] md:text-[2rem]">
+            Inspiration For You
+          </h2>
           <Button
-            className="flex items-center gap-x-1 text-[1.2rem] font-medium leading-normal text-primary hover:bg-transparent hover:text-primary"
+            className="flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]"
             variant="ghost"
           >
             See more
@@ -37,7 +39,7 @@ export default function Inspiration() {
               {inspirationImages.map(({ alt, src }, i) => (
                 <CarouselItem
                   key={`inspiration-image-${i}`}
-                  className="h-[27.8rem] w-[23rem] basis-1/4 rounded-[0.5rem]"
+                  className="h-[27.8rem] w-[23rem] basis-full rounded-[0.5rem] md:basis-1/2 lg:basis-1/3 2xl:basis-1/4"
                 >
                   <img
                     src={src}
