@@ -143,7 +143,7 @@ export default function RegisterForm() {
                           <Input
                             autoComplete="name"
                             placeholder="Full Name"
-                            className="border-none text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent"
+                            className="border-none bg-transparent text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                             {...field}
                           />
                         </div>
@@ -164,7 +164,7 @@ export default function RegisterForm() {
                             type="email"
                             autoComplete="email"
                             placeholder="Email"
-                            className="border-none text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent"
+                            className="border-none bg-transparent text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                             {...field}
                           />
                         </div>
@@ -184,7 +184,7 @@ export default function RegisterForm() {
                           <Input
                             type={showPassword.password ? "text" : "password"}
                             placeholder="Password"
-                            className="border-none text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent"
+                            className="border-none bg-transparent text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                             {...field}
                           />
                           <div className="cursor-pointer">
@@ -231,7 +231,7 @@ export default function RegisterForm() {
                               showPassword.confirmPassword ? "text" : "password"
                             }
                             placeholder="Confirm Password"
-                            className="border-none text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent"
+                            className="border-none bg-transparent text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                             {...field}
                           />
                           <div className="cursor-pointer">

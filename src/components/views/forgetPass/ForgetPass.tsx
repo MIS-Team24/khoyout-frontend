@@ -93,7 +93,7 @@ export default function ForgetPass() {
                             autoComplete="email"
                             type="email"
                             placeholder="Email"
-                            className="border-none text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent"
+                            className="border-none bg-transparent text-lg text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                             {...field}
                           />
                         </div>
