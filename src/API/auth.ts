@@ -3,12 +3,11 @@ export type API_User = {
   email: string;
   phone: string;
   emailActivated: boolean;
-  createdAt: Date;
 };
 
-export type API_SuccessfullAuth = {
+export type API_SuccessfullRegister = {
   user: API_User;
-  otp: {
+  Otp: {
     keyVal: string;
   };
 };

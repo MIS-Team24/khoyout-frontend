@@ -11,7 +11,7 @@ import {
   PersistConfig,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import usersReducer from "./features/users";
+import userReducer from "./features/user";
 
 const persistConfig: PersistConfig<RootState> = {
   key: "root",
@@ -20,7 +20,7 @@ const persistConfig: PersistConfig<RootState> = {
 };
 
 const rootReducer = combineReducers({
-  users: usersReducer,
+  user: userReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -39,5 +39,5 @@ export const persistor = persistStore(store);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof rootReducer>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+// Inferred type: {posts: PostsState, comments: CommentsState, user: userState}
 export type AppDispatch = typeof store.dispatch;
