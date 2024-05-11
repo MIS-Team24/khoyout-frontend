@@ -15,7 +15,7 @@ export default function Inspiration() {
   const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
-    <section className="py-[5rem]">
+    <section className="my-[5rem]">
       <div className="mx-auto h-[34rem] w-[90rem]">
         <div className="flex w-full items-center justify-between">
           <h2 className="text-[2rem] font-normal">Inspiration For You</h2>
