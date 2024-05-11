@@ -7,7 +7,8 @@ import ins3 from "./Ins3.png";
 import ins4 from "./Ins4.png";
 import ins5 from "./Ins5.png";
 import ins6 from "./Ins6.png";
-import ins8 from "./Ins8.png";
+import ins7 from "./Ins7.png";
+import aboutImg from "./about.png";
 
 const inspirationImages = [
   {
@@ -35,9 +36,9 @@ const inspirationImages = [
     alt: "inspiration-image-6",
   },
   {
-    src: ins8,
-    alt: "inspiration-image-8",
+    src: ins7,
+    alt: "inspiration-image-7",
   },
 ];
 
-export { sideImg, mainLogo, heroImg, inspirationImages };
+export { sideImg, mainLogo, heroImg, inspirationImages, aboutImg };
