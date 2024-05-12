@@ -19,6 +19,8 @@ import ins7 from "./Ins7.png";
 import aboutImg from "./about.png";
 import bookImg from "./book.png";
 import designer1 from "./designer1.webp";
+import share from "./icons/share.svg";
+import heart from "./icons/heart.svg";
 
 const inspirationImages = [
   {
@@ -109,4 +111,6 @@ export {
   quotes,
   clients,
   designer1,
+  share,
+  heart,
 };
