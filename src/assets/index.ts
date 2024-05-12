@@ -21,6 +21,8 @@ import bookImg from "./book.png";
 import designer1 from "./designer1.webp";
 import share from "./icons/share.svg";
 import heart from "./icons/heart.svg";
+import markerImg from "./map/marker.svg";
+import markerShadow from "./map/marker-shadow.png";
 
 const inspirationImages = [
   {
@@ -113,4 +115,6 @@ export {
   designer1,
   share,
   heart,
+  markerImg,
+  markerShadow,
 };
