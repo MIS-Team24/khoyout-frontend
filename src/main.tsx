@@ -5,6 +5,8 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { Provider } from "react-redux";
 import { store } from "./store";
 
+import "leaflet/dist/leaflet.css";
+
 const queryClient = new QueryClient();
 
 // Import the generated route tree
