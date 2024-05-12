@@ -1,5 +1,13 @@
 import sideImg from "./side-img.webp";
 import mainLogo from "./Logo.svg";
+import scratchImg from "./scratchImg.jpeg";
+import implementImg from "./implementImg.jpeg";
+import redesignImg from "./redesignImg.png";
+import handImg from "./handImg.jpeg";
+import quotes from "./Quotes.svg";
+import amira from "./amira.jpeg";
+import hager from "./hager.jpeg";
+import may from "./may.jpeg";
 import heroImg from "./hero.png";
 import ins1 from "./Ins1.png";
 import ins2 from "./Ins2.png";
@@ -42,4 +50,19 @@ const inspirationImages = [
   },
 ];
 
-export { sideImg, mainLogo, heroImg, inspirationImages, aboutImg, bookImg };
+export {
+  sideImg,
+  mainLogo,
+  heroImg,
+  inspirationImages,
+  aboutImg,
+  bookImg,
+  scratchImg,
+  implementImg,
+  redesignImg,
+  handImg,
+  quotes,
+  amira,
+  hager,
+  may,
+};
