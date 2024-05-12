@@ -21,6 +21,8 @@ import bookImg from "./book.png";
 import Ellipse from "./Ellipse 578.svg";
 import clientImg from "./clientImg.png";
 import designer1 from "./designer1.webp";
+import share from "./icons/share.svg";
+import heart from "./icons/heart.svg";
 
 const inspirationImages = [
   {
@@ -113,4 +115,6 @@ export {
   Ellipse,
   clientImg,
   designer1,
+  share,
+  heart,
 };
