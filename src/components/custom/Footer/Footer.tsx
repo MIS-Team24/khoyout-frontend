@@ -16,8 +16,8 @@ const Footer = forwardRef(function (_, ref) {
       ref={ref as RefObject<HTMLDivElement>}
     >
       <div className="relative mx-auto flex w-full max-w-[1130px] flex-col flex-wrap gap-4">
-        <div className="absolute bottom-1 right-1 w-20 lg:static lg:w-auto">
-          <img src={miniLogo} className="w-28" />
+        <div className="absolute bottom-0 right-4 w-20 lg:static lg:w-auto">
+          <img src={miniLogo} className="w-28 lg:min-h-[67px]" />
         </div>
         <div className="flex w-full flex-wrap justify-center gap-4 text-[#F9F4F4] lg:justify-between lg:gap-0">
           <div>
@@ -83,7 +83,7 @@ const Footer = forwardRef(function (_, ref) {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="ml-4 flex items-center gap-2 lg:ml-0">
           <a href="https://facebook.com">
             <div className="aspect-square w-8 rounded-[8px] bg-white p-1.5">
               <img src={facebook} className="h-full w-full" />
