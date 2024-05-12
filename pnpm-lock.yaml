@@ -10,6 +10,9 @@ importers:
       "@hookform/resolvers":
         specifier: ^3.3.4
         version: 3.3.4(react-hook-form@7.51.4(react@18.2.0))
+      "@radix-ui/react-dialog":
+        specifier: ^1.0.5
+        version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       "@radix-ui/react-dropdown-menu":
         specifier: ^2.0.6
         version: 2.0.6(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1438,12 +1441,6 @@ packages:
     resolution:
       {
         integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==,
-      }
-
-  "@types/hoist-non-react-statics@3.3.5":
-    resolution:
-      {
-        integrity: sha512-SbcrWzkKBw2cdwRTwQAswfpB9g9LJWfjtUeW/jvNwbhC8cpmmNYVePa+ncbUe0rGTQ7G3Ff6mYUN2VMfLVr+Sg==,
       }
 
   "@types/json-schema@7.0.15":
@@ -4462,8 +4459,6 @@ snapshots:
   "@types/babel__traverse@7.20.5":
     dependencies:
       "@babel/types": 7.24.0
-
-  "@types/cookie@0.6.0": {}
 
   "@types/estree@1.0.5": {}
 
