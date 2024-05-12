@@ -1,1 +1,1 @@
-export { default as Test } from "./test/Test";
+export { default as ProfileDetails } from "./profileDetails/ProfileDetails";
