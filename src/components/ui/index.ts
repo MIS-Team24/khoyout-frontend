@@ -25,3 +25,12 @@ export {
   CarouselPrevious,
   CarouselContent,
 } from "./carousel";
+
+export {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./dialog";
