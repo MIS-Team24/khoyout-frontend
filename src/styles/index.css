@@ -47,6 +47,11 @@
     --ring: 319 57.2% 39.4%;
     --radius: 1rem;
   }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: #fff;
+  }
 }
 
 @layer base {
