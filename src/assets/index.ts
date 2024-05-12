@@ -18,6 +18,7 @@ import ins6 from "./Ins6.png";
 import ins7 from "./Ins7.png";
 import aboutImg from "./about.png";
 import bookImg from "./book.png";
+import designer1 from "./designer1.webp";
 
 const inspirationImages = [
   {
@@ -107,4 +108,5 @@ export {
   workExamples,
   quotes,
   clients,
+  designer1,
 };
