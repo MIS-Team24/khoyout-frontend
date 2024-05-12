@@ -50,6 +50,29 @@ const inspirationImages = [
   },
 ];
 
+const workExamples = [
+  {
+    src: scratchImg,
+    alt: "Design from scratch",
+    title: "Design from scratch",
+  },
+  {
+    src: implementImg,
+    alt: "Design implementation",
+    title: "Design implementation",
+  },
+  {
+    src: redesignImg,
+    alt: "Redesign image",
+    title: "Redesign image",
+  },
+  {
+    src: handImg,
+    alt: "Hand made image",
+    title: "Hand made image",
+  },
+];
+
 export {
   sideImg,
   mainLogo,
@@ -57,10 +80,7 @@ export {
   inspirationImages,
   aboutImg,
   bookImg,
-  scratchImg,
-  implementImg,
-  redesignImg,
-  handImg,
+  workExamples,
   quotes,
   amira,
   hager,
