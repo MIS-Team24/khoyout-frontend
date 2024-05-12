@@ -60,7 +60,6 @@ export default function ProfileDetails({
             </div>
           </div>
           <div className="flex flex-row-reverse gap-x-8">
-            {/* <img src={heart} alt="heart-icon" className="cursor-pointer" /> */}
             <Button className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent">
               <Heart
                 className={cn(
