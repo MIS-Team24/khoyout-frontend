@@ -17,7 +17,7 @@ const position: [number, number] = [31.214457, 29.994616];
 export default function AboutMap() {
   return (
     <MapContainer
-      className="h-full w-full rounded-[0.5rem]"
+      className="-z-10 h-full w-full rounded-[0.5rem]"
       center={position}
       zoom={13}
       scrollWheelZoom={true}
