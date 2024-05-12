@@ -1,5 +1,13 @@
 import sideImg from "./side-img.webp";
 import mainLogo from "./Logo.svg";
+import scratchImg from "./scratchImg.jpeg";
+import implementImg from "./implementImg.jpeg";
+import redesignImg from "./redesignImg.png";
+import handImg from "./handImg.jpeg";
+import quotes from "./Quotes.svg";
+import amira from "./amira.jpeg";
+import hager from "./hager.jpeg";
+import mai from "./may.jpeg";
 import heroImg from "./hero.png";
 import ins1 from "./Ins1.png";
 import ins2 from "./Ins2.png";
@@ -42,4 +50,61 @@ const inspirationImages = [
   },
 ];
 
-export { sideImg, mainLogo, heroImg, inspirationImages, aboutImg, bookImg };
+const workExamples = [
+  {
+    src: scratchImg,
+    alt: "Design from scratch",
+    title: "Design from scratch",
+  },
+  {
+    src: implementImg,
+    alt: "Design implementation",
+    title: "Design implementation",
+  },
+  {
+    src: redesignImg,
+    alt: "Redesign image",
+    title: "Redesign image",
+  },
+  {
+    src: handImg,
+    alt: "Hand made image",
+    title: "Hand made image",
+  },
+];
+
+const clients = [
+  {
+    src: amira,
+    alt: "Amira Ali",
+    name: "Amira Ali",
+    review:
+      "Khoyout made finding the perfect tailor a breeze! I was able to browse through various options, read reviews, and book my appointment with ease. Highly recommended!",
+  },
+  {
+    src: mai,
+    alt: "Mai Ahmed",
+    name: "Mai Ahmed",
+    review:
+      "Khoyout made finding the perfect tailor a breeze! I was able to browse through various options, read reviews, and book my appointment with ease. Highly recommended!",
+  },
+  {
+    src: hager,
+    alt: "Hager Ahmed",
+    name: "Hager Ahmed",
+    review:
+      "Khoyout made finding the perfect tailor a breeze! I was able to browse through various options, read reviews, and book my appointment with ease. Highly recommended!",
+  },
+];
+
+export {
+  sideImg,
+  mainLogo,
+  heroImg,
+  inspirationImages,
+  aboutImg,
+  bookImg,
+  workExamples,
+  quotes,
+  clients,
+};

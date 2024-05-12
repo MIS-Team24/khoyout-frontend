@@ -51,7 +51,7 @@ export default function Inspiration() {
                     />
                     <motion.span
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                      whileHover={{ opacity: 1 }}
                       transition={{ duration: 0.5 }}
                       className="absolute inset-0 z-50 hidden items-end justify-center space-x-1 rounded-[0.5rem] bg-gradient-to-t from-primary/70 to-transparent pb-4 text-[1.3rem] leading-[2rem] text-white group-hover:flex"
                     >

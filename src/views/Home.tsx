@@ -1,5 +1,11 @@
 import NavigatablePageWrapper from "@/components/custom/NavigatablePageWrapper";
-import { Hero, Inspiration, About } from "@/components/views/home";
+import {
+  Hero,
+  Inspiration,
+  About,
+  Designers,
+  Clients,
+} from "@/components/views/home";
 
 export default function Home() {
   return (
@@ -7,6 +13,8 @@ export default function Home() {
       <Hero />
       <Inspiration />
       <About />
+      <Designers />
+      <Clients />
     </NavigatablePageWrapper>
   );
 }
