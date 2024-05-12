@@ -20,6 +20,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import client from "@/API/client";
 
 const NavigationBar = forwardRef(function (_, ref) {
   const router = useRouterState();
@@ -28,7 +29,15 @@ const NavigationBar = forwardRef(function (_, ref) {
   const userQuery = useQuery({
     queryKey: ["active-user"],
     queryFn: getCurrentActiveUser,
+    retry: false,
   });
+
+  async function onClickLogin() {
+    await client.post("/local/auth/login", {
+      email: "fuser2051@gmail.com",
+      password: "123456789",
+    });
+  }
 
   return (
     <motion.nav
@@ -163,6 +172,7 @@ const NavigationBar = forwardRef(function (_, ref) {
                 <Button
                   variant={"ghost"}
                   className="py-7 text-xl text-primary hover:text-primary"
+                  onClick={onClickLogin}
                 >
                   Log In
                 </Button>
