@@ -7,7 +7,7 @@ import handImg from "./handImg.jpeg";
 import quotes from "./Quotes.svg";
 import amira from "./amira.jpeg";
 import hager from "./hager.jpeg";
-import may from "./may.jpeg";
+import mai from "./may.jpeg";
 import heroImg from "./hero.png";
 import ins1 from "./Ins1.png";
 import ins2 from "./Ins2.png";
@@ -73,6 +73,30 @@ const workExamples = [
   },
 ];
 
+const clients = [
+  {
+    src: amira,
+    alt: "Amira Ali",
+    name: "Amira Ali",
+    review:
+      "Khoyout made finding the perfect tailor a breeze! I was able to browse through various options, read reviews, and book my appointment with ease. Highly recommended!",
+  },
+  {
+    src: mai,
+    alt: "Mai Ahmed",
+    name: "Mai Ahmed",
+    review:
+      "Khoyout made finding the perfect tailor a breeze! I was able to browse through various options, read reviews, and book my appointment with ease. Highly recommended!",
+  },
+  {
+    src: hager,
+    alt: "Hager Ahmed",
+    name: "Hager Ahmed",
+    review:
+      "Khoyout made finding the perfect tailor a breeze! I was able to browse through various options, read reviews, and book my appointment with ease. Highly recommended!",
+  },
+];
+
 export {
   sideImg,
   mainLogo,
@@ -82,7 +106,5 @@ export {
   bookImg,
   workExamples,
   quotes,
-  amira,
-  hager,
-  may,
+  clients,
 };
