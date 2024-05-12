@@ -18,6 +18,8 @@ import ins6 from "./Ins6.png";
 import ins7 from "./Ins7.png";
 import aboutImg from "./about.png";
 import bookImg from "./book.png";
+import Ellipse from "./Ellipse 578.svg";
+import clientImg from "./clientImg.png";
 
 const inspirationImages = [
   {
@@ -107,4 +109,6 @@ export {
   workExamples,
   quotes,
   clients,
+  Ellipse,
+  clientImg,
 };
