@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Button } from "@/components/ui";
-import AboutMap from "./AboutMap";
 import { MapPin } from "lucide-react";
+import AboutMap from "./AboutMap";
+import AboutMapDialog from "./AboutMapDialog";
 
 const workingtimes = [
   { day: "Saturday", time: "12:00 PM - 10:00 PM", open: true },
@@ -13,6 +15,7 @@ const workingtimes = [
 ];
 
 export default function AboutDesigner() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <section className="mb-20">
       <div className="mx-auto w-full max-w-[80%]">
@@ -49,6 +52,7 @@ export default function AboutDesigner() {
           </div>
           <div className="flex flex-1 flex-col gap-y-5">
             <AboutMap />
+
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center gap-x-2">
                 <MapPin size={18} className="mb-0.5" />
@@ -57,6 +61,7 @@ export default function AboutDesigner() {
               <Button
                 variant="default"
                 className="!m-0 h-0 !p-0 text-[1rem] text-primary hover:text-primary"
+                onClick={() => setIsOpen(true)}
               >
                 Show Location on map
               </Button>
@@ -64,6 +69,7 @@ export default function AboutDesigner() {
           </div>
         </div>
       </div>
+      <AboutMapDialog isOpen={isOpen} onChange={setIsOpen} />
     </section>
   );
 }
