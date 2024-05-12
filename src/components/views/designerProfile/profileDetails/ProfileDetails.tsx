@@ -1,8 +1,14 @@
-import { heart, share, designer1 } from "@/assets";
+import { share, designer1 } from "@/assets";
 import { Button } from "@/components/ui";
 import { Rating } from "react-simple-star-rating";
+import { Heart } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export default function ProfileDetails() {
+export default function ProfileDetails({
+  wishlisted,
+}: {
+  wishlisted: boolean;
+}) {
   return (
     <section className="pb-[5.25rem] pt-[1.25rem]">
       <div className="mx-auto w-full max-w-[80%]">
@@ -54,8 +60,23 @@ export default function ProfileDetails() {
             </div>
           </div>
           <div className="flex flex-row-reverse gap-x-8">
-            <img src={heart} alt="heart-icon" className="cursor-pointer" />
-            <img src={share} alt="share-icon" className="cursor-pointer" />
+            {/* <img src={heart} alt="heart-icon" className="cursor-pointer" /> */}
+            <Button className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent">
+              <Heart
+                className={cn(
+                  "text-primary transition-all",
+                  wishlisted ? "fill-primary" : "fill-none",
+                )}
+                size={32}
+              />
+              <Heart
+                className="absolute fill-primary text-primary opacity-0 transition-all group-hover:opacity-100 group-hover:active:fill-muted-foreground"
+                size={32}
+              />
+            </Button>
+            <Button className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent">
+              <img src={share} alt="share-icon" className="cursor-pointer" />
+            </Button>
           </div>
         </div>
       </div>
