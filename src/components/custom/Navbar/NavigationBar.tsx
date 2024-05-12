@@ -5,11 +5,39 @@ import { initialTabs as tabs } from "./NavLinks";
 import { motion } from "framer-motion";
 import { RefObject, forwardRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { getCurrentActiveUser } from "@/API/user/user";
+import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
+import bell from "@/assets/icons/bell.svg";
+import { ChevronDown, LogOut, User } from "lucide-react";
+import pfp from "@/assets/hager.jpeg";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import client from "@/API/client";
 
 const NavigationBar = forwardRef(function (_, ref) {
   const router = useRouterState();
   const matches = router.matches;
   const [isExpanded, setIsExpanded] = useState<boolean>();
+  const userQuery = useQuery({
+    queryKey: ["active-user"],
+    queryFn: getCurrentActiveUser,
+    retry: false,
+  });
+
+  async function onClickLogin() {
+    await client.post("/local/auth/login", {
+      email: "fuser2051@gmail.com",
+      password: "123456789",
+    });
+  }
 
   return (
     <motion.nav
@@ -19,9 +47,10 @@ const NavigationBar = forwardRef(function (_, ref) {
       )}
       ref={ref as RefObject<HTMLDivElement>}
       animate={isExpanded ? { height: "auto" } : { height: "70px" }}
+      initial={isExpanded ? { height: "auto" } : { height: "70px" }}
     >
       <Button
-        className="absolute right-5 top-0 w-14 translate-y-1/2 rounded-none bg-transparent p-0 hover:bg-transparent lg:hidden"
+        className="absolute right-5 top-[-5px] w-14 translate-y-1/2 rounded-none bg-transparent p-0 hover:bg-transparent lg:hidden"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <motion.div className="flex h-full w-full flex-col gap-2">
@@ -97,24 +126,67 @@ const NavigationBar = forwardRef(function (_, ref) {
               </Button>
             </Link>
           </div>
-          <div className="flex items-center gap-4">
-            <Link>
-              <Button
-                variant={"ghost"}
-                className="py-7 text-xl text-primary hover:text-primary"
-              >
-                Log In
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button
-                variant={"default"}
-                className="rounded-2xl px-4 py-7 text-xl"
-              >
-                Sign Up
-              </Button>
-            </Link>
-          </div>
+          {userQuery.isPending ? (
+            <UserSkeleton />
+          ) : userQuery.isSuccess ? (
+            <div className="flex items-center gap-8">
+              <div>
+                <Button className="m-0 rounded-none bg-transparent hover:bg-transparent">
+                  <img src={bell} />
+                </Button>
+              </div>
+              <div className="flex items-center gap-4">
+                <Link className="flex items-center gap-2">
+                  <img
+                    src={pfp}
+                    className="aspect-square w-12 rounded-full object-cover"
+                  />
+                  <h1>Some Client</h1>
+                </Link>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className="cursor-pointer border-none bg-transparent text-black outline-none hover:bg-transparent">
+                      <ChevronDown />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem>
+                        <User className="mr-2 h-4 w-4" />
+                        <span>Profile</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <LogOut className="mr-2 h-4 w-4" />
+                        <span>Log out</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link>
+                <Button
+                  variant={"ghost"}
+                  className="py-7 text-xl text-primary hover:text-primary"
+                  onClick={onClickLogin}
+                >
+                  Log In
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button
+                  variant={"default"}
+                  className="rounded-2xl px-4 py-7 text-xl"
+                >
+                  Sign Up
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </motion.nav>
@@ -122,3 +194,17 @@ const NavigationBar = forwardRef(function (_, ref) {
 });
 
 export default NavigationBar;
+
+function UserSkeleton() {
+  return (
+    <div className="flex items-center gap-8">
+      <div>
+        <Skeleton className="aspect-square w-6" />
+      </div>
+      <div className="flex items-center gap-2">
+        <Skeleton className="aspect-square w-12 rounded-full" />
+        <Skeleton className="h-6 w-24 rounded-md" />
+      </div>
+    </div>
+  );
+}
