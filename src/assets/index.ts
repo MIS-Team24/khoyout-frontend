@@ -20,6 +20,7 @@ import aboutImg from "./about.png";
 import bookImg from "./book.png";
 import Ellipse from "./Ellipse 578.svg";
 import clientImg from "./clientImg.png";
+import designer1 from "./designer1.webp";
 
 const inspirationImages = [
   {
@@ -111,4 +112,5 @@ export {
   clients,
   Ellipse,
   clientImg,
+  designer1,
 };
