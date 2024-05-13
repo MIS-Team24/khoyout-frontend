@@ -12,7 +12,7 @@ export default function DesignerProfile() {
       {/* TODO: Make it dynamic */}
       <ProfileDetails wishlisted={false} />
       <AboutDesigner />
-      <Inspiration title="Images" />
+      <Inspiration title="Photos" />
       <DesignerVideos />
     </NavigatablePageWrapper>
   );
