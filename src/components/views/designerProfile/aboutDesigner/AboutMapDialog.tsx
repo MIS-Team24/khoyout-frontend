@@ -29,7 +29,7 @@ export default function AboutMapDialog({
 }: AboutMapDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
-      <DialogContent className="z-[100] min-h-[800px] w-full max-w-[1700px] overflow-hidden !rounded !px-0 pb-0">
+      <DialogContent className="z-[100] min-h-[90%] w-full max-w-[90%] overflow-hidden !rounded !px-0 pb-0">
         <div>
           <div className="-mt-3 ml-5 flex items-center gap-x-2 pb-2 font-medium">
             <MapPin size={18} className="mb-0.5" />
