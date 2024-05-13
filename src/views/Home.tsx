@@ -1,6 +1,7 @@
 import NavigatablePageWrapper from "@/components/custom/NavigatablePageWrapper";
 import {
   Hero,
+  Categories,
   Inspiration,
   About,
   Designers,
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <NavigatablePageWrapper>
       <Hero />
+      <Categories />
       <Inspiration title="Inspiration For You" />
       <About />
       <Designers />
