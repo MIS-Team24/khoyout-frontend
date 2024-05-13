@@ -23,6 +23,8 @@ import share from "./icons/share.svg";
 import heart from "./icons/heart.svg";
 import markerImg from "./map/marker.svg";
 import markerShadow from "./map/marker-shadow.png";
+import designerVideo1 from "./designer-video1.webp";
+import designerVideo2 from "./designer-video2.webp";
 
 const inspirationImages = [
   {
@@ -117,4 +119,6 @@ export {
   heart,
   markerImg,
   markerShadow,
+  designerVideo1,
+  designerVideo2,
 };
