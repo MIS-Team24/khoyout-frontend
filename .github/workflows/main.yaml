@@ -25,13 +25,13 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > ezz.pem
+          chmod 600 ezz.pem
           
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@18.217.85.155 << 'EOF'
+          sudo ssh -o StrictHostKeyChecking=no -i ezz.pem ec2-user@18.217.85.155 << 'EOF'
           container_id=$(docker ps --format "{{.ID}}")
           sudo docker logs $container_id > khoyoutfrontend$(date +%Y%m%d).log
           sudo docker stop $(docker ps -aq)
