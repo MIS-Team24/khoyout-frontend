@@ -1,4 +1,12 @@
 import { categories } from "@/assets";
+import { motion } from "framer-motion";
+
+const spring = {
+  ease: "linear",
+  type: "spring",
+  stiffness: 50,
+  damping: 10,
+};
 
 function Categories() {
   return (
@@ -10,7 +18,10 @@ function Categories() {
           </h2>
           <div className="flex w-full flex-wrap justify-center gap-6 px-4 sm:px-0">
             {categories.map(({ src, alt }, i) => (
-              <div
+              <motion.div
+                initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={spring}
                 className="h-[19.9rem] w-full max-w-[35.25rem] rounded-[0.5rem]"
                 key={i}
               >
@@ -19,7 +30,7 @@ function Categories() {
                   alt={alt}
                   className="h-full w-full rounded-[0.5rem] object-cover"
                 />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
