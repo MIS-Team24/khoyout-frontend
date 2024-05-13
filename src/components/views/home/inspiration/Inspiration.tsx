@@ -13,7 +13,7 @@ import { inspirationImages } from "@/assets";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-export default function Inspiration({title}: {title: string}) {
+export default function Inspiration({ title }: { title: string }) {
   const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
