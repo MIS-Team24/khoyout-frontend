@@ -26,9 +26,11 @@ const DUMMY_DATA = [
 export default function Notification() {
   return (
     <section>
-      <div className="mx-auto mt-10 max-h-[88.75rem] w-[83rem]">
+      <div className="mx-auto mt-10 max-h-[88.75rem] w-full max-w-[83rem]">
         <div className="flex w-full items-center justify-between px-4 pb-8">
-          <h2 className="text-2xl font-normal text-[#1F1F29]">Notifications</h2>
+          <h1 className="text-[2rem] font-normal text-[#1F1F29]">
+            Notifications
+          </h1>
           <Button
             type="button"
             variant={"outline"}
