@@ -19,11 +19,13 @@ const position: [number, number] = [31.214457, 29.994616];
 type AboutMapDialogProps = {
   isOpen: boolean;
   onChange: (isOpen: boolean) => void;
+  location?: [number, number];
 };
 
 export default function AboutMapDialog({
   isOpen,
   onChange,
+  location,
 }: AboutMapDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
@@ -35,7 +37,7 @@ export default function AboutMapDialog({
           </div>
           <MapContainer
             className="z-[50] h-full w-full"
-            center={position}
+            center={location ?? position}
             zoom={13}
             scrollWheelZoom={true}
           >
@@ -43,7 +45,7 @@ export default function AboutMapDialog({
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={position} icon={legalIcon} />
+            <Marker position={location ?? position} icon={legalIcon} />
           </MapContainer>
         </div>
       </DialogContent>
