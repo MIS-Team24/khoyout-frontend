@@ -13,7 +13,7 @@ export default function Home() {
       <Hero />
       <Inspiration />
       <About />
-      <Designers />
+      <Designers title="What Designers Do" />
       <Clients />
     </NavigatablePageWrapper>
   );
