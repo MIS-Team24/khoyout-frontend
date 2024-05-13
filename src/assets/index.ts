@@ -116,12 +116,12 @@ const categories = [
     alt: "Soiree Image",
   },
   {
-    src: casual,
-    alt: "Casual Image",
-  },
-  {
     src: classic,
     alt: "Classic Image",
+  },
+  {
+    src: casual,
+    alt: "Casual Image",
   },
   {
     src: formal,
