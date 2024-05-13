@@ -18,26 +18,26 @@ export default function DesignerVideos() {
             <ChevronRight size={25} />
           </Button>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-8 pt-8">
-          <div className="group relative h-[22rem] flex-1 cursor-pointer">
+        <div className="flex flex-col items-center justify-center gap-8 pt-8 lg:flex-row">
+          <div className="group relative h-[22rem] flex-1 cursor-pointer rounded-[0.25rem]">
             <img
               src={designerVideo1}
               alt="designer-video-1"
-              className="h-full w-full object-cover"
+              className="h-full w-full rounded-[0.25rem] object-cover"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+            <div className="absolute inset-0 flex items-center justify-center rounded-[0.25rem] bg-black/30">
               <div className="flex h-[4.25rem] w-[4.25rem] items-center justify-center rounded-full bg-primary group-hover:opacity-80">
                 <Play className="fill-white text-white" size={35} />
               </div>
             </div>
           </div>
-          <div className="group relative h-[22rem] flex-1 cursor-pointer">
+          <div className="group relative h-[22rem] flex-1 cursor-pointer rounded-[0.25rem]">
             <img
               src={designerVideo2}
               alt="designer-video-2"
-              className="h-full w-full object-cover"
+              className="h-full w-full rounded-[0.25rem] object-cover"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+            <div className="absolute inset-0 flex items-center justify-center rounded-[0.25rem] bg-black/30">
               <div className="flex h-[4.25rem] w-[4.25rem] items-center justify-center rounded-full bg-primary group-hover:opacity-80">
                 <Play className="fill-white text-white" size={35} />
               </div>
