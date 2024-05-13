@@ -18,10 +18,12 @@ import { Route as rootRoute } from './routes/__root'
 
 const RegisterLazyImport = createFileRoute('/register')()
 const OtpLazyImport = createFileRoute('/otp')()
+const NotificationsLazyImport = createFileRoute('/notifications')()
 const InspirationLazyImport = createFileRoute('/inspiration')()
 const HomeLazyImport = createFileRoute('/home')()
 const ForgetPasswordLazyImport = createFileRoute('/forget-password')()
 const DesignersLazyImport = createFileRoute('/designers')()
+const DesignerProfileLazyImport = createFileRoute('/designer-profile')()
 const ContactLazyImport = createFileRoute('/contact')()
 const IndexLazyImport = createFileRoute('/')()
 
@@ -36,6 +38,11 @@ const OtpLazyRoute = OtpLazyImport.update({
   path: '/otp',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/otp.lazy').then((d) => d.Route))
+
+const NotificationsLazyRoute = NotificationsLazyImport.update({
+  path: '/notifications',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/notifications.lazy').then((d) => d.Route))
 
 const InspirationLazyRoute = InspirationLazyImport.update({
   path: '/inspiration',
@@ -59,6 +66,13 @@ const DesignersLazyRoute = DesignersLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/designers.lazy').then((d) => d.Route))
 
+const DesignerProfileLazyRoute = DesignerProfileLazyImport.update({
+  path: '/designer-profile',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/designer-profile.lazy').then((d) => d.Route),
+)
+
 const ContactLazyRoute = ContactLazyImport.update({
   path: '/contact',
   getParentRoute: () => rootRoute,
@@ -81,6 +95,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactLazyImport
       parentRoute: typeof rootRoute
     }
+    '/designer-profile': {
+      preLoaderRoute: typeof DesignerProfileLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/designers': {
       preLoaderRoute: typeof DesignersLazyImport
       parentRoute: typeof rootRoute
@@ -95,6 +113,10 @@ declare module '@tanstack/react-router' {
     }
     '/inspiration': {
       preLoaderRoute: typeof InspirationLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/notifications': {
+      preLoaderRoute: typeof NotificationsLazyImport
       parentRoute: typeof rootRoute
     }
     '/otp': {
@@ -113,10 +135,12 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   ContactLazyRoute,
+  DesignerProfileLazyRoute,
   DesignersLazyRoute,
   ForgetPasswordLazyRoute,
   HomeLazyRoute,
   InspirationLazyRoute,
+  NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,
 ])
