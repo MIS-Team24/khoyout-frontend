@@ -18,7 +18,7 @@ export default function AboutDesigner() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <section className="mb-20">
-      <div className="mx-auto w-full px-2 md:max-w-[95%] md:px-10 lg:px-0 xl:max-w-[80%]">
+      <div className="mx-auto w-full px-2 md:max-w-[90rem] md:px-10 xl:px-0">
         <h2 className="w-full pb-2 text-[2rem] font-normal sm:pb-4">About</h2>
         <div className="grid grid-cols-1 gap-x-10 gap-y-10 lg:grid-cols-2 lg:gap-y-0">
           <div className="flex flex-1 flex-col gap-y-[2.5rem]">
@@ -50,7 +50,7 @@ export default function AboutDesigner() {
               </div>
             </div>
           </div>
-          <div className="flex h-[30rem] flex-1 flex-col gap-y-5">
+          <div className="flex h-[30rem] flex-1 flex-col gap-y-5 lg:h-full">
             <AboutMap />
             <div className="flex w-full flex-col items-center justify-between gap-y-4 pb-4 sm:flex-row sm:gap-y-0">
               <div className="flex items-center gap-x-2">

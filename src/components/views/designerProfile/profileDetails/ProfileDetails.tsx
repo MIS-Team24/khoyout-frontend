@@ -11,7 +11,7 @@ export default function ProfileDetails({
 }) {
   return (
     <section className="pb-[5.25rem] pt-[1.25rem]">
-      <div className="mx-auto w-[90%] md:max-w-[90%]">
+      <div className="mx-auto w-[90%] md:max-w-[90rem]">
         <div className="flex w-full flex-col items-center justify-between gap-y-5 sm:flex-row sm:gap-y-0">
           <div className="flex flex-1 flex-col items-center gap-x-8 sm:flex-row">
             <div className="h-52 w-52 rounded-full sm:h-44 sm:w-44">
@@ -59,7 +59,7 @@ export default function ProfileDetails({
               </div>
             </div>
           </div>
-          <div className="flex flex-1 flex-row-reverse gap-x-8">
+          <div className="flex flex-1 flex-row-reverse gap-x-8 pr-4">
             <Button className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent">
               <Heart
                 className={cn(

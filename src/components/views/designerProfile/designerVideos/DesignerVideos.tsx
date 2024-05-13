@@ -5,7 +5,7 @@ import { designerVideo1, designerVideo2 } from "@/assets";
 export default function DesignerVideos() {
   return (
     <section className="my-[5rem]">
-      <div className="mx-auto min-h-[34rem] w-full max-w-[85rem] px-4">
+      <div className="mx-auto min-h-[34rem] w-full max-w-[90rem] px-4">
         <div className="flex w-full items-center justify-between">
           <h2 className="text-[1.3rem] font-normal sm:text-[1.5rem] md:text-[2rem]">
             Videos
@@ -19,7 +19,7 @@ export default function DesignerVideos() {
           </Button>
         </div>
         <div className="flex flex-col items-center justify-center gap-8 pt-8 lg:flex-row">
-          <div className="group relative h-[22rem] flex-1 cursor-pointer rounded-[0.25rem]">
+          <div className="group relative h-full flex-1 cursor-pointer rounded-[0.25rem]">
             <img
               src={designerVideo1}
               alt="designer-video-1"
@@ -31,7 +31,7 @@ export default function DesignerVideos() {
               </div>
             </div>
           </div>
-          <div className="group relative h-[22rem] flex-1 cursor-pointer rounded-[0.25rem]">
+          <div className="group relative h-full flex-1 cursor-pointer rounded-[0.25rem]">
             <img
               src={designerVideo2}
               alt="designer-video-2"

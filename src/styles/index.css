@@ -66,3 +66,11 @@
     @apply overflow-hidden;
   }
 }
+
+.gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(140, 35, 108, 0) 29.94%,
+    #8c236c 100%
+  );
+}
