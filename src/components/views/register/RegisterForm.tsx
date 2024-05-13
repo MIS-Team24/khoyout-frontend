@@ -288,9 +288,8 @@ export default function RegisterForm() {
           </div>
           <p className="mt-5 w-full space-x-1 text-center text-secondary">
             <span>Already have an account?</span>
-            <Link to="/login" className="font-semibold text-primary">
-              Log In
-            </Link>
+            {/* to="/login"  */}
+            <Link className="font-semibold text-primary">Log In</Link>
           </p>
         </div>
       </div>

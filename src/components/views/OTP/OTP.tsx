@@ -91,10 +91,10 @@ export default function OTP() {
       if (comingFromRoute()) {
         comingFromRoute();
         toast.success("Awesome! Successfully Verified");
-
-        setTimeout(() => navigate({ to: "/login" }), 1000);
+        // setTimeout(() => navigate({ to: "/login" }), 1000);
       } else {
-        navigate({ to: "/reset-password" });
+        // navigate({ to: "/reset-password" });
+        console.log("reset password");
       }
     },
     onError: (data: Error) => {
@@ -117,29 +117,13 @@ export default function OTP() {
   const sendOtpMutation = useMutation({
     mutationFn: sendOTP,
     onSuccess: () => {
-      toast({
-        title: "OTP Sent",
-        description: "OTP has been sent to your email.",
-        variant: "default",
-      });
+      toast.success("OTP has been sent to your email.");
     },
     onError: (data: Error) => {
       const AxiosData = data as AxiosError;
       const responseData = AxiosData.response?.data as SystemAPIError;
       if (responseData) {
-        toast({
-          title: "OTP Sending Failed",
-          description: responseData.error
-            ? responseData.error
-            : "Unknown Error.",
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "OTP Sending Failed",
-          description: "Unexpected Error, please contact the site owner.",
-          variant: "destructive",
-        });
+        toast.error("OTP Sending Failed");
       }
     },
   });
@@ -233,7 +217,7 @@ export default function OTP() {
             <Button
               variant="link"
               className="p-0 font-semibold text-primary hover:no-underline"
-              onClick={() => sendOtpMutation.mutate(user?.user.email ?? "")}
+              onClick={() => sendOtpMutation.mutate(user?.email ?? "")}
               disabled={sendOtpMutation.isPending}
             >
               Resend Code
