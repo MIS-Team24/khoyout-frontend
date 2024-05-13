@@ -1,9 +1,8 @@
-name: CI
+name: CI/CD
 
 on:
   push:
     branches:
-
       - dev
 
 jobs:
@@ -22,19 +21,22 @@ jobs:
     needs: CI
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Install SSH key
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-            script: |
-        ssh -o StrictHostKeyChecking=no ubuntu@3.145.216.194 << 'EOF'
-              container_id=$(docker ps --format "{{.ID}}")
-              sudo docker logs $container_id > khoyoutfrontend$(date +%Y%m%d).log
-              sudo docker stop $(docker ps -aq)
-              sudo docker rm $(docker ps -aq)
-              sudo docker rmi $(docker images -q)
-              sudo docker run -d --restart=unless-stopped -p 5173:5173 ezzops/khoyoutfrontend:${{ github.sha }} &
-              sudo docker run -d --restart=unless-stopped --net=host -it -e NGROK_AUTHTOKEN=2gQMgDTmxvY3NUuE6nNA5xVsD7I_4LHNWrWUDZm777QQxBwZX ngrok/ngrok:latest http --domain=easy-ace-opossum.ngrok-free.app 5173 &
-        EOF
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@3.145.216.194 << 'EOF'
+          container_id=$(docker ps --format "{{.ID}}")
+          sudo docker logs $container_id > khoyoutfrontend$(date +%Y%m%d).log
+          sudo docker stop $(docker ps -aq)
+          sudo docker rm $(docker ps -aq)
+          sudo docker rmi $(docker images -q)
+          sudo docker run -d --restart=unless-stopped -p 5173:5173 ezzops/khoyoutfrontend:${{ github.sha }} &
+          sudo docker run -d --restart=unless-stopped --net=host -it -e NGROK_AUTHTOKEN=2gQMgDTmxvY3NUuE6nNA5xVsD7I_4LHNWrWUDZm777QQxBwZX ngrok/ngrok:latest http --domain=easy-ace-opossum.ngrok-free.app 5173 &
+          EOF
