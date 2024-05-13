@@ -11,9 +11,9 @@ export default function Home() {
   return (
     <NavigatablePageWrapper>
       <Hero />
-      <Inspiration />
+      <Inspiration title="Inspiration For You" />
       <About />
-      <Designers title="What Designers Do" />
+      <Designers />
       <Clients />
     </NavigatablePageWrapper>
   );
