@@ -5,7 +5,7 @@ import { ChevronRight } from "lucide-react";
 function Clients() {
   return (
     <section>
-      <div className="mx-auto mt-10 h-full min-h-[34rem] max-w-[72rem]">
+      <div className="mx-auto mb-16 mt-10 h-full min-h-[34rem] max-w-[72rem]">
         <div className="flex items-center justify-between px-4 pb-8 md:px-0">
           <h2 className="text-[1.3rem] font-normal sm:text-[1.5rem] md:text-[2rem]">
             What Our Clients Say
