@@ -27,6 +27,10 @@ import markerImg from "./map/marker.svg";
 import markerShadow from "./map/marker-shadow.png";
 import designerVideo1 from "./designer-video1.webp";
 import designerVideo2 from "./designer-video2.webp";
+import soiree from "./Soiree.jpeg";
+import formal from "./Formal.jpeg";
+import casual from "./Casual.jpeg";
+import classic from "./Classic.jpeg";
 
 const inspirationImages = [
   {
@@ -125,4 +129,8 @@ export {
   markerShadow,
   designerVideo1,
   designerVideo2,
+  formal,
+  classic,
+  casual,
+  soiree,
 };
