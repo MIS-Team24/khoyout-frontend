@@ -1,10 +1,10 @@
 import NavigatablePageWrapper from "@/components/custom/NavigatablePageWrapper";
-import { Test } from "@/components/views/designerProfile";
+import { Notification } from "@/components/views/notification";
 
-export default function DesignerProfile() {
+export default function Notifications() {
   return (
     <NavigatablePageWrapper>
-      <Test />
+      <Notification />
     </NavigatablePageWrapper>
   );
 }
