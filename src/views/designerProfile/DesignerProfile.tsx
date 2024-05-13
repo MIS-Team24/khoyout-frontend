@@ -3,6 +3,7 @@ import {
   ProfileDetails,
   AboutDesigner,
 } from "@/components/views/designerProfile";
+import { Inspiration } from "@/components/views/home";
 
 export default function DesignerProfile() {
   return (
@@ -10,6 +11,7 @@ export default function DesignerProfile() {
       {/* TODO: Make it dynamic */}
       <ProfileDetails wishlisted={false} />
       <AboutDesigner />
+      <Inspiration title="Images" />
     </NavigatablePageWrapper>
   );
 }
