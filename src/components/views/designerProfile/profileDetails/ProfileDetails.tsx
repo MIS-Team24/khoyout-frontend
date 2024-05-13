@@ -11,17 +11,17 @@ export default function ProfileDetails({
 }) {
   return (
     <section className="pb-[5.25rem] pt-[1.25rem]">
-      <div className="mx-auto w-full max-w-[80%]">
-        <div className="flex w-full items-center justify-between">
-          <div className="flex gap-x-8">
-            <div className="h-44 w-44 rounded-full">
+      <div className="mx-auto w-[90%] md:max-w-[90%]">
+        <div className="flex w-full flex-col items-center justify-between gap-y-5 sm:flex-row sm:gap-y-0">
+          <div className="flex flex-1 flex-col items-center gap-x-8 sm:flex-row">
+            <div className="h-52 w-52 rounded-full sm:h-44 sm:w-44">
               <img
                 src={designer1}
                 alt="designer-image"
                 className="h-full w-full rounded-full object-cover"
               />
             </div>
-            <div className="pt-5">
+            <div className="pt-5  text-center sm:text-start">
               <h1 className="text-[2rem] leading-10">Bassma Adel</h1>
               <p className="text-base leading-normal text-[#49454F]">
                 132 finished order
@@ -29,7 +29,7 @@ export default function ProfileDetails({
               <p className="text-[0.75rem] leading-normal text-[#49454F]">
                 <span className="text-[#1EB717]">Opened</span> until 10 pm
               </p>
-              <p className="flex items-center space-x-0.5 pt-2 text-[0.75rem] text-[#49454F]">
+              <p className="flex items-center justify-center space-x-0.5 pt-2 text-[0.75rem] text-[#49454F] sm:justify-start">
                 <span className="pt-0.5">4.5</span>
                 <Rating
                   initialValue={4.5}
@@ -59,7 +59,7 @@ export default function ProfileDetails({
               </div>
             </div>
           </div>
-          <div className="flex flex-row-reverse gap-x-8">
+          <div className="flex flex-1 flex-row-reverse gap-x-8">
             <Button className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent">
               <Heart
                 className={cn(
