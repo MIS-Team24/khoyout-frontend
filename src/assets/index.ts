@@ -110,6 +110,25 @@ const clients = [
   },
 ];
 
+const categories = [
+  {
+    src: soiree,
+    alt: "Soiree Image",
+  },
+  {
+    src: casual,
+    alt: "Casual Image",
+  },
+  {
+    src: classic,
+    alt: "Classic Image",
+  },
+  {
+    src: formal,
+    alt: "Formal Image",
+  },
+];
+
 export {
   sideImg,
   mainLogo,
@@ -129,8 +148,5 @@ export {
   markerShadow,
   designerVideo1,
   designerVideo2,
-  formal,
-  classic,
-  casual,
-  soiree,
+  categories,
 };
