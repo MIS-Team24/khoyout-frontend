@@ -31,7 +31,7 @@ jobs:
           
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@3.145.216.194 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@18.217.85.155 << 'EOF'
           container_id=$(docker ps --format "{{.ID}}")
           sudo docker logs $container_id > khoyoutfrontend$(date +%Y%m%d).log
           sudo docker stop $(docker ps -aq)
