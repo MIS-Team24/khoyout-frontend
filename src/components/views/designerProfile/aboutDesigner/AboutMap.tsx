@@ -23,8 +23,8 @@ export default function AboutMap({
     <MapContainer
       className="z-0 h-full w-full rounded-[0.5rem]"
       center={location ?? position}
-      zoom={13}
-      scrollWheelZoom={true}
+      zoom={16}
+      scrollWheelZoom={false}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
