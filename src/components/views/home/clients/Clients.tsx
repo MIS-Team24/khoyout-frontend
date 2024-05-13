@@ -4,8 +4,8 @@ import { ChevronRight } from "lucide-react";
 
 function Clients() {
   return (
-    <section>
-      <div className="mx-auto mb-16 mt-10 h-full min-h-[34rem] max-w-[72rem]">
+    <section className="mb-10">
+      <div className="mx-auto h-full min-h-[34rem] max-w-[72rem]">
         <div className="flex items-center justify-between px-4 pb-8 md:px-0">
           <h2 className="text-[1.3rem] font-normal sm:text-[1.5rem] md:text-[2rem]">
             What Our Clients Say
@@ -18,7 +18,7 @@ function Clients() {
             <ChevronRight size={25} />
           </Button>
         </div>
-        <div className="grid grid-cols-1 gap-5 px-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 px-4 md:grid-cols-2 lg:px-0 xl:grid-cols-3">
           {clients.map(({ src, alt, name, review }, i) => (
             <div
               key={`client-${i}`}

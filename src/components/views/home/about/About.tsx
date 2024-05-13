@@ -12,7 +12,7 @@ const spring = {
 
 export default function About() {
   return (
-    <section className="my-[5rem]">
+    <section className="mt-[5rem]">
       <div className="mx-auto h-full min-h-[65rem] w-full max-w-[75rem]">
         <div className="flex flex-col gap-y-8">
           <h2 className="text-center text-[2rem] font-normal leading-normal xl:text-start">
