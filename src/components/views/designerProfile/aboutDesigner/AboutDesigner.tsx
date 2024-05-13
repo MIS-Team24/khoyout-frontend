@@ -52,7 +52,6 @@ export default function AboutDesigner() {
           </div>
           <div className="flex flex-1 flex-col gap-y-5">
             <AboutMap />
-
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center gap-x-2">
                 <MapPin size={18} className="mb-0.5" />
