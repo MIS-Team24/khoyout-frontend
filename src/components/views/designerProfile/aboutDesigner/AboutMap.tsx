@@ -14,11 +14,15 @@ const legalIcon = new Icon({
 
 const position: [number, number] = [31.214457, 29.994616];
 
-export default function AboutMap() {
+export default function AboutMap({
+  location,
+}: {
+  location?: [number, number];
+}) {
   return (
     <MapContainer
       className="z-0 h-full w-full rounded-[0.5rem]"
-      center={position}
+      center={location ?? position}
       zoom={13}
       scrollWheelZoom={true}
     >
@@ -26,7 +30,7 @@ export default function AboutMap() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={position} icon={legalIcon} />
+      <Marker position={location ?? position} icon={legalIcon} />
     </MapContainer>
   );
 }
