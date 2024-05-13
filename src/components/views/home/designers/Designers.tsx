@@ -8,7 +8,7 @@ function Designers() {
         <h2 className="w-full text-center text-[2rem] font-normal leading-normal lg:text-start">
           What Designers Do
         </h2>
-        <div className="grid w-[35.23rem] grid-cols-1 gap-5 px-4 lg:w-full lg:grid-cols-2">
+        <div className="grid w-[35.23rem] grid-cols-1 gap-5 px-4 lg:w-full lg:grid-cols-2 lg:px-0">
           {workExamples.map(({ alt, src, title }, i) => (
             <div
               key={`work-example-${i}`}

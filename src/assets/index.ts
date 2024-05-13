@@ -20,6 +20,17 @@ import aboutImg from "./about.png";
 import bookImg from "./book.png";
 import Ellipse from "./Ellipse 578.svg";
 import clientImg from "./clientImg.png";
+import designer1 from "./designer1.webp";
+import share from "./icons/share.svg";
+import heart from "./icons/heart.svg";
+import markerImg from "./map/marker.svg";
+import markerShadow from "./map/marker-shadow.png";
+import designerVideo1 from "./designer-video1.webp";
+import designerVideo2 from "./designer-video2.webp";
+import soiree from "./Soiree.jpeg";
+import formal from "./Formal.jpeg";
+import casual from "./Casual.jpeg";
+import classic from "./Classic.jpeg";
 
 const inspirationImages = [
   {
@@ -99,6 +110,25 @@ const clients = [
   },
 ];
 
+const categories = [
+  {
+    src: soiree,
+    alt: "Soiree Image",
+  },
+  {
+    src: casual,
+    alt: "Casual Image",
+  },
+  {
+    src: classic,
+    alt: "Classic Image",
+  },
+  {
+    src: formal,
+    alt: "Formal Image",
+  },
+];
+
 export {
   sideImg,
   mainLogo,
@@ -111,4 +141,12 @@ export {
   clients,
   Ellipse,
   clientImg,
+  designer1,
+  share,
+  heart,
+  markerImg,
+  markerShadow,
+  designerVideo1,
+  designerVideo2,
+  categories,
 };

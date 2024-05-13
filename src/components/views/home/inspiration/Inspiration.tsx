@@ -13,7 +13,7 @@ import { inspirationImages } from "@/assets";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-export default function Inspiration() {
+export default function Inspiration({ title }: { title: string }) {
   const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
@@ -21,7 +21,7 @@ export default function Inspiration() {
       <div className="mx-auto min-h-[34rem] w-full max-w-[90rem] px-4">
         <div className="flex w-full items-center justify-between">
           <h2 className="text-[1.3rem] font-normal sm:text-[1.5rem] md:text-[2rem]">
-            Inspiration For You
+            {title}
           </h2>
           <Button
             className="flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]"
@@ -53,7 +53,7 @@ export default function Inspiration() {
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 1 }}
                       transition={{ duration: 0.5 }}
-                      className="absolute inset-0 z-50 hidden items-end justify-center space-x-1 rounded-[0.5rem] bg-gradient-to-t from-primary/70 to-transparent pb-4 text-[1.3rem] leading-[2rem] text-white group-hover:flex"
+                      className="absolute inset-0 z-50 hidden items-end justify-center space-x-1 rounded-[0.5rem] bg-gradient-to-t from-primary/60 via-transparent to-transparent pb-4 text-[1.3rem] leading-[2rem] text-white group-hover:flex"
                     >
                       <span>Designed by</span>
                       <Link
