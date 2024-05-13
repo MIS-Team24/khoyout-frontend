@@ -23,9 +23,11 @@ import {
 import client from "@/API/client";
 
 const NavigationBar = forwardRef(function (_, ref) {
+  // const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const router = useRouterState();
   const matches = router.matches;
   const [isExpanded, setIsExpanded] = useState<boolean>();
+
   const userQuery = useQuery({
     queryKey: ["active-user"],
     queryFn: getCurrentActiveUser,
@@ -33,10 +35,18 @@ const NavigationBar = forwardRef(function (_, ref) {
   });
 
   async function onClickLogin() {
-    await client.post("/local/auth/login", {
-      email: "fuser2051@gmail.com",
-      password: "123456789",
-    });
+    const response = await client.post(
+      "/local/auth/login",
+      {
+        email: "fuser2051@gmail.com",
+        password: "123456789",
+      },
+      {
+        withCredentials: true,
+      },
+    );
+
+    console.log(response.headers);
   }
 
   return (
