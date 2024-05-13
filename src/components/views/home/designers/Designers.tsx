@@ -1,12 +1,12 @@
 import { workExamples } from "@/assets";
 import { Button } from "@/components/ui";
 
-function Designers({ title }: { title: string }) {
+function Designers() {
   return (
     <section>
       <div className="mx-auto flex w-full max-w-[75rem] flex-wrap items-center justify-center gap-8 py-10">
         <h2 className="w-full text-center text-[2rem] font-normal leading-normal lg:text-start">
-          {title}
+          What Designers Do
         </h2>
         <div className="grid w-[35.23rem] grid-cols-1 gap-5 px-4 lg:w-full lg:grid-cols-2">
           {workExamples.map(({ alt, src, title }, i) => (
