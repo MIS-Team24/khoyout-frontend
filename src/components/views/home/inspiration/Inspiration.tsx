@@ -14,11 +14,11 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
 export default function Inspiration({ title }: { title: string }) {
-  const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+  const autoplay = useRef(Autoplay({ delay: 200000, stopOnInteraction: true }));
 
   return (
     <section className="my-[5rem]">
-      <div className="mx-auto min-h-[34rem] w-full max-w-[90rem] px-4">
+      <div className="mx-auto min-h-[40rem] w-full max-w-[90rem] overflow-hidden px-4">
         <div className="flex w-full items-center justify-between">
           <h2 className="text-[1.3rem] font-normal sm:text-[1.5rem] md:text-[2rem]">
             {title}
@@ -31,19 +31,20 @@ export default function Inspiration({ title }: { title: string }) {
             <ChevronRight size={25} />
           </Button>
         </div>
-        <div className="pt-8">
+        <div className="rounded-[0.5rem] pt-8">
           <Carousel
             plugins={[autoplay.current]}
             onMouseEnter={autoplay.current.stop}
             onMouseLeave={autoplay.current.play}
+            className="rounded-[0.5rem]"
           >
             <CarouselContent>
               {inspirationImages.map(({ alt, src }, i) => (
                 <CarouselItem
                   key={`inspiration-image-${i}`}
-                  className="h-[27.8rem] w-[23rem] basis-full overflow-hidden rounded-[0.5rem] md:basis-1/2 lg:basis-1/3 2xl:basis-1/4"
+                  className="h-full basis-full overflow-hidden rounded-[0.5rem] lg:basis-1/2 2xl:basis-1/3"
                 >
-                  <div className="group relative h-full w-full">
+                  <div className="group relative h-full w-full rounded-[0.5rem]">
                     <img
                       src={src}
                       alt={alt}
@@ -52,8 +53,8 @@ export default function Inspiration({ title }: { title: string }) {
                     <motion.span
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.5 }}
-                      className="absolute inset-0 z-50 hidden items-end justify-center space-x-1 rounded-[0.5rem] bg-gradient-to-t from-primary/60 via-transparent to-transparent pb-4 text-[1.3rem] leading-[2rem] text-white group-hover:flex"
+                      transition={{ duration: 0.3 }}
+                      className="gradient absolute inset-0 z-50 hidden items-end justify-center space-x-1 rounded-[0.5rem] pb-4 text-[1.3rem] leading-[2rem] text-white group-hover:flex"
                     >
                       <span>Designed by</span>
                       <Link
@@ -67,8 +68,8 @@ export default function Inspiration({ title }: { title: string }) {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-4  border-none bg-primary text-white hover:bg-[#9E2B7A] hover:text-white" />
-            <CarouselNext className="right-4  border-none bg-primary text-white hover:bg-[#9E2B7A] hover:text-white" />
+            <CarouselPrevious className="left-4 h-14 w-14 border-none bg-primary text-white hover:bg-[#9E2B7A] hover:text-white" />
+            <CarouselNext className="right-4 h-14 w-14 border-none bg-primary text-white hover:bg-[#9E2B7A] hover:text-white" />
           </Carousel>
         </div>
       </div>

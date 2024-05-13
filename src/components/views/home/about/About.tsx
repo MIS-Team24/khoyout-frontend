@@ -13,7 +13,7 @@ const spring = {
 export default function About() {
   return (
     <section className="mt-[5rem]">
-      <div className="mx-auto h-full min-h-[65rem] w-full max-w-[75rem]">
+      <div className="mx-auto h-full min-h-[65rem] w-full max-w-[90rem]">
         <div className="flex flex-col gap-y-8">
           <h2 className="text-center text-[2rem] font-normal leading-normal xl:text-start">
             About Khoyout
@@ -23,7 +23,7 @@ export default function About() {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={spring}
-              className="w-[25rem] sm:w-[32rem]"
+              className="w-[25rem] sm:w-[35rem]"
             >
               <img
                 src={aboutImg}
@@ -35,7 +35,7 @@ export default function About() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={spring}
-              className="w-full max-w-[37rem] space-y-[1.5rem]"
+              className="w-full max-w-[40rem] space-y-[1.5rem]"
             >
               <p className="text-center text-[1.3rem] font-normal leading-normal text-[#49454F] md:text-[1.5rem] md:leading-[2rem] xl:text-start">
                 Khoyout is your one-stop destination for effortlessly finding
@@ -60,7 +60,7 @@ export default function About() {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={spring}
-              className="flex w-full max-w-[37rem] flex-col items-start justify-center gap-y-[1.5rem]"
+              className="flex w-full max-w-[40rem] flex-col items-start justify-center gap-y-[1.5rem]"
             >
               <p className="text-center text-[1.3rem] font-normal leading-normal text-[#49454F] md:text-[1.5rem] md:leading-[2rem] xl:text-start">
                 It helps you easily schedule appointments with your chosen
@@ -78,7 +78,7 @@ export default function About() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={spring}
-              className="w-[23rem] sm:w-[30rem]"
+              className="w-[23rem] sm:w-[35rem]"
             >
               <img
                 src={bookImg}

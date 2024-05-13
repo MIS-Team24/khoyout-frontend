@@ -12,8 +12,8 @@ function Categories() {
   return (
     <section className="mt-16">
       <div className="mx-auto flex w-full items-center justify-center">
-        <div className="flex w-full flex-col items-center lg:w-[72rem]">
-          <h2 className="w-full pb-8 text-[2rem] font-normal">
+        <div className="flex max-w-[90rem] flex-col items-center text-center 2xl:text-start">
+          <h2 className="w-full pb-8 text-[1.3rem] font-normal sm:text-[1.5rem] md:text-[2rem]">
             Browse Designers By Categories
           </h2>
           <div className="flex w-full flex-wrap justify-center gap-6 px-4 sm:px-0">
@@ -22,7 +22,7 @@ function Categories() {
                 initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={spring}
-                className="h-[19.9rem] w-full max-w-[35.25rem] rounded-[0.5rem]"
+                className="h-[400px] w-full max-w-[708px] rounded-[0.25rem]"
                 key={i}
               >
                 <img
