@@ -31,6 +31,9 @@ import soiree from "./Soiree.jpeg";
 import formal from "./Formal.jpeg";
 import casual from "./Casual.jpeg";
 import classic from "./Classic.jpeg";
+import esraa from "./Esraa.png";
+import body from "./BodyImg.png";
+import edit from "./icons/Edit.svg";
 
 const inspirationImages = [
   {
@@ -149,4 +152,7 @@ export {
   designerVideo1,
   designerVideo2,
   categories,
+  esraa,
+  body,
+  edit,
 };
