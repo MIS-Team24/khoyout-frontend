@@ -217,7 +217,7 @@ export default function OTP() {
             <Button
               variant="link"
               className="p-0 font-semibold text-primary hover:no-underline"
-              onClick={() => sendOtpMutation.mutate(user?.email ?? "")}
+              onClick={() => sendOtpMutation.mutate(user?.user?.email ?? "")}
               disabled={sendOtpMutation.isPending}
             >
               Resend Code
