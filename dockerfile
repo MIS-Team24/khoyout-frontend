@@ -1,35 +1,19 @@
-FROM node:lts-alpine3.19 AS base
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-RUN npm install -g pnpm
+COPY package*.json ./
 
-FROM base AS dependencies
-
-COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm 
 
 RUN pnpm install
-
-FROM base AS build
-
-COPY package.json pnpm-lock.yaml ./
-
-COPY --from=dependencies /app/node_modules ./node_modules
 
 COPY . .
 
 RUN pnpm run build
 
-FROM base AS final
+FROM cgr.dev/chainguard/nginx
 
-COPY --from=build /app/dist ./dist
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-COPY package.json pnpm-lock.yaml index.html vite.config.ts tsconfig.json tsconfig.node.json postcss.config.js tailwind.config.js ./
-COPY public ./public
-COPY src ./src
-
-COPY --from=dependencies /app/node_modules ./node_modules
-
-EXPOSE 5173
-
-CMD ["pnpm", "run", "dev"]
+EXPOSE 8080

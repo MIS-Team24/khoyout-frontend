@@ -38,5 +38,5 @@ jobs:
           sudo docker rm $(docker ps -aq)
           sudo docker rmi $(docker images -q)
           sudo docker run -d --restart=unless-stopped -p 5173:5173 ezzops/khoyoutfrontend:${{ github.sha }} &
-          sudo docker run -d --restart=unless-stopped --net=host -it -e NGROK_AUTHTOKEN=2gQMgDTmxvY3NUuE6nNA5xVsD7I_4LHNWrWUDZm777QQxBwZX ngrok/ngrok:latest http --domain=easy-ace-opossum.ngrok-free.app 5173 &
+          sudo docker run -d --restart=unless-stopped --net=host -it -e NGROK_AUTHTOKEN=2gQMgDTmxvY3NUuE6nNA5xVsD7I_4LHNWrWUDZm777QQxBwZX ngrok/ngrok:latest http --domain=easy-ace-opossum.ngrok-free.app 8080 &
           EOF
