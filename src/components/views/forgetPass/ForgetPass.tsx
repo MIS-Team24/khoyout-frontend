@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { sendOTP } from "@/API/OTP/OTP";
-import { LoadingState } from "@/components/customUi";
+import { LoadingState } from "@/components/custom";
 import { cn } from "@/lib/utils";
 import { HistoryState } from "@tanstack/react-router";
 import toast from "react-hot-toast";

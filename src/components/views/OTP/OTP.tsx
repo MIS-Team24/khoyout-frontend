@@ -23,7 +23,7 @@ import {
 import toast from "react-hot-toast";
 import { mainLogo, sideImg } from "@/assets";
 import { useNavigate } from "@tanstack/react-router";
-import { LoadingState } from "@/components/customUi";
+import { LoadingState } from "@/components/custom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { cn } from "@/lib/utils";
