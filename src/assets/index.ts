@@ -31,6 +31,9 @@ import soiree from "./Soiree.jpeg";
 import formal from "./Formal.jpeg";
 import casual from "./Casual.jpeg";
 import classic from "./Classic.jpeg";
+import circleDot from "./icons/circle-dot.png";
+import circleCheck from "./icons/circle-check.png";
+import circle from "./icons/circle.png";
 
 const inspirationImages = [
   {
@@ -149,4 +152,7 @@ export {
   designerVideo1,
   designerVideo2,
   categories,
+  circleDot,
+  circle,
+  circleCheck,
 };
