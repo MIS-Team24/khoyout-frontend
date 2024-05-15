@@ -36,6 +36,9 @@ import body from "./BodyImg.png";
 import edit from "./icons/Edit.svg";
 import email from "./icons/email.svg";
 import plusIcon from "./icons/plus-circle.svg";
+import circleDot from "./icons/circle-dot.png";
+import circleCheck from "./icons/circle-check.png";
+import circle from "./icons/circle.png";
 
 const inspirationImages = [
   {
@@ -159,4 +162,7 @@ export {
   edit,
   email,
   plusIcon,
+  circleDot,
+  circle,
+  circleCheck,
 };
