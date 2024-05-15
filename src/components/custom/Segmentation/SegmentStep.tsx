@@ -1,7 +1,7 @@
 import { Variants, motion } from "framer-motion";
 
 type SegmentProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const animationVariants: Variants = {
@@ -19,7 +19,7 @@ export default function SegmentStep(props: SegmentProps) {
       exit="unmount"
       variants={animationVariants}
     >
-      {props.children}
+      {props.children ?? null}
     </motion.div>
   );
 }
