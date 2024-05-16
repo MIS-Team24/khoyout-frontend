@@ -1,3 +1,10 @@
+// import { useQuery } from "@tanstack/react-query";
+// import {
+//   getNotifications,
+//   API_NotificationResponse,
+// } from "@/API/notification/notification";
+// import { useSelector } from "react-redux";
+// import { RootState } from "@/store";
 import NotificationItem from "./NotificationItem";
 import { Button } from "@/components/ui";
 import { clientImg } from "@/assets";
@@ -24,6 +31,17 @@ const DUMMY_DATA = [
 ];
 
 export default function Notification() {
+  // const access_token = useSelector((x: RootState) => x.user.user?.access_token);
+  // const getNotificationsFn = () => getNotifications(access_token ?? "");
+  // const notificationQuery = useQuery({
+  //   queryKey: ["notifications-list"],
+  //   queryFn: getNotificationsFn,
+  // });
+  // let transformedData: API_NotificationResponse | undefined;
+  // if (notificationQuery.isSuccess) {
+  //   transformedData = notificationQuery.data.data as API_NotificationResponse;
+  // }
+
   return (
     <section>
       <div className="mx-auto mt-10 max-h-[88.75rem] w-full max-w-[83rem]">
