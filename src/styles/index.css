@@ -24,7 +24,7 @@
     --border: 319 30% 82%;
     --input: 319 30% 50%;
     --ring: 319 57.2% 39.4%;
-    --radius: 1rem;
+    --radius: 0.5rem;
   }
   .dark {
     --background: 319 50% 10%;
@@ -45,7 +45,6 @@
     --border: 319 30% 50%;
     --input: 319 30% 50%;
     --ring: 319 57.2% 39.4%;
-    --radius: 1rem;
   }
 
   ::selection {
