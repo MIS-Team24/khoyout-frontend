@@ -37,3 +37,11 @@ export {
 } from "./dialog";
 
 export { Calendar } from "./calendar";
+
+export {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./select";
