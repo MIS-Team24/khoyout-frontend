@@ -34,6 +34,8 @@ import classic from "./Classic.jpeg";
 import esraa from "./Esraa.png";
 import body from "./BodyImg.png";
 import edit from "./icons/Edit.svg";
+import email from "./icons/email.svg";
+import plusIcon from "./icons/plus-circle.svg";
 
 const inspirationImages = [
   {
@@ -155,4 +157,6 @@ export {
   esraa,
   body,
   edit,
+  email,
+  plusIcon,
 };
