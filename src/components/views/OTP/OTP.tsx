@@ -67,8 +67,6 @@ export default function OTP() {
     return false;
   }
 
-  console.log(selected);
-
   function OTPFn(data: z.infer<typeof FormSchema>) {
     if (comingFromRoute()) {
       return verifyEmail({
