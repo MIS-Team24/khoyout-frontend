@@ -1,27 +1,35 @@
-export { Button, buttonVariants } from "./button";
-export { Input } from "./input";
-export { Label } from "./label";
+export {Button, buttonVariants} from "./button";
+export {Input} from "./input";
+export {Label} from "./label";
 export {
-  Form,
-  FormField,
-  FormItem,
-  FormDescription,
-  FormControl,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormField,
+    FormItem,
+    FormDescription,
+    FormControl,
+    FormLabel,
+    FormMessage,
 } from "./form";
 
 export {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
+    InputOTP,
+    InputOTPGroup,
+    InputOTPSeparator,
+    InputOTPSlot,
 } from "./input-otp";
 
 export {
-  Carousel,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  CarouselContent,
+    Carousel,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+    CarouselContent,
 } from "./carousel";
+export {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "./card";
