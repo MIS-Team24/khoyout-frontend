@@ -1,15 +1,20 @@
-FROM node
-
-USER root
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-RUN npm install -g pnpm
+COPY package*.json ./
+
+RUN npm install -g pnpm 
+
+RUN pnpm install
 
 COPY . .
 
-RUN pnpm install 
+RUN pnpm run build
 
-EXPOSE 5173
+FROM cgr.dev/chainguard/nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-CMD [ "npm", "run", "dev" ]
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 8080

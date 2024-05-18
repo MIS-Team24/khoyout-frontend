@@ -23,7 +23,7 @@ import {
 import toast from "react-hot-toast";
 import { mainLogo, sideImg } from "@/assets";
 import { useNavigate } from "@tanstack/react-router";
-import { LoadingState } from "@/components/customUi";
+import { LoadingState } from "@/components/custom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { cn } from "@/lib/utils";
@@ -66,8 +66,6 @@ export default function OTP() {
     }
     return false;
   }
-
-  console.log(selected);
 
   function OTPFn(data: z.infer<typeof FormSchema>) {
     if (comingFromRoute()) {
@@ -217,7 +215,7 @@ export default function OTP() {
             <Button
               variant="link"
               className="p-0 font-semibold text-primary hover:no-underline"
-              onClick={() => sendOtpMutation.mutate(user?.email ?? "")}
+              onClick={() => sendOtpMutation.mutate(user?.user?.email ?? "")}
               disabled={sendOtpMutation.isPending}
             >
               Resend Code

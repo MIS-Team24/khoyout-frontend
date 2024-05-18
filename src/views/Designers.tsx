@@ -1,4 +1,4 @@
-import NavigatablePageWrapper from "@/components/custom/NavigatablePageWrapper";
+import { NavigatablePageWrapper } from "@/components/custom";
 import DesignerProfileCard from "@/components/views/designers/DesignerProfileCard";
 
 export default function Designers() {

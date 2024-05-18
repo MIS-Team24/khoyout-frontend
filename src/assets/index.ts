@@ -31,6 +31,14 @@ import soiree from "./Soiree.jpeg";
 import formal from "./Formal.jpeg";
 import casual from "./Casual.jpeg";
 import classic from "./Classic.jpeg";
+import esraa from "./Esraa.png";
+import body from "./BodyImg.png";
+import edit from "./icons/Edit.svg";
+import email from "./icons/email.svg";
+import plusIcon from "./icons/plus-circle.svg";
+import circleDot from "./icons/circle-dot.png";
+import circleCheck from "./icons/circle-check.png";
+import circle from "./icons/circle.png";
 
 const inspirationImages = [
   {
@@ -149,4 +157,12 @@ export {
   designerVideo1,
   designerVideo2,
   categories,
+  esraa,
+  body,
+  edit,
+  email,
+  plusIcon,
+  circleDot,
+  circle,
+  circleCheck,
 };

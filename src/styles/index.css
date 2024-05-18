@@ -24,7 +24,7 @@
     --border: 319 30% 82%;
     --input: 319 30% 50%;
     --ring: 319 57.2% 39.4%;
-    --radius: 1rem;
+    --radius: 0.5rem;
   }
   .dark {
     --background: 319 50% 10%;
@@ -45,7 +45,6 @@
     --border: 319 30% 50%;
     --input: 319 30% 50%;
     --ring: 319 57.2% 39.4%;
-    --radius: 1rem;
   }
 
   ::selection {
@@ -73,4 +72,14 @@
     rgba(140, 35, 108, 0) 29.94%,
     #8c236c 100%
   );
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }

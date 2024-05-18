@@ -2,6 +2,8 @@ import { Button, Input } from "@/components/ui";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { aboutImg, bookImg } from "@/assets";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { BookingDialog } from "@/components/custom";
 
 const spring = {
   ease: "linear",
@@ -11,6 +13,8 @@ const spring = {
 };
 
 export default function About() {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="mt-[5rem]">
       <div className="mx-auto h-full min-h-[65rem] w-full max-w-[90rem]">
@@ -70,6 +74,7 @@ export default function About() {
               <Button
                 type="button"
                 className="h-[2.5rem] w-[18rem] rounded-[1rem] text-[1.2rem] font-medium leading-normal hover:bg-[#9E2B7A] sm:h-[3rem] sm:w-[23rem] sm:text-[1.5rem]"
+                onClick={() => setOpen(true)}
               >
                 Book Now
               </Button>
@@ -89,6 +94,7 @@ export default function About() {
           </div>
         </div>
       </div>
+      <BookingDialog designerName="Basma Adel" open={open} onChange={setOpen} />
     </section>
   );
 }

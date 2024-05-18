@@ -1,4 +1,4 @@
-import NavigatablePageWrapper from "@/components/custom/NavigatablePageWrapper";
+import { NavigatablePageWrapper } from "@/components/custom";
 import {
   Hero,
   Categories,
