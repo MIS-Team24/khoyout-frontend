@@ -39,6 +39,7 @@ import plusIcon from "./icons/plus-circle.svg";
 import circleDot from "./icons/circle-dot.png";
 import circleCheck from "./icons/circle-check.png";
 import circle from "./icons/circle.png";
+import design2 from "./Design2.png";
 
 const inspirationImages = [
   {
@@ -165,4 +166,5 @@ export {
   circleDot,
   circle,
   circleCheck,
+  design2,
 };
