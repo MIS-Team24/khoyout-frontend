@@ -40,6 +40,10 @@ import circleDot from "./icons/circle-dot.png";
 import circleCheck from "./icons/circle-check.png";
 import circle from "./icons/circle.png";
 import design2 from "./Design2.png";
+import design5 from "./Design5.png";
+import design6 from "./Design6.png";
+import design7 from "./Design7.png";
+import design8 from "./Design8.png";
 
 const inspirationImages = [
   {
@@ -138,6 +142,21 @@ const categories = [
   },
 ];
 
+const designerGalleryImages = [
+  { src: design2, alt: "Design 1" },
+  { src: design5, alt: "Design 2" },
+  { src: design6, alt: "Design 3" },
+  { src: design7, alt: "Design 4" },
+  { src: design8, alt: "Design 5" },
+  { src: ins1, alt: "Design 6" },
+  { src: ins2, alt: "Design 7" },
+  { src: ins3, alt: "Design 8" },
+  { src: ins4, alt: "Design 9" },
+  { src: ins5, alt: "Design 10" },
+  { src: ins6, alt: "Design 11" },
+  { src: ins7, alt: "Design 12" },
+];
+
 export {
   sideImg,
   mainLogo,
@@ -166,5 +185,5 @@ export {
   circleDot,
   circle,
   circleCheck,
-  design2,
+  designerGalleryImages,
 };
