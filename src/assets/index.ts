@@ -36,6 +36,7 @@ import body from "./BodyImg.png";
 import edit from "./icons/Edit.svg";
 import email from "./icons/email.svg";
 import plusIcon from "./icons/plus-circle.svg";
+import design2 from "./Design2.png";
 
 const inspirationImages = [
   {
@@ -159,4 +160,5 @@ export {
   edit,
   email,
   plusIcon,
+  design2,
 };
