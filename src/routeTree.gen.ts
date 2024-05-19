@@ -20,6 +20,7 @@ const RegisterLazyImport = createFileRoute('/register')()
 const OtpLazyImport = createFileRoute('/otp')()
 const NotificationsLazyImport = createFileRoute('/notifications')()
 const InspirationLazyImport = createFileRoute('/inspiration')()
+const ImagesLazyImport = createFileRoute('/images')()
 const HomeLazyImport = createFileRoute('/home')()
 const ForgetPasswordLazyImport = createFileRoute('/forget-password')()
 const DesignersLazyImport = createFileRoute('/designers')()
@@ -49,6 +50,11 @@ const InspirationLazyRoute = InspirationLazyImport.update({
   path: '/inspiration',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/inspiration.lazy').then((d) => d.Route))
+
+const ImagesLazyRoute = ImagesLazyImport.update({
+  path: '/images',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/images.lazy').then((d) => d.Route))
 
 const HomeLazyRoute = HomeLazyImport.update({
   path: '/home',
@@ -121,6 +127,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeLazyImport
       parentRoute: typeof rootRoute
     }
+    '/images': {
+      preLoaderRoute: typeof ImagesLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/inspiration': {
       preLoaderRoute: typeof InspirationLazyImport
       parentRoute: typeof rootRoute
@@ -150,6 +160,7 @@ export const routeTree = rootRoute.addChildren([
   DesignersLazyRoute,
   ForgetPasswordLazyRoute,
   HomeLazyRoute,
+  ImagesLazyRoute,
   InspirationLazyRoute,
   NotificationsLazyRoute,
   OtpLazyRoute,
