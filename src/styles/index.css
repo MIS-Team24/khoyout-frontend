@@ -27,6 +27,9 @@
         --accent: 60 4.8% 95.9%;
         --accent-foreground: 24 9.8% 10%;
 
+        --success: 117 78% 40%;
+        --error: 3 71% 41%;
+
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 60 9.1% 97.8%;
 
@@ -84,6 +87,10 @@
 
     form > div:has( #terms) {
         margin: 1rem 0 0 0;
+    }
+
+    #password-condition-list li {
+        @apply flex place-items-center gap-2;
     }
 
     h1, h2, h3, h4, h5, h6 {
