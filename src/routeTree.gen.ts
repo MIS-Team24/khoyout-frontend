@@ -20,7 +20,6 @@ const RegisterLazyImport = createFileRoute('/register')()
 const OtpLazyImport = createFileRoute('/otp')()
 const NotificationsLazyImport = createFileRoute('/notifications')()
 const InspirationLazyImport = createFileRoute('/inspiration')()
-const ImagesLazyImport = createFileRoute('/images')()
 const HomeLazyImport = createFileRoute('/home')()
 const ForgetPasswordLazyImport = createFileRoute('/forget-password')()
 const DesignersLazyImport = createFileRoute('/designers')()
@@ -28,6 +27,8 @@ const DesignerProfileLazyImport = createFileRoute('/designer-profile')()
 const ContactLazyImport = createFileRoute('/contact')()
 const ClientPageLazyImport = createFileRoute('/client-page')()
 const IndexLazyImport = createFileRoute('/')()
+const GalleryVideosLazyImport = createFileRoute('/gallery/videos')()
+const GalleryImagesLazyImport = createFileRoute('/gallery/images')()
 
 // Create/Update Routes
 
@@ -50,11 +51,6 @@ const InspirationLazyRoute = InspirationLazyImport.update({
   path: '/inspiration',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/inspiration.lazy').then((d) => d.Route))
-
-const ImagesLazyRoute = ImagesLazyImport.update({
-  path: '/images',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/images.lazy').then((d) => d.Route))
 
 const HomeLazyRoute = HomeLazyImport.update({
   path: '/home',
@@ -95,6 +91,20 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
+const GalleryVideosLazyRoute = GalleryVideosLazyImport.update({
+  path: '/gallery/videos',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/gallery/videos.lazy').then((d) => d.Route),
+)
+
+const GalleryImagesLazyRoute = GalleryImagesLazyImport.update({
+  path: '/gallery/images',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/gallery/images.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -127,10 +137,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeLazyImport
       parentRoute: typeof rootRoute
     }
-    '/images': {
-      preLoaderRoute: typeof ImagesLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/inspiration': {
       preLoaderRoute: typeof InspirationLazyImport
       parentRoute: typeof rootRoute
@@ -147,6 +153,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterLazyImport
       parentRoute: typeof rootRoute
     }
+    '/gallery/images': {
+      preLoaderRoute: typeof GalleryImagesLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/gallery/videos': {
+      preLoaderRoute: typeof GalleryVideosLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -160,11 +174,12 @@ export const routeTree = rootRoute.addChildren([
   DesignersLazyRoute,
   ForgetPasswordLazyRoute,
   HomeLazyRoute,
-  ImagesLazyRoute,
   InspirationLazyRoute,
   NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,
+  GalleryImagesLazyRoute,
+  GalleryVideosLazyRoute,
 ])
 
 /* prettier-ignore-end */
