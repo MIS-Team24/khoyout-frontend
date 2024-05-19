@@ -24,8 +24,8 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -81,21 +81,11 @@
   }
 
   input {
-    @apply !h-12 text-foreground;
+    @apply text-foreground;
   }
 
-  input[type="email"] {
-    background-image: url("@/assets/images/email-icon.svg");
-    background-repeat: no-repeat;
-    background-position: left 1rem center;
-    padding-left: 3rem;
-  }
-
-  input[type="password"] {
-    background-image: url("@/assets/images/lock-icon.svg");
-    background-repeat: no-repeat;
-    background-position: left 1rem center;
-    padding-left: 3rem;
+  form > div:has(#terms) {
+    margin: 1rem 0 0 0;
   }
 
   h1,

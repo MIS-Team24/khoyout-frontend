@@ -7,7 +7,6 @@ import handImg from "./handImg.jpeg";
 import quotes from "./Quotes.svg";
 import amira from "./amira.jpeg";
 import hager from "./hager.jpeg";
-import mai from "./may.jpeg";
 import heroImg from "./hero.png";
 import ins1 from "./Ins1.png";
 import ins2 from "./Ins2.png";

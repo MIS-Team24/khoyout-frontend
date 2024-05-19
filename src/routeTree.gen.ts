@@ -22,6 +22,11 @@ const GalleryImagesLazyImport = createFileRoute("/gallery/images")();
 
 // Create/Update Routes
 
+const LoginLazyRoute = LoginLazyImport.update({
+  path: "/login",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/login.lazy").then((d) => d.Route));
+
 const IndexLazyRoute = IndexLazyImport.update({
   path: "/",
   getParentRoute: () => rootRoute,
@@ -49,11 +54,18 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexLazyImport;
       parentRoute: typeof rootRoute;
     };
+    "/login": {
+      preLoaderRoute: typeof LoginLazyImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([IndexLazyRoute]);
+export const routeTree = rootRoute.addChildren([
+  IndexLazyRoute,
+  LoginLazyRoute,
+]);
 
 /* prettier-ignore-end */
