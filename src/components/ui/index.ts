@@ -47,3 +47,13 @@ export {
 } from "./select";
 
 export { Textarea } from "./textarea";
+
+export {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "./pagination";
