@@ -79,21 +79,11 @@
     }
 
     input {
-        @apply text-foreground !h-12;
+        @apply text-foreground ;
     }
 
-    input[type="email"] {
-        background-image: url("@/assets/images/email-icon.svg");
-        background-repeat: no-repeat;
-        background-position: left 1rem center;
-        padding-left: 3rem;
-    }
-
-    input[type="password"] {
-        background-image: url("@/assets/images/lock-icon.svg");
-        background-repeat: no-repeat;
-        background-position: left 1rem center;
-        padding-left: 3rem;
+    form > div:has( #terms) {
+        margin: 1rem 0 0 0;
     }
 
     h1, h2, h3, h4, h5, h6 {
