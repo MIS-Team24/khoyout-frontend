@@ -165,7 +165,7 @@ export default function LoginHomePage() {
                 </div>
             </div>
             <div className="w-2/5 hidden md:block">
-                <img src={SideImg} className="object-cover w-full h-full"/>
+                <img src={SideImg} alt="sideImage" className="object-cover w-full h-full"/>
             </div>
         </div>
     );
