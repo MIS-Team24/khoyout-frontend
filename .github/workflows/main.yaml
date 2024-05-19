@@ -21,22 +21,18 @@ jobs:
     needs: CI
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Install SSH key
-        run: |
-          echo "${{ secrets.EC2_SSH_KEY }}" > ezz.pem
-          chmod 600 ezz.pem
+      - name: SSH to server and execute commands
+        uses: appleboy/ssh-action@master
+        with:
+            host: 67.207.70.199
+            username: root
+            password: ${{ secrets.EC2_SSH_KEY }}
+            script: |
+              container_id=$(docker ps --format "{{.ID}}")
+              sudo docker logs $container_id > khoyoutfrontend$(date +%Y%m%d).log
+              sudo docker stop $(docker ps -aq)
+              sudo docker rm $(docker ps -aq)
+              sudo docker rmi $(docker images -q)
+              sudo docker run -d --restart=unless-stopped -p 8080:8080 ezzops/khoyoutfrontend:${{ github.sha }} &
+              sudo docker run -d --restart=unless-stopped --net=host -it -e NGROK_AUTHTOKEN=2gQMgDTmxvY3NUuE6nNA5xVsD7I_4LHNWrWUDZm777QQxBwZX ngrok/ngrok:latest http --domain=composed-greatly-wasp.ngrok-free.app 8080 &
           
-      - name: Deploy to EC2
-        run: |
-          sudo ssh -o StrictHostKeyChecking=no -i ezz.pem ec2-user@18.217.85.155 << 'EOF'
-          container_id=$(docker ps --format "{{.ID}}")
-          sudo docker logs $container_id > khoyoutfrontend$(date +%Y%m%d).log
-          sudo docker stop $(docker ps -aq)
-          sudo docker rm $(docker ps -aq)
-          sudo docker rmi $(docker images -q)
-          sudo docker run -d --restart=unless-stopped -p 8080:8080 ezzops/khoyoutfrontend:${{ github.sha }} &
-          sudo docker run -d --restart=unless-stopped --net=host -it -e NGROK_AUTHTOKEN=2gQMgDTmxvY3NUuE6nNA5xVsD7I_4LHNWrWUDZm777QQxBwZX ngrok/ngrok:latest http --domain=composed-greatly-wasp.ngrok-free.app 8080 &
-          EOF

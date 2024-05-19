@@ -27,6 +27,8 @@ const DesignerProfileLazyImport = createFileRoute('/designer-profile')()
 const ContactLazyImport = createFileRoute('/contact')()
 const ClientPageLazyImport = createFileRoute('/client-page')()
 const IndexLazyImport = createFileRoute('/')()
+const GalleryVideosLazyImport = createFileRoute('/gallery/videos')()
+const GalleryImagesLazyImport = createFileRoute('/gallery/images')()
 
 // Create/Update Routes
 
@@ -89,6 +91,20 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
+const GalleryVideosLazyRoute = GalleryVideosLazyImport.update({
+  path: '/gallery/videos',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/gallery/videos.lazy').then((d) => d.Route),
+)
+
+const GalleryImagesLazyRoute = GalleryImagesLazyImport.update({
+  path: '/gallery/images',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/gallery/images.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -137,6 +153,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterLazyImport
       parentRoute: typeof rootRoute
     }
+    '/gallery/images': {
+      preLoaderRoute: typeof GalleryImagesLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/gallery/videos': {
+      preLoaderRoute: typeof GalleryVideosLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -154,6 +178,8 @@ export const routeTree = rootRoute.addChildren([
   NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,
+  GalleryImagesLazyRoute,
+  GalleryVideosLazyRoute,
 ])
 
 /* prettier-ignore-end */
