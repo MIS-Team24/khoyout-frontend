@@ -74,7 +74,60 @@
   * {
     @apply border-border;
   }
+
   body {
+    font-family: "Roboto";
     @apply bg-background text-foreground;
+  }
+
+  input {
+    @apply !h-12 text-foreground;
+  }
+
+  input[type="email"] {
+    background-image: url("@/assets/images/email-icon.svg");
+    background-repeat: no-repeat;
+    background-position: left 1rem center;
+    padding-left: 3rem;
+  }
+
+  input[type="password"] {
+    background-image: url("@/assets/images/lock-icon.svg");
+    background-repeat: no-repeat;
+    background-position: left 1rem center;
+    padding-left: 3rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold text-primary;
+  }
+
+  h1 {
+    @apply text-7xl;
+  }
+
+  h2 {
+    @apply text-[4rem];
+  }
+
+  h3 {
+    @apply text-[3.5rem];
+  }
+
+  h4 {
+    @apply text-5xl;
+  }
+
+  h5 {
+    @apply text-[2.5rem];
+  }
+
+  h6 {
+    @apply text-[2rem];
   }
 }
