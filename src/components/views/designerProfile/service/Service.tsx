@@ -38,43 +38,50 @@ export default function Service() {
     },
   ];
   return (
-    <div className="mx-4 mb-8 mt-16 flex flex-col gap-8 pb-0 text-xl lg:mx-auto lg:mt-[4.25rem] lg:h-full lg:w-full lg:flex-row lg:pb-0 xl:w-4/5 xl:px-2">
-      <div className="mx-auto flex w-full flex-col gap-[4.25rem] lg:w-3/5">
-        <section>
-          <div>
-            <p className="mb-8 text-[2rem] text-foreground">Services</p>
-            <div className="flex flex-col gap-6">
-              {data.map((item) => (
-                <Card className="rounded-2xl ">
-                  <CardHeader className="gap-4">
-                    <CardTitle className="font-medium text-foreground">
-                      {item.title}
-                    </CardTitle>
-                    <CardDescription className="text-xl text-secondary">
-                      {item.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardFooter className="flex place-items-center justify-between">
-                    <p className="text-xl font-medium text-foreground">
-                      From <span>{item.price}</span>
-                    </p>
-                    <Button
-                      variant="outline"
-                      className="rounded-2xl px-6 py-3 text-xl font-medium text-primary "
-                    >
-                      Book
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
+    <div className="main-container">
+      <p className="mb-8 mt-16 text-[2rem] text-foreground">Services</p>
+      <div className="mb-8 flex flex-col place-items-start gap-8 pb-0 text-xl lg:flex-row">
+        <div className="mx-auto flex w-full flex-col gap-[4.25rem] lg:w-3/5">
+          <section>
+            <div>
+              <div className="flex flex-col gap-6">
+                {data.map((item, i) => (
+                  <Card
+                    className="rounded-2xl"
+                    key={`
+                    service-${i}
+                  `}
+                  >
+                    <CardHeader className="gap-4">
+                      <CardTitle className="font-medium text-foreground">
+                        {item.title}
+                      </CardTitle>
+                      <CardDescription className="text-xl text-secondary">
+                        {item.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardFooter className="flex place-items-center justify-between">
+                      <p className="text-xl font-medium text-foreground">
+                        From <span>{item.price}</span>
+                      </p>
+                      <Button
+                        variant="outline"
+                        className="rounded-2xl px-6 py-3 text-xl font-medium text-primary "
+                      >
+                        Book
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-        <Team />
-        <Reviews />
-      </div>
-      <div className="sticky top-0 lg:w-2/5">
-        <BookingCard />
+          </section>
+          <Team />
+          <Reviews />
+        </div>
+        <div className="sticky top-24 lg:w-2/5">
+          <BookingCard />
+        </div>
       </div>
     </div>
   );

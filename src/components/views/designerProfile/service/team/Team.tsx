@@ -7,8 +7,13 @@ export default function Team() {
       <div>
         <p className="mb-8 text-[2rem] text-foreground">Team</p>
         <div className="no-scrollbar flex flex-row gap-6 overflow-auto whitespace-nowrap">
-          {team.map((member) => (
-            <Card className="min-w-48 p-2">
+          {team.map((member, i) => (
+            <Card
+              className="min-w-48 p-2"
+              key={`
+              team-member-${i}
+            `}
+            >
               <CardContent className="p-0 text-center">
                 <img
                   src={member.image.src}
