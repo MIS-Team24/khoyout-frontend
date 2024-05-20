@@ -24,10 +24,10 @@ import {Link} from '@tanstack/react-router';
 
 const formSchema = z.object({
     email: z.string().email({
-        message: "Please enter a valid email address (user@xyz.com).",
+        message: "Ensure that you are entering the correct email address.",
     }),
     password: z.string().min(8, {
-        message: "Password must be at least 8 characters.",
+        message: "Verify that the password is entered correctly",
     }),
     rememberMe: z.boolean().default(false).optional(),
 })
@@ -53,9 +53,9 @@ export default function LoginHomePage() {
     }
 
     return (
-        <div className="flex h-screen">
-            <div className="w-full md:w-3/5">
-                <div className="p-11">
+        <div className="flex h-screen place-items-center lg:place-items-start">
+            <div className="w-11/12 lg:w-3/5 mx-auto py-12 lg:py-0">
+                <div className="p-11 hidden lg:block">
                     <img src={Logo} alt="Logo" className="object-cover"/>
                 </div>
                 <div className="flex justify-center place-items-center">
@@ -164,7 +164,7 @@ export default function LoginHomePage() {
                     </div>
                 </div>
             </div>
-            <div className="w-2/5 hidden md:block">
+            <div className="w-2/5 hidden lg:block">
                 <img src={SideImg} alt="sideImage" className="object-cover w-full h-full"/>
             </div>
         </div>

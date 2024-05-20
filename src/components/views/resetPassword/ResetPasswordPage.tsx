@@ -13,6 +13,10 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
 import {Lock, EyeOff, Eye, Check, X} from "lucide-react";
 import {useState} from "react";
+import {Link} from "@tanstack/react-router";
+import {useMutation} from "@tanstack/react-query";
+import {resetPassword} from "@/API/resetPassword/ResetPassword";
+
 
 const formSchema = z.object({
     password: z
@@ -35,12 +39,15 @@ export default function ResetPasswordPage() {
         password: false,
         confirmPassword: false
     });
+    const resetPasswordMutation = useMutation({
+        mutationFn: resetPassword,
+    });
 
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>, event) {
         if (values.password !== '' || values.password == undefined) {
             if (values.password.length >= 8 && /[a-z]/.test(values.password) && /[A-Z]/.test(values.password) && /[0-9]/.test(values.password)) {
-                console.log(values)
+                resetPasswordMutation.mutate(values);
             } else {
                 event.preventDefault();
             }
@@ -54,9 +61,9 @@ export default function ResetPasswordPage() {
     }
 
     return (
-        <div className="flex h-screen">
-            <div className="w-full md:w-3/5">
-                <div className="p-11">
+        <div className="flex h-screen place-items-center lg:place-items-start">
+            <div className="w-11/12 lg:w-3/5 mx-auto py-12 lg:py-0">
+                <div className="p-11 hidden lg:block">
                     <img src={Logo} alt="Logo" className="object-cover"/>
                 </div>
                 <div className="flex justify-center place-items-center">
@@ -153,8 +160,10 @@ export default function ResetPasswordPage() {
                                         </FormItem>
                                     )}
                                 />
-                                <div>
-                                    <Button type="submit" className="w-full h-14 rounded-2xl text-2xl">Log In</Button>
+                                <div className="flex gap-6">
+                                    <Link to="/login"
+                                          className="w-1/2 h-14 border border-primary text-primary font-medium flex place-items-center justify-center bg-background  rounded-2xl text-2xl">Cancel</Link>
+                                    <Button type="submit" className="w-1/2 h-14 rounded-2xl text-2xl">Reset</Button>
                                 </div>
                             </form>
                         </Form>
@@ -202,7 +211,7 @@ export default function ResetPasswordPage() {
                     </div>
                 </div>
             </div>
-            <div className="w-2/5 hidden md:block">
+            <div className="w-2/5 hidden lg:block">
                 <img src={SideImg} alt="sideImage" className="object-cover w-full h-full"/>
             </div>
         </div>
