@@ -96,6 +96,9 @@
   h6 {
     @apply font-bold text-primary;
   }
+  #password-condition-list li {
+    @apply mb-2 flex place-items-center gap-2 last:mb-0;
+  }
 
   h1 {
     @apply text-7xl;
