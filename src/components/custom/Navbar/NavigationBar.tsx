@@ -92,7 +92,7 @@ const NavigationBar = forwardRef(function (_, ref) {
           ></motion.div>
         </motion.div>
       </Button>
-      <div className="mb-8 mt-16 flex flex-col items-center justify-between pb-0 text-xl lg:mx-auto lg:my-0 lg:h-full lg:w-full lg:flex-row lg:pb-0 xl:w-4/5 xl:px-2">
+      <div className="main-container mb-8 mt-16 flex flex-col items-center justify-between pb-0 text-xl lg:mt-0 lg:flex-row">
         <div className="absolute left-4 top-3 h-12 w-20 lg:static">
           <img className="w-full" src={miniLogo} />
         </div>

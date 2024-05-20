@@ -71,6 +71,10 @@
     @apply overflow-hidden;
   }
 
+  .main-container {
+    @apply mx-4 lg:mx-auto lg:h-full lg:w-11/12 lg:pb-0 xl:w-4/5 xl:px-2;
+  }
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
