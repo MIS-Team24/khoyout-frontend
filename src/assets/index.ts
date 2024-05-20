@@ -44,6 +44,9 @@ import design5 from "./Design5.png";
 import design6 from "./Design6.png";
 import design7 from "./Design7.png";
 import design8 from "./Design8.png";
+import team1 from "./team-1.png";
+import team2 from "./team-2.png";
+import team3 from "./team-3.png";
 
 const inspirationImages = [
   {
@@ -122,6 +125,23 @@ const clients = [
       "Khoyout made finding the perfect tailor a breeze! I was able to browse through various options, read reviews, and book my appointment with ease. Highly recommended!",
   },
 ];
+const team = [
+  {
+    image: { src: team1, alt: "team1 Image" },
+    name: "Nada",
+    job: "Hand made specialist",
+  },
+  {
+    image: { src: team2, alt: "team2 Image" },
+    name: "Mona",
+    job: "Redesign specialist",
+  },
+  {
+    image: { src: team3, atl: "team3 Image" },
+    name: "Mariam",
+    job: "Sewing specialist",
+  },
+];
 
 const categories = [
   {
@@ -186,4 +206,5 @@ export {
   circle,
   circleCheck,
   designerGalleryImages,
+  team,
 };
