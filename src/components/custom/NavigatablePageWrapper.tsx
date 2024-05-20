@@ -33,7 +33,7 @@ export default function NavigatablePageWrapper({
       className={`relative min-h-screen`}
       style={{ paddingBottom: PB, paddingTop: PT }}
     >
-      <div className="h-fit min-h-full overflow-hidden">
+      <div className="h-fit min-h-full overflow-hidden sm:overflow-visible">
         <NavigationBar ref={navRef} />
         <div className="relative">{children}</div>
         <Footer ref={footerRef} />

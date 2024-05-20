@@ -3,6 +3,7 @@ import {
   ProfileDetails,
   AboutDesigner,
   DesignerVideos,
+  Service,
 } from "@/components/views/designerProfile";
 import { Inspiration } from "@/components/views/home";
 
@@ -14,6 +15,7 @@ export default function DesignerProfile() {
       <AboutDesigner />
       <Inspiration title="Photos" />
       <DesignerVideos />
+      <Service />
     </NavigatablePageWrapper>
   );
 }
