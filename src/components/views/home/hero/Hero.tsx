@@ -5,7 +5,7 @@ import { heroImg } from "@/assets";
 export default function Hero() {
   return (
     <section>
-      <div className="relative h-[60rem] w-full">
+      <div className="main-container relative h-[60rem] w-full">
         <div className="absolute inset-0">
           <img
             src={heroImg}
@@ -13,7 +13,6 @@ export default function Hero() {
             className="h-full w-full object-cover"
           />
         </div>
-
         <div className="absolute z-10 flex h-full w-full items-center justify-start">
           <div className="flex w-full flex-col items-center gap-y-[4.44rem] px-4 md:w-[80%] md:items-start md:pl-[10rem] lg:w-[56%]">
             <div className="w-full">
