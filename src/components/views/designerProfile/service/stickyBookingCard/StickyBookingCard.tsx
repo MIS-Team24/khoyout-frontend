@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import {
   Card,
@@ -8,8 +9,11 @@ import {
   Button,
 } from "@/components/ui";
 import { Clock } from "lucide-react";
+import { BookingDialog } from "@/components/custom";
 
 export default function BookingCard() {
+  const [open, setOpen] = useState(false);
+
   const data = {
     storeRating: "5.0",
     time: "12:00 PM to 10:00 PM",
@@ -60,11 +64,15 @@ export default function BookingCard() {
           </div>
         </CardContent>
         <CardFooter className="p-0">
-          <Button className="h-14 w-full rounded-2xl text-2xl font-medium">
+          <Button
+            onClick={() => setOpen(true)}
+            className="h-14 w-full rounded-2xl text-2xl font-medium"
+          >
             Book now
           </Button>
         </CardFooter>
       </Card>
+      <BookingDialog designerName="Basma Adel" open={open} onChange={setOpen} />
     </div>
   );
 }
