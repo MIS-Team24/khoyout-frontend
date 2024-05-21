@@ -10,7 +10,7 @@ export default function ProfileDetails({
   wishlisted: boolean;
 }) {
   return (
-    <section className="main-container">
+    <section className="main-container mt-16">
       <div className="flex w-full flex-col items-center justify-between gap-y-3 sm:flex-row sm:gap-y-0">
         <div className="flex w-full flex-col items-center gap-x-8 sm:flex-row lg:w-3/5">
           <div className="h-52 w-52 rounded-full sm:h-44 sm:w-44">
