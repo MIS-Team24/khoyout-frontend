@@ -1,9 +1,10 @@
-import { Button, Input } from "@/components/ui";
+import { buttonVariants, Input } from "@/components/ui";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { aboutImg, bookImg } from "@/assets";
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { BookingDialog, SectionHeader } from "@/components/custom";
+import { SectionHeader } from "@/components/custom";
+import { cn } from "@/lib/utils";
 
 const spring = {
   ease: "linear",
@@ -13,8 +14,6 @@ const spring = {
 };
 
 export default function About() {
-  const [open, setOpen] = useState(false);
-
   return (
     <section className="w-full">
       <div className="main-container my-16">
@@ -69,13 +68,15 @@ export default function About() {
                 tailor after exploring and choosing from our wide range of
                 tailors
               </p>
-              <Button
-                type="button"
-                className="h-[2.5rem] w-[18rem] rounded-[1rem] text-[1.2rem] font-medium leading-normal hover:bg-[#9E2B7A] sm:h-[3rem] sm:w-[23rem] sm:text-[1.5rem]"
-                onClick={() => setOpen(true)}
+              <Link
+                to="/designers"
+                className={cn(
+                  buttonVariants({ variant: "default" }),
+                  "h-[2.5rem] w-[18rem] rounded-[1rem] text-[1.2rem] font-medium leading-normal hover:bg-[#9E2B7A] sm:h-[3rem] sm:w-[23rem] sm:text-[1.5rem]",
+                )}
               >
                 Book Now
-              </Button>
+              </Link>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -91,11 +92,6 @@ export default function About() {
             </motion.div>
           </div>
         </div>
-        <BookingDialog
-          designerName="Basma Adel"
-          open={open}
-          onChange={setOpen}
-        />
       </div>
     </section>
   );
