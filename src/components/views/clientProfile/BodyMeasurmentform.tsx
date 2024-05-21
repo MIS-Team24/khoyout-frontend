@@ -11,6 +11,8 @@ import {
   FormMessage,
   Input,
 } from "@/components/ui";
+import { SectionHeader } from "@/components/custom";
+import { useState } from "react";
 
 const formSchema = z.object({
   body_shape: z
@@ -82,6 +84,8 @@ const formSchema = z.object({
 });
 
 function BodyMeasurmentform() {
+  const [edit, setEdit] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -108,35 +112,19 @@ function BodyMeasurmentform() {
     console.log(values);
   }
 
-  function cancelHandler() {
-    form.resetField("body_shape");
-    form.resetField("weight");
-    form.resetField("length");
-    form.resetField("shoulder_width");
-    form.resetField("neck");
-    form.resetField("chest");
-    form.resetField("arms");
-    form.resetField("forearms");
-    form.resetField("wrists");
-    form.resetField("waist");
-    form.resetField("hips");
-    form.resetField("thigh");
-    form.resetField("belly");
-    form.resetField("above_kinee");
-    form.resetField("below_kinee");
-    form.resetField("calf");
-  }
-
   return (
-    <div className="min-h-[59.3rem] w-full max-w-[39rem] rounded-xl bg-[#F3EBF1] p-6">
+    <div className="w-full rounded-xl bg-[#F3EBF1] p-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-[2rem] font-normal">My body measurments</h2>
+        <SectionHeader title="My body measurments" className="my-0 pb-2" />
         <Button
-          onClick={cancelHandler}
+          onClick={() => {
+            form.reset();
+            setEdit(!edit);
+          }}
           variant={"ghost"}
-          className="h-[2.375rem] text-2xl font-medium  text-[#8C236C] hover:bg-transparent hover:text-[#8C236C]"
+          className="h-[2.375rem] text-2xl font-medium  text-primary hover:bg-transparent hover:text-primary"
         >
-          Cancel
+          {edit ? "Cancel" : "Edit"}
         </Button>
       </div>
       <div className="pb-8">
@@ -155,9 +143,10 @@ function BodyMeasurmentform() {
                 <FormItem>
                   <FormControl>
                     <Input
+                      disabled={!edit}
                       placeholder="Body Shape"
                       {...field}
-                      className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                      className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                     />
                   </FormControl>
                   <FormMessage />
@@ -172,10 +161,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Weight"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -189,10 +179,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Length"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -208,10 +199,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Shoulder_Width"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -225,10 +217,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Neck"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -244,10 +237,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Chest"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -261,10 +255,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Arms"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -280,10 +275,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Forearms"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -297,10 +293,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Wrists"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -316,10 +313,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Waist"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -333,10 +331,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Hips"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -352,10 +351,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Thigh"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -369,10 +369,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Belly"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -388,10 +389,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Above Kinee"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -405,10 +407,11 @@ function BodyMeasurmentform() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Below Kinee"
                         {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                        className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -423,10 +426,11 @@ function BodyMeasurmentform() {
                 <FormItem>
                   <FormControl>
                     <Input
+                      disabled={!edit}
                       type="number"
                       placeholder="Calf"
                       {...field}
-                      className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                      className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                     />
                   </FormControl>
                   <FormMessage />
@@ -436,7 +440,8 @@ function BodyMeasurmentform() {
             <div className="flex items-center justify-end">
               <Button
                 type="submit"
-                className="h-[2.9375rem] w-[17.5rem] items-center text-xl font-medium text-[#F9F4F4]"
+                className="h-[2.9375rem] w-[17.5rem] text-xl font-medium text-[#F9F4F4]"
+                disabled={!edit}
               >
                 Save
               </Button>
