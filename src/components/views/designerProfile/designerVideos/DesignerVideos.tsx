@@ -1,14 +1,13 @@
 import { Button } from "@/components/ui";
 import { ChevronRight, Play } from "lucide-react";
 import { designerVideo1, designerVideo2 } from "@/assets";
+import { SectionHeader } from "@/components/custom";
 
 export default function DesignerVideos() {
   return (
     <section className="main-container mt-16">
       <div className="flex w-full items-center justify-between">
-        <h2 className="text-[1.3rem] font-normal sm:text-[1.5rem] md:text-[2rem]">
-          Videos
-        </h2>
+        <SectionHeader className="my-0" title="Videos" />
         <Button
           className="flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]"
           variant="ghost"
