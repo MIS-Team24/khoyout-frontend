@@ -14,16 +14,11 @@ export default function DesignerGalleryImages() {
 
   return (
     <section>
-      <div className="mx-auto flex w-full max-w-[90rem] flex-col px-[9rem] py-16">
-        <div className="pb-8">
-          <h1 className="text-[2rem] font-normal leading-normal">Images</h1>
-        </div>
-        <div className="grid grid-cols-3 place-items-center gap-6 pb-[3.5rem]">
+      <div className="main-container my-16">
+        <h1 className="pb-8 text-[2rem] font-normal leading-normal">Images</h1>
+        <div className="place-items- grid w-full grid-cols-3 gap-6 pb-[3.5rem]">
           {currentItems.map(({ alt, src }, index) => (
-            <div
-              key={index}
-              className="h-[27.8125rem] w-[23rem] rounded-[0.5rem]"
-            >
+            <div key={index} className="h-[35.4rem] w-full rounded-[0.5rem]">
               <img
                 src={src}
                 alt={alt}
