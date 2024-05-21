@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui";
 import { SectionHeader } from "@/components/custom";
+import { useState } from "react";
 
 const formSchema = z.object({
   first_name: z
@@ -68,6 +69,8 @@ const formSchema = z.object({
 });
 
 export default function PersonalInfoForm() {
+  const [edit, setEdit] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -93,11 +96,14 @@ export default function PersonalInfoForm() {
       <div className="mb-8 flex items-center justify-between">
         <SectionHeader title="Personal Information" className="my-0" />
         <Button
-          onClick={() => form.reset()}
+          onClick={() => {
+            setEdit(!edit);
+            form.reset();
+          }}
           variant={"ghost"}
           className="h-[2.375rem] text-2xl font-medium  text-[#8C236C] hover:bg-transparent hover:text-[#8C236C]"
         >
-          Cancel
+          {edit ? "Cancel" : "Edit"}
         </Button>
       </div>
       <div className="">
@@ -111,6 +117,7 @@ export default function PersonalInfoForm() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         placeholder="First Name"
                         {...field}
                         className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent p-4 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
@@ -127,6 +134,7 @@ export default function PersonalInfoForm() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         placeholder="Last Name"
                         {...field}
                         className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent p-4 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
@@ -144,6 +152,7 @@ export default function PersonalInfoForm() {
                 <FormItem className="">
                   <FormControl>
                     <Input
+                      disabled={!edit}
                       placeholder="Phone Number"
                       {...field}
                       className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
@@ -160,6 +169,7 @@ export default function PersonalInfoForm() {
                 <FormItem>
                   <FormControl>
                     <Input
+                      disabled={!edit}
                       type="email"
                       placeholder="Email"
                       {...field}
@@ -178,6 +188,7 @@ export default function PersonalInfoForm() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         type="number"
                         placeholder="Age"
                         {...field}
@@ -194,6 +205,7 @@ export default function PersonalInfoForm() {
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <Select
+                      disabled={!edit}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
@@ -224,6 +236,7 @@ export default function PersonalInfoForm() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         placeholder="Country"
                         {...field}
                         className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent p-4 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
@@ -240,6 +253,7 @@ export default function PersonalInfoForm() {
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
+                        disabled={!edit}
                         placeholder="City"
                         {...field}
                         className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent p-4 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
@@ -254,6 +268,7 @@ export default function PersonalInfoForm() {
               <Button
                 type="submit"
                 className="h-[2.9375rem] w-[17.5rem] items-center text-xl font-medium text-[#F9F4F4]"
+                disabled={!edit}
               >
                 Save
               </Button>
