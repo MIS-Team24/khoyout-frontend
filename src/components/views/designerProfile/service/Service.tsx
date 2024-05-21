@@ -9,37 +9,38 @@ import { Button } from "@/components/ui";
 import Team from "./team/Team";
 import Reviews from "./reviews/Reviews";
 import BookingCard from "./stickyBookingCard/StickyBookingCard";
+import { SectionHeader } from "@/components/custom";
 
+const data = [
+  {
+    title: "Design from scratch",
+    description:
+      '"Crafting your vision from the ground up – our design from scratch service brings your ideas to life with creativity and precision."',
+    price: "250 EGP",
+  },
+  {
+    title: "Design implementation",
+    description:
+      '"Expertly executing your designs with precision and passion."',
+    price: "200 EGP",
+  },
+  {
+    title: "Hand made",
+    description:
+      '"Artisanal elegance tailored just for you – where every stitch tells a story."',
+    price: "300 EGP",
+  },
+  {
+    title: "Redesign",
+    description:
+      '"Elevating tradition with a modern twist – our redesign service breathes new life into timeless garments."',
+    price: "200 EGP",
+  },
+];
 export default function Service() {
-  const data = [
-    {
-      title: "Design from scratch",
-      description:
-        '"Crafting your vision from the ground up – our design from scratch service brings your ideas to life with creativity and precision."',
-      price: "250 EGP",
-    },
-    {
-      title: "Design implementation",
-      description:
-        '"Expertly executing your designs with precision and passion."',
-      price: "200 EGP",
-    },
-    {
-      title: "Hand made",
-      description:
-        '"Artisanal elegance tailored just for you – where every stitch tells a story."',
-      price: "300 EGP",
-    },
-    {
-      title: "Redesign",
-      description:
-        '"Elevating tradition with a modern twist – our redesign service breathes new life into timeless garments."',
-      price: "200 EGP",
-    },
-  ];
   return (
     <div className="main-container">
-      <p className="mb-8 mt-16 text-[2rem] text-foreground">Services</p>
+      <SectionHeader title="Services" />
       <div className="mb-8 flex flex-col place-items-start gap-8 pb-0 text-xl lg:flex-row">
         <div className="mx-auto flex w-full flex-col gap-[4.25rem] lg:w-3/5">
           <section>
