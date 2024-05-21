@@ -42,7 +42,6 @@ import circle from "./icons/circle.png";
 import design2 from "./Design2.png";
 import design5 from "./Design5.png";
 import design6 from "./Design6.png";
-import design7 from "./Design7.png";
 import design8 from "./Design8.png";
 import team1 from "./team-1.png";
 import team2 from "./team-2.png";
@@ -149,7 +148,6 @@ const designerGalleryImages = [
   { src: design2, alt: "Design 1" },
   { src: design5, alt: "Design 2" },
   { src: design6, alt: "Design 3" },
-  { src: design7, alt: "Design 4" },
   { src: design8, alt: "Design 5" },
   { src: ins1, alt: "Design 6" },
   { src: ins2, alt: "Design 7" },
