@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/custom";
 
 export default function Inspiration({ title }: { title: string }) {
-  const autoplay = useRef(Autoplay({ delay: 200000, stopOnInteraction: true }));
+  const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
     <section className="main-container mt-16">
