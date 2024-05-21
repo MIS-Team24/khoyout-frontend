@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
 import {
   Button,
   Form,
@@ -10,35 +9,62 @@ import {
   FormItem,
   FormMessage,
   Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui";
+import { SectionHeader } from "@/components/custom";
 
 const formSchema = z.object({
-  first_name: z.string().min(2, {
-    message: "First Name must be at least 2 characters.",
-  }),
-  last_name: z.string().min(2, {
-    message: "Last Name must be at least 2 characters.",
-  }),
-  phone_number: z.string().min(10, {
-    message:
-      "Invalid phone number format. Please provide a valid phone number with the +20 country code.",
-  }),
-  email: z.string().email({
-    message: "Invalid email format. Please provide a valid email address.",
-  }),
+  first_name: z
+    .string()
+    .min(2, {
+      message: "Please enter your first name, must be at least 2 characters.",
+    })
+    .trim(),
+  last_name: z
+    .string()
+    .min(2, {
+      message: "Please enter your last name must be at least 2 characters.",
+    })
+    .trim(),
+  phone_number: z
+    .string()
+    .regex(/^\+20\d{10}$/, {
+      message:
+        "Invalid phone number format. Please provide a valid phone number with the +20 country code.",
+    })
+    .trim(),
+  email: z
+    .string()
+    .email({
+      message: "Invalid email format. Please provide a valid email address.",
+    })
+    .trim(),
   age: z.coerce
     .number()
     .positive()
     .gte(0, { message: "Age must be greater than 0" }),
-  gender: z.string().min(2, {
-    message: "Please enter your gender",
-  }),
-  country: z.string().min(2, {
-    message: "Please enter your country",
-  }),
-  city: z.string().min(2, {
-    message: "Please enter your city",
-  }),
+  gender: z
+    .string()
+    .min(2, {
+      message: "Please enter your gender",
+    })
+    .trim(),
+  country: z
+    .string()
+    .min(2, {
+      message: "Please enter your country",
+    })
+    .trim(),
+  city: z
+    .string()
+    .min(2, {
+      message: "Please enter your city",
+    })
+    .trim(),
 });
 
 export default function PersonalInfoForm() {
@@ -47,7 +73,7 @@ export default function PersonalInfoForm() {
     defaultValues: {
       first_name: "",
       last_name: "",
-      phone_number: "",
+      phone_number: "+20",
       email: "",
       age: 0,
       gender: "",
@@ -56,20 +82,18 @@ export default function PersonalInfoForm() {
     },
   });
 
+  // TODO: Implement Mutation function
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
   }
 
-  function cancelHandler() {
-    form.reset();
-  }
-
   return (
-    <div className="w-full max-w-[39rem] rounded-xl bg-[#F3EBF1] p-6">
-      <div className="flex items-center justify-between pb-8">
-        <h2 className="text-[2rem] font-normal">Personal Information</h2>
+    <div className="w-full rounded-xl bg-[#F3EBF1] p-6">
+      <div className="mb-8 flex items-center justify-between">
+        <SectionHeader title="Personal Information" className="my-0" />
         <Button
-          onClick={cancelHandler}
+          onClick={() => form.reset()}
           variant={"ghost"}
           className="h-[2.375rem] text-2xl font-medium  text-[#8C236C] hover:bg-transparent hover:text-[#8C236C]"
         >
@@ -169,13 +193,24 @@ export default function PersonalInfoForm() {
                 name="gender"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormControl>
-                      <Input
-                        placeholder="Gender"
-                        {...field}
-                        className="h-14 items-center gap-2 rounded border border-[#B1B1B1] bg-transparent p-4 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
-                      />
-                    </FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="h-14 w-full rounded-[0.25rem] border-[#B1B1B1] bg-transparent py-[1rem] transition hover:border-primary focus:!ring-0 focus:!ring-offset-0 focus-visible:!ring-offset-0">
+                          <SelectValue placeholder="Select Your Gender" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="rounded-none">
+                        <SelectItem className="rounded-none" value="male">
+                          Male
+                        </SelectItem>
+                        <SelectItem className="rounded-none" value="female">
+                          Female
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
