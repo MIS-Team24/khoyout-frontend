@@ -21,7 +21,7 @@ export default function AboutMap({
 }) {
   return (
     <MapContainer
-      className="z-0 h-full w-full rounded-[0.5rem]"
+      className="z-0 h-full w-full rounded-[0.25rem]"
       center={location ?? position}
       zoom={16}
       scrollWheelZoom={false}
