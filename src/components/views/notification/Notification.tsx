@@ -44,7 +44,7 @@ export default function Notification() {
 
   return (
     <section>
-      <div className="mx-auto mt-10 max-h-[88.75rem] w-full max-w-[83rem]">
+      <div className="main-container mt-10">
         <div className="flex w-full items-center justify-between px-4 pb-8">
           <h1 className="text-[2rem] font-normal text-[#1F1F29]">
             Notifications
