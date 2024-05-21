@@ -16,7 +16,7 @@ export default function DesignerGalleryImages() {
     <section>
       <div className="main-container my-16">
         <h1 className="pb-8 text-[2rem] font-normal leading-normal">Images</h1>
-        <div className="place-items- grid w-full grid-cols-3 gap-6 pb-[3.5rem]">
+        <div className="grid w-full grid-cols-1 gap-5 pb-[3.5rem] sm:grid-cols-2 lg:grid-cols-3">
           {currentItems.map(({ alt, src }, index) => (
             <div key={index} className="h-[35.4rem] w-full rounded-[0.5rem]">
               <img
