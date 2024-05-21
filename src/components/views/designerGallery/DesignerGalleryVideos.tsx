@@ -18,13 +18,11 @@ export default function DesignerGalleryVideos() {
 
   return (
     <section>
-      <div className="mx-auto flex w-full max-w-[90rem] flex-col px-[9rem] py-16">
-        <div className="pb-8">
-          <h1 className="text-[2rem] font-normal leading-normal">Videos</h1>
-        </div>
-        <div className="grid grid-cols-3 place-items-center gap-6 pb-[3.5rem]">
+      <div className="main-container my-16">
+        <h1 className="pb-8 text-[2rem] font-normal leading-normal">Videos</h1>
+        <div className="mb-[3.5rem] grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {currentItems.map((video, index) => (
-            <div className="group relative h-full flex-1 cursor-pointer rounded-[0.25rem]">
+            <div className="group relative h-full w-full cursor-pointer rounded-[0.25rem]">
               <img
                 src={video}
                 alt={`designer-video-${index}`}
