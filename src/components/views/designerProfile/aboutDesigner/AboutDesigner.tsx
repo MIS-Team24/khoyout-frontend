@@ -19,7 +19,7 @@ export default function AboutDesigner() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <section className="main-container">
-      <SectionHeader title="About" />
+      <SectionHeader title="About" className="mb-8 mt-16" />
       <div className="grid grid-cols-1 gap-x-10 gap-y-10 lg:grid-cols-2 lg:gap-y-0">
         <div className="flex flex-1 flex-col gap-y-[2.5rem]">
           <p className="text-base leading-6 tracking-[0.00625rem] text-[#49454F] sm:text-[1.25rem] sm:leading-8">
