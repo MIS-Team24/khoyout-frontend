@@ -5,6 +5,7 @@ on:
     branches:
       - dev
       - main
+
 jobs:
   CI:
     runs-on: ubuntu-latest
@@ -21,18 +22,14 @@ jobs:
     needs: CI
     runs-on: ubuntu-latest
     steps:
-      - name: SSH to server and execute commands
+      - name: SSH to server and update services
         uses: appleboy/ssh-action@master
         with:
-            host: 67.207.70.199
-            username: root
-            password: ${{ secrets.EC2_SSH_KEY }}
-            script: |
-              container_id=$(docker ps --format "{{.ID}}")
-              sudo docker logs $container_id > khoyoutfrontend$(date +%Y%m%d).log
-              sudo docker stop $(docker ps -aq)
-              sudo docker rm $(docker ps -aq)
-              sudo docker rmi $(docker images -q)
-              sudo docker run -d --restart=unless-stopped -p 8080:8080 ezzops/khoyoutfrontend:${{ github.sha }} &
-              sudo docker run -d --restart=unless-stopped --net=host -it -e NGROK_AUTHTOKEN=2gQMgDTmxvY3NUuE6nNA5xVsD7I_4LHNWrWUDZm777QQxBwZX ngrok/ngrok:latest http --domain=composed-greatly-wasp.ngrok-free.app 8080 &
-          
+          host: 67.207.70.199
+          username: root
+          password: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /root/traefik
+            sed -i 's|image: ezzops/khoyoutfrontend:.*|image: ezzops/khoyoutfrontend:${{ github.sha }}|' docker-compose.yml
+            docker-compose down
+            docker-compose up -d
