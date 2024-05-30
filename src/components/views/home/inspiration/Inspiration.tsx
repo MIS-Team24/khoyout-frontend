@@ -1,5 +1,5 @@
 import {
-  Button,
+  buttonVariants,
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -13,22 +13,30 @@ import { inspirationImages } from "@/assets";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/custom";
+import { cn } from "@/lib/utils";
 
 export default function Inspiration({ title }: { title: string }) {
   const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
     <section className="main-container mt-16">
-      <div className="flex w-full items-center justify-between">
-        <SectionHeader className="my-0" title={title} />
-        <Button
-          className="flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]"
-          variant="ghost"
-        >
-          See more
-          <ChevronRight size={25} />
-        </Button>
-      </div>
+      {title === "Photos" ? (
+        <div className="flex w-full items-center justify-between">
+          <SectionHeader className="my-0" title={title} />
+          <Link
+            to="/gallery/images"
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]",
+            )}
+          >
+            See more
+            <ChevronRight size={25} />
+          </Link>
+        </div>
+      ) : (
+        <SectionHeader className="mb-8" title={title} />
+      )}
       <div className="rounded-[0.5rem] pt-8">
         <Carousel
           plugins={[autoplay.current]}
