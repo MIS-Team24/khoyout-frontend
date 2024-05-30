@@ -1,20 +1,25 @@
-import { Button } from "@/components/ui";
+import { buttonVariants } from "@/components/ui";
 import { ChevronRight, Play } from "lucide-react";
 import { designerVideo1, designerVideo2 } from "@/assets";
 import { SectionHeader } from "@/components/custom";
+import { Link } from "@tanstack/react-router";
+import { cn } from "@/lib/utils";
 
 export default function DesignerVideos() {
   return (
     <section className="main-container mt-16">
       <div className="flex w-full items-center justify-between">
         <SectionHeader className="my-0" title="Videos" />
-        <Button
-          className="flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]"
-          variant="ghost"
+        <Link
+          to="/gallery/videos"
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]",
+          )}
         >
           See more
           <ChevronRight size={25} />
-        </Button>
+        </Link>
       </div>
       <div className="flex flex-col items-center justify-center gap-8 pt-8 lg:flex-row">
         <div className="group relative h-full flex-1 cursor-pointer rounded-[0.25rem]">
