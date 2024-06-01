@@ -20,7 +20,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import client from "@/API/client";
 
 const NavigationBar = forwardRef(function (_, ref) {
   // const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
@@ -33,21 +32,6 @@ const NavigationBar = forwardRef(function (_, ref) {
     queryFn: getCurrentActiveUser,
     retry: false,
   });
-
-  async function onClickLogin() {
-    const response = await client.post(
-      "/local/auth/login",
-      {
-        email: "fuser2051@gmail.com",
-        password: "123456789",
-      },
-      {
-        withCredentials: true,
-      },
-    );
-
-    console.log(response.headers);
-  }
 
   return (
     <motion.nav
@@ -178,11 +162,10 @@ const NavigationBar = forwardRef(function (_, ref) {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link>
+              <Link to="/login">
                 <Button
                   variant={"ghost"}
                   className="py-7 text-xl text-primary hover:text-primary"
-                  onClick={onClickLogin}
                 >
                   Log In
                 </Button>

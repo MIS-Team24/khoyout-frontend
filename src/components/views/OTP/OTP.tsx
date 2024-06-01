@@ -89,10 +89,16 @@ export default function OTP() {
       if (comingFromRoute()) {
         comingFromRoute();
         toast.success("Awesome! Successfully Verified");
-        // setTimeout(() => navigate({ to: "/login" }), 1000);
+        navigate({ from: "/otp", to: "/login" });
       } else {
-        // navigate({ to: "/reset-password" });
-        console.log("reset password");
+        navigate({
+          from: "/otp",
+          to: "/reset-password",
+          state: {
+            from: "/otp",
+            email: selected?.email ?? "",
+          } as state,
+        });
       }
     },
     onError: (data: Error) => {

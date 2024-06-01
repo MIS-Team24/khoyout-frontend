@@ -11,3 +11,7 @@ export type API_SuccessfullRegister = {
     keyVal: string;
   };
 };
+export type API_SuccessfullLogin = {
+  user: API_User;
+  access_token: string;
+};

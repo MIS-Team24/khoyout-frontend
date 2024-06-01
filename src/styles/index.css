@@ -23,6 +23,7 @@
     --destructive: 0 100% 50%;
     --destructive-foreground: 319 5% 100%;
     --success: 117 78% 40%;
+    --error: 3 71% 41%;
     --border: 0 0% 69%;
     --input: 319 30% 50%;
     --ring: 319 57.2% 39.4%;
@@ -143,4 +144,8 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+#password-condition-list li {
+  @apply mb-2 flex place-items-center gap-2 last:mb-0;
 }
