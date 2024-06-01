@@ -37,8 +37,8 @@ interface state extends HistoryState {
 }
 
 export default function ResetPasswordPage() {
+  const [value, setValue] = useState("");
   const navigate = useNavigate();
-
   const selected = useRouterState({
     select: (state) => state.location.state as state,
   });
@@ -66,8 +66,10 @@ export default function ResetPasswordPage() {
     mutationFn: resetPasswordFn,
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>, event) {
+  function onSubmit(
+    values: z.infer<typeof formSchema>,
+    event: React.BaseSyntheticEvent | undefined,
+  ) {
     if (values.password !== "" || values.password == undefined) {
       if (
         values.password.length >= 8 &&
@@ -77,15 +79,13 @@ export default function ResetPasswordPage() {
       ) {
         resetPasswordMutation.mutate(values);
       } else {
-        event.preventDefault();
+        event?.preventDefault();
       }
     }
   }
 
-  const [value, setValue] = useState("");
-
-  function handleInputChange(event) {
-    setValue(`${event.value}`);
+  function handleInputChange(event: React.KeyboardEvent<HTMLInputElement>) {
+    setValue(`${event.currentTarget.value}`);
   }
 
   return (
@@ -116,7 +116,7 @@ export default function ResetPasswordPage() {
                         <div className="flex h-12 items-center justify-center gap-x-0.5 rounded border border-input px-3 py-3 focus-within:border-primary">
                           <Lock size={24} className="text-secondary" />
                           <Input
-                            onKeyUp={handleInputChange({ ...field })}
+                            onKeyUp={handleInputChange}
                             type={showPassword.password ? "text" : "password"}
                             placeholder="Enter your password"
                             {...field}
