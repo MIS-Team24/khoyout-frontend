@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const SubscriptionLazyImport = createFileRoute('/subscription')()
 const RegisterLazyImport = createFileRoute('/register')()
 const OtpLazyImport = createFileRoute('/otp')()
 const NotificationsLazyImport = createFileRoute('/notifications')()
@@ -31,6 +32,11 @@ const GalleryVideosLazyImport = createFileRoute('/gallery/videos')()
 const GalleryImagesLazyImport = createFileRoute('/gallery/images')()
 
 // Create/Update Routes
+
+const SubscriptionLazyRoute = SubscriptionLazyImport.update({
+  path: '/subscription',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/subscription.lazy').then((d) => d.Route))
 
 const RegisterLazyRoute = RegisterLazyImport.update({
   path: '/register',
@@ -153,6 +159,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterLazyImport
       parentRoute: typeof rootRoute
     }
+    '/subscription': {
+      preLoaderRoute: typeof SubscriptionLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/gallery/images': {
       preLoaderRoute: typeof GalleryImagesLazyImport
       parentRoute: typeof rootRoute
@@ -178,6 +188,7 @@ export const routeTree = rootRoute.addChildren([
   NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,
+  SubscriptionLazyRoute,
   GalleryImagesLazyRoute,
   GalleryVideosLazyRoute,
 ])
