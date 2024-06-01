@@ -57,10 +57,10 @@ export default function RegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullName: "Amr Mahmoud",
-      email: "amrmahmoud20022002@gmail.com",
-      password: "Ab@123456789",
-      confirmPassword: "Ab@123456789",
+      fullName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
   });
 
@@ -83,16 +83,16 @@ export default function RegisterForm() {
     //   }),
     // );
     toast.success("Successful Sign Up");
-    setTimeout(() => {
-      navigate({
-        to: "/otp",
-        state: {
-          from: "/register",
-          email: userData.user.email,
-          keyVal: userData.Otp.keyVal,
-        } as state,
-      });
-    }, 1000);
+    navigate({
+      to: "/otp",
+      from: "/register",
+      state: {
+        from: "/register",
+        email: userData.user.email,
+        keyVal: userData.Otp.keyVal,
+      } as state,
+    });
+    form.reset();
   };
 
   const registrationMutation = useMutation({
