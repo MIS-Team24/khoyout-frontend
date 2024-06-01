@@ -29,7 +29,7 @@ function Subscription() {
                     </span>
                   </p>
                 </div>
-                <div className="pt-6 ">
+                <div className="flex h-full w-full flex-col pt-6">
                   <div>
                     <h3 className="w-full pb-6 text-2xl font-normal leading-8">
                       Features
@@ -83,7 +83,7 @@ function Subscription() {
                     </span>
                   </p>
                 </div>
-                <div className="pt-6">
+                <div className="flex h-full w-full flex-col pt-6">
                   <div>
                     <h3 className="w-full pb-6 text-2xl font-normal leading-8">
                       Features
@@ -144,13 +144,13 @@ function Subscription() {
                     </span>
                   </p>
                 </div>
-                <div className="pt-6">
+                <div className="flex h-full w-full flex-col pt-6">
                   <div>
                     <h3 className="w-full pb-6 text-2xl font-normal leading-8">
                       Features
                     </h3>
                   </div>
-                  <div className="flex flex-col justify-between">
+                  <div className="flex flex-col items-start justify-between">
                     <div className="flex items-start pb-4">
                       <img src={checkImg} alt="Check Image" />
                       <p className="pl-2 text-xl font-normal leading-8 text-[#6C6C6C]">
@@ -163,7 +163,7 @@ function Subscription() {
                         Featured listing on the homepage{" "}
                       </p>
                     </div>
-                    <div className="flex items-start lg:pb-[4.5rem]">
+                    <div className="flex items-start">
                       <img src={checkImg} alt="Check Image" />
                       <p className="pl-2 text-xl font-normal leading-8 text-[#6C6C6C]">
                         Unlimited booking requests{" "}
