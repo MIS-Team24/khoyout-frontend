@@ -20,6 +20,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useRouterState } from "@tanstack/react-router";
 import { HistoryState } from "@tanstack/react-router";
 import { LoadingState } from "@/components/custom";
+import toast from "react-hot-toast";
 
 const formSchema = z
   .object({
@@ -64,6 +65,16 @@ export default function ResetPasswordPage() {
 
   const resetPasswordMutation = useMutation({
     mutationFn: resetPasswordFn,
+    onSuccess: () => {
+      toast.success("Password reset successfully");
+      navigate({ from: "/reset-password", to: "/login" });
+    },
+    onError: (error) => {
+      toast.error(
+        error.message ??
+          "An error occurred while resetting password please try again later.",
+      );
+    },
   });
 
   function onSubmit(
