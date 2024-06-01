@@ -1,13 +1,14 @@
 import client from "@/API/client";
 
-type API_LoginBody = {
-    email: string;
-    password: string;
-    rememberMe: boolean;
+export type API_LoginBody = {
+  email: string;
+  password: string;
+  rememberMe: boolean | undefined;
 };
 
 export function login(data: API_LoginBody) {
-    return client.post("/auth/login", {
-        data,
-    });
+  return client.post("/local/auth/login", {
+    email: data.email,
+    password: data.password,
+  });
 }
