@@ -16,6 +16,10 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { resetPassword } from "@/API/resetPassword/ResetPassword";
+import { useNavigate } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
+import { HistoryState } from "@tanstack/react-router";
+import { LoadingState } from "@/components/custom";
 
 const formSchema = z
   .object({
@@ -26,7 +30,19 @@ const formSchema = z
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+
+interface state extends HistoryState {
+  from: string;
+  email: string;
+}
+
 export default function ResetPasswordPage() {
+  const navigate = useNavigate();
+
+  const selected = useRouterState({
+    select: (state) => state.location.state as state,
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,8 +54,16 @@ export default function ResetPasswordPage() {
     password: false,
     confirmPassword: false,
   });
+
+  const resetPasswordFn = (values: z.infer<typeof formSchema>) =>
+    resetPassword({
+      repeatPassword: values.confirmPassword,
+      password: values.password,
+      email: selected.email,
+    });
+
   const resetPasswordMutation = useMutation({
-    mutationFn: resetPassword,
+    mutationFn: resetPasswordFn,
   });
 
   // 2. Define a submit handler.
@@ -67,9 +91,12 @@ export default function ResetPasswordPage() {
   return (
     <div className="flex h-screen place-items-center lg:place-items-start">
       <div className="mx-auto w-11/12 py-12 lg:w-3/5 lg:py-0">
-        <div className="hidden p-11 lg:block">
-          <img src={mainLogo} alt="main-logo" className="object-cover" />
-        </div>
+        <img
+          src={mainLogo}
+          alt="main-logo"
+          className="ml-5 mt-5 hidden h-[6rem] w-[10rem] cursor-pointer object-cover md:block"
+          onClick={() => navigate({ to: "/" })}
+        />
         <div className="flex place-items-center justify-center">
           <div className="flex w-[23rem] flex-col gap-16 text-center">
             <div>
@@ -182,9 +209,17 @@ export default function ResetPasswordPage() {
                   </Link>
                   <Button
                     type="submit"
-                    className="h-14 w-1/2 rounded-2xl text-2xl"
+                    className="h-14 w-1/2 rounded-2xl text-xl"
+                    disabled={resetPasswordMutation.isPending}
                   >
-                    Reset
+                    {resetPasswordMutation.isPending ? (
+                      <>
+                        <LoadingState />
+                        <span>Resetting...</span>
+                      </>
+                    ) : (
+                      "Reset"
+                    )}
                   </Button>
                 </div>
               </form>
