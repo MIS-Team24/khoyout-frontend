@@ -60,7 +60,7 @@ export default function OTP() {
     if (selected) {
       if (selected.from === "/register") {
         return true;
-      } else if (selected.from === "/forget-password" || selected.from === "/login") {
+      } else if (selected.from === "/forget-password") {
         return false;
       }
     }
@@ -91,7 +91,14 @@ export default function OTP() {
         toast.success("Awesome! Successfully Verified");
         navigate({ from: "/otp", to: "/login" });
       } else {
-        navigate({ from: "/otp", to: "/reset-password" });
+        navigate({
+          from: "/otp",
+          to: "/reset-password",
+          state: {
+            from: "/otp",
+            email: selected?.email ?? "",
+          } as state,
+        });
       }
     },
     onError: (data: Error) => {
