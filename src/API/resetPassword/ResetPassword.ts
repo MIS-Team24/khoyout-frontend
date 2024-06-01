@@ -7,9 +7,7 @@ type API_ResetPasswordBody = {
 };
 
 export function resetPassword(data: API_ResetPasswordBody) {
-  console.log(data);
-
-  return client.put("/auth/reset-password", {
-    data,
+  return client.post("/auth/reset-password", {
+    ...data,
   });
 }
