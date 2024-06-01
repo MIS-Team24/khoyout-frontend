@@ -72,16 +72,6 @@ export default function RegisterForm() {
     data: AxiosResponse<API_SuccessfullRegister>,
   ) => {
     const userData: UserDate = data.data as API_SuccessfullRegister;
-    // dispatch(
-    //   stateSetNewAuthUser({
-    //     user: {
-    //       email: userData.user.email,
-    //       fullName: userData.user.fullName,
-    //       phone: userData.user.phone,
-    //       emailActivated: userData.user.emailActivated,
-    //     },
-    //   }),
-    // );
     toast.success("Successful Sign Up");
     setTimeout(() => {
       navigate({
@@ -289,7 +279,9 @@ export default function RegisterForm() {
           <p className="mt-5 w-full space-x-1 text-center text-secondary">
             <span>Already have an account?</span>
             {/* to="/login"  */}
-            <Link className="font-semibold text-primary">Log In</Link>
+            <Link to="/login" className="font-semibold text-primary">
+              Log In
+            </Link>
           </p>
         </div>
       </div>
