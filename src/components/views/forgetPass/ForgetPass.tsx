@@ -42,9 +42,16 @@ export default function ForgetPass() {
 
   const forgetPassMutation = useMutation({
     mutationFn: sendOTP,
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast.success("Successfully Sent OTP Code to your Email");
-      navigate({ to: "/otp", state: { from: "/forget-password" } as state });
+      navigate({
+        to: "/otp",
+        state: {
+          from: "/forget-password",
+          email: form.getValues("email"),
+          keyVal: data.data?.Otp.keyVal,
+        } as state,
+      });
     },
 
     onError: (error) => {
@@ -118,6 +125,7 @@ export default function ForgetPass() {
                       forgetPassMutation.isPending &&
                         "cursor-not-allowed bg-primary/80",
                     )}
+                    disabled={forgetPassMutation.isPending}
                   >
                     {forgetPassMutation.isPending ? (
                       <>
