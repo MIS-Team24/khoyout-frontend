@@ -46,6 +46,7 @@ import design8 from "./Design8.png";
 import team1 from "./team-1.png";
 import team2 from "./team-2.png";
 import team3 from "./team-3.png";
+import checkImg from "./icons/check_24px.svg";
 
 const inspirationImages = [
   {
@@ -206,4 +207,5 @@ export {
   circleCheck,
   designerGalleryImages,
   team,
+  checkImg,
 };
