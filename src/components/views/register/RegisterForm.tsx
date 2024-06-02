@@ -1,6 +1,6 @@
 import { HistoryState, Link, useNavigate } from "@tanstack/react-router";
 import { Mail, UserRound, Lock, EyeOff, Eye } from "lucide-react";
-import { register } from "@/API/register/register";
+import { register } from "@/API/auth/register/register";
 import { useMutation } from "@tanstack/react-query";
 import { sideImg, mainLogo } from "@/assets";
 import {
