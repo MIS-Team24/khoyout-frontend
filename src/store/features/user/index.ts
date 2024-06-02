@@ -1,4 +1,4 @@
-import { API_User } from "@/API/auth";
+import { API_User } from "@/API/types/auth/auth";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type UserState = {
