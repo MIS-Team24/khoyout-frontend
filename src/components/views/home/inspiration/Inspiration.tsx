@@ -19,10 +19,10 @@ export default function Inspiration({ title }: { title: string }) {
   const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
-    <section className="main-container mt-16">
+    <section className="main-container my-16">
       {title === "Photos" ? (
         <div className="flex w-full items-center justify-between">
-          <SectionHeader className="my-0" title={title} />
+          <SectionHeader className="my-0 !mb-0" title={title} />
           <Link
             to="/gallery/images"
             className={cn(
@@ -35,7 +35,7 @@ export default function Inspiration({ title }: { title: string }) {
           </Link>
         </div>
       ) : (
-        <SectionHeader className="mb-8" title={title} />
+        <SectionHeader className="my-0" title={title} />
       )}
       <div className="rounded-[0.5rem] pt-8">
         <Carousel
