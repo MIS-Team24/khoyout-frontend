@@ -17,7 +17,6 @@ import { Route as ResetPasswordImport } from './routes/reset-password'
 
 // Create Virtual Routes
 
-const SubscriptionLazyImport = createFileRoute('/subscription')()
 const RegisterLazyImport = createFileRoute('/register')()
 const OtpLazyImport = createFileRoute('/otp')()
 const NotificationsLazyImport = createFileRoute('/notifications')()
@@ -30,15 +29,15 @@ const DesignerProfileLazyImport = createFileRoute('/designer-profile')()
 const ContactLazyImport = createFileRoute('/contact')()
 const ClientPageLazyImport = createFileRoute('/client-page')()
 const IndexLazyImport = createFileRoute('/')()
+const SubscriptionIndexLazyImport = createFileRoute('/subscription/')()
+const SubscriptionStandardLazyImport = createFileRoute(
+  '/subscription/standard',
+)()
+const SubscriptionPremiumLazyImport = createFileRoute('/subscription/premium')()
 const GalleryVideosLazyImport = createFileRoute('/gallery/videos')()
 const GalleryImagesLazyImport = createFileRoute('/gallery/images')()
 
 // Create/Update Routes
-
-const SubscriptionLazyRoute = SubscriptionLazyImport.update({
-  path: '/subscription',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/subscription.lazy').then((d) => d.Route))
 
 const RegisterLazyRoute = RegisterLazyImport.update({
   path: '/register',
@@ -108,6 +107,27 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const SubscriptionIndexLazyRoute = SubscriptionIndexLazyImport.update({
+  path: '/subscription/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/subscription/index.lazy').then((d) => d.Route),
+)
+
+const SubscriptionStandardLazyRoute = SubscriptionStandardLazyImport.update({
+  path: '/subscription/standard',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/subscription/standard.lazy').then((d) => d.Route),
+)
+
+const SubscriptionPremiumLazyRoute = SubscriptionPremiumLazyImport.update({
+  path: '/subscription/premium',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/subscription/premium.lazy').then((d) => d.Route),
+)
 
 const GalleryVideosLazyRoute = GalleryVideosLazyImport.update({
   path: '/gallery/videos',
@@ -179,16 +199,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterLazyImport
       parentRoute: typeof rootRoute
     }
-    '/subscription': {
-      preLoaderRoute: typeof SubscriptionLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/gallery/images': {
       preLoaderRoute: typeof GalleryImagesLazyImport
       parentRoute: typeof rootRoute
     }
     '/gallery/videos': {
       preLoaderRoute: typeof GalleryVideosLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/subscription/premium': {
+      preLoaderRoute: typeof SubscriptionPremiumLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/subscription/standard': {
+      preLoaderRoute: typeof SubscriptionStandardLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/subscription/': {
+      preLoaderRoute: typeof SubscriptionIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -210,9 +238,11 @@ export const routeTree = rootRoute.addChildren([
   NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,
-  SubscriptionLazyRoute,
   GalleryImagesLazyRoute,
   GalleryVideosLazyRoute,
+  SubscriptionPremiumLazyRoute,
+  SubscriptionStandardLazyRoute,
+  SubscriptionIndexLazyRoute,
 ])
 
 /* prettier-ignore-end */
