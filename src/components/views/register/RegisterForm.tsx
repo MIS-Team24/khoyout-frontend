@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { AxiosResponse } from "axios";
-import { API_SuccessfullRegister } from "@/API/auth";
+import { API_SuccessfullRegister } from "@/API/types/auth/auth";
 import { LoadingState } from "@/components/custom";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";

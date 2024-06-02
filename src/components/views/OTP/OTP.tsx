@@ -1,10 +1,10 @@
-import { SystemAPIError } from "@/API/APIError";
+import { SystemAPIError } from "@/API/types/auth/APIError";
 import { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { HistoryState } from "@tanstack/react-router";
 import { useRouterState } from "@tanstack/react-router";
 import { verifyEmail } from "@/API/auth/register/register";
-import { validateOTP, sendOTP } from "@/API/OTP/OTP";
+import { validateOTP, sendOTP } from "@/API/auth/OTP/OTP";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

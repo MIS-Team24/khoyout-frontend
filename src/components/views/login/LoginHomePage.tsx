@@ -20,7 +20,7 @@ import { Link } from "@tanstack/react-router";
 import { useNavigate } from "@tanstack/react-router";
 import { AxiosResponse } from "axios";
 import toast from "react-hot-toast";
-import { API_SuccessfullLogin } from "@/API/auth";
+import { API_SuccessfullLogin } from "@/API/types/auth/auth";
 import { stateSetNewAuthUser } from "@/store/features/user";
 import { useDispatch } from "react-redux";
 import { LoadingState } from "@/components/custom";
