@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { HistoryState } from "@tanstack/react-router";
 import { useRouterState } from "@tanstack/react-router";
-import { verifyEmail } from "@/API/register/register";
+import { verifyEmail } from "@/API/auth/register/register";
 import { validateOTP, sendOTP } from "@/API/OTP/OTP";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
