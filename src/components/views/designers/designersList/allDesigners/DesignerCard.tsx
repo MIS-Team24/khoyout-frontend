@@ -14,30 +14,30 @@ type DesignerCardProps = {
   };
   yearsOfExperienceCount: number;
   wishlisted: boolean;
-  address: {
-    province: string;
-    city: string;
-  };
-  img: {
-    src: string;
-    alt: string;
-  };
+  // address: {
+  //   province: string;
+  //   city: string;
+  // };
+  img: string;
+  address: string;
+  openNow: boolean;
+  openUntil: string;
 };
 
 export default function DesignerCard(props: DesignerCardProps) {
   return (
-    <>
-      <Card className="flex h-[415px] w-[270px] flex-col items-center gap-4 border-gray-300 bg-transparent px-4 py-4">
-        <div className="h-[185px] w-full">
+    <div>
+      <Card className="flex h-full w-full flex-col items-center gap-4 border-gray-300 pb-4">
+        <div className="h-[250px] w-full rounded-lg">
           <img
-            className="h-full w-full rounded-lg object-cover"
-            src={props.img.src}
-            alt={props.img.alt}
+            className="h-full w-full rounded-t-lg object-cover"
+            src={props.img}
+            alt={`${props.name} image`}
           />
         </div>
-        <div className="flex w-full flex-col gap-2">
+        <div className="flex w-full flex-col gap-2 px-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl">{props.name}</h1>
+            <h3 className="text-2xl">{props.name}</h3>
             <Button className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent">
               <Heart
                 className={cn(
@@ -60,33 +60,47 @@ export default function DesignerCard(props: DesignerCardProps) {
               readonly={true}
               SVGclassName={`inline-block`}
               allowFraction={true}
-              size={16}
+              size={20}
             />
             <p className="text-[12px]">({props.ratings.totalCount})</p>
           </div>
           <div className="flex flex-col gap-1.5 text-[12px]">
-            <span className="flex items-center gap-2">
+            <p className="flex items-center gap-2">
               <MapPin size={12} />
-              {props.address.province}, {props.address.city}
-            </span>
-            <span className="flex items-center gap-2">
+              {/* {props.address.province}, {props.address.city} */}
+              <span className="whitespace-nowrap text-sm text-[#49454F]">
+                {props.address}
+              </span>
+            </p>
+            <p className="flex items-center gap-2 whitespace-nowrap text-sm text-[#49454F]">
               <Clock size={12} />
               <span>
-                <span>Open</span> Until 10 AM
+                {props.openNow ? (
+                  <span className="text-green-500">Opened</span>
+                ) : (
+                  <span className="text-red-500">Closed</span>
+                )}
               </span>
-            </span>
-            <span className="flex items-center gap-2">
+              {props.openNow ? (
+                <span>until - {props.openUntil}</span>
+              ) : (
+                <span>now</span>
+              )}
+            </p>
+            <p className="flex items-center gap-2 whitespace-nowrap text-sm text-[#49454F]">
               <Briefcase size={12} />
               {props.yearsOfExperienceCount} Years Of Experience
-            </span>
+            </p>
           </div>
         </div>
-        <Link className="w-full">
-          <Button className="mt-auto h-8 w-full rounded-full py-0">
-            View Profile
-          </Button>
-        </Link>
+        <div className="w-full px-4">
+          <Link className="w-full">
+            <Button className="mt-auto h-8 w-full rounded-full py-0">
+              View Profile
+            </Button>
+          </Link>
+        </div>
       </Card>
-    </>
+    </div>
   );
 }
