@@ -20,16 +20,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui";
+import useAuth from "@/hooks/useAuth";
 
 const NavigationBar = forwardRef(function (_, ref) {
   // const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const router = useRouterState();
   const matches = router.matches;
   const [isExpanded, setIsExpanded] = useState<boolean>();
+  const { access_token } = useAuth();
+
+  const getCurrentUserFn = () => getCurrentActiveUser(access_token() ?? "");
 
   const userQuery = useQuery({
     queryKey: ["active-user"],
-    queryFn: getCurrentActiveUser,
+    queryFn: getCurrentUserFn,
     retry: false,
   });
 
