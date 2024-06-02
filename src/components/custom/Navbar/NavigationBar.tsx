@@ -19,7 +19,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui";
 
 const NavigationBar = forwardRef(function (_, ref) {
   // const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
