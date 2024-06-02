@@ -15,7 +15,7 @@ import { Lock, EyeOff, Eye, Check, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
-import { resetPassword } from "@/API/resetPassword/ResetPassword";
+import { resetPassword } from "@/API/auth/resetPassword/ResetPassword";
 import { useNavigate } from "@tanstack/react-router";
 import { useRouterState } from "@tanstack/react-router";
 import { HistoryState } from "@tanstack/react-router";
