@@ -31,8 +31,9 @@ export default function Search() {
   // TODO: Fetch designers based on selectedSubCategory and filteredValue
   console.log(selectedSubCategory);
 
+  // TODO: REMOVE "mb-[1rem]" class from the section
   return (
-    <section className="main-container my-[4.5rem]">
+    <section className="main-container -mb-[1rem] mt-[4.5rem]">
       <div className="flex items-center justify-center gap-x-6">
         {/* Select Category */}
         <div>
