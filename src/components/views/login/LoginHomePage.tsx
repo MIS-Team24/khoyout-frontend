@@ -10,7 +10,7 @@ import {
 } from "@/components/ui";
 import { mainLogo, sideImg } from "@/assets";
 import { Mail, Lock, EyeOff, Eye } from "lucide-react";
-import { API_LoginBody, login } from "@/API/login/login";
+import { API_LoginBody, login } from "@/API/auth/login/login";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
