@@ -1,40 +1,76 @@
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   Input,
+  Button,
 } from "@/components/ui";
-import { Search as SearchIcon } from "lucide-react";
 
-const cateogries = ["Apple", "Banana", "Blueberry", "Grapes", "Pineapple"];
+import { Search as SearchIcon, ChevronDown } from "lucide-react";
+import { useState } from "react";
+
+const cateogries = ["Casual", "Formal", "Classic", "Soiree"];
+const subCategories = [
+  "Dresses",
+  "Skirts",
+  "Blouses",
+  "Coats & Jackets",
+  "Pants",
+  "Suits",
+];
 
 export default function Search() {
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const [filteredValue, setFilteredValue] = useState("");
+
+  // TODO: Fetch designers based on selectedSubCategory and filteredValue
+  console.log(selectedSubCategory);
+
   return (
     <section className="main-container my-[4.5rem]">
       <div className="flex items-center justify-center gap-x-6">
         {/* Select Category */}
         <div>
-          <Select>
-            <SelectTrigger className="h-[3rem] w-[10rem] rounded-lg border-none bg-[#F3EBF1] py-[1rem] text-base text-[#49454F] transition hover:border-primary focus:!ring-0 focus:!ring-offset-0 focus-visible:!ring-offset-0">
-              <SelectValue placeholder="Categories" />
-            </SelectTrigger>
-            <SelectContent className="!overflow-visible">
-              {cateogries.map((category, i) => (
-                <SelectItem
-                  key={`category-${i}`}
-                  value={category.toLowerCase()}
-                  className="relative cursor-pointer !overflow-visible"
-                >
-                  {category}
-                  <div className="absolute right-20 top-0 bg-red-500">
-                    "goodbye world"
-                  </div>
-                </SelectItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="h-[3rem] w-[10rem] rounded-lg border-none bg-[#F3EBF1] py-[1rem] text-base font-normal text-[#49454F] hover:border-primary focus:!ring-0 focus:!ring-offset-0 focus-visible:!ring-offset-0"
+              >
+                <span className="pr-[0.5rem]">Categories</span>
+                <ChevronDown className="h-6 w-6" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[10rem] space-y-2 border-[#F3EBF1] py-2 shadow-[0_4px_25px_0px_rgba(108,108,108,0.15)]">
+              {cateogries.map((cat) => (
+                <DropdownMenuSub key={cat}>
+                  <DropdownMenuSubTrigger className="cursor-pointer rounded-[0.5rem]">
+                    {cat}
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent className="ml-2 w-[8rem] space-y-2 rounded-[0.5rem] border-[#F3EBF1] py-2 shadow-[0_4px_25px_0px_rgba(108,108,108,0.15)]">
+                      {subCategories.map((subCat) => (
+                        <DropdownMenuItem
+                          key={subCat}
+                          className="cursor-pointer rounded-[0.5rem]"
+                          onClick={() =>
+                            setSelectedSubCategory(subCat.toLowerCase())
+                          }
+                        >
+                          {subCat}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
               ))}
-            </SelectContent>
-          </Select>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         {/* Search for designer */}
         <div className="flex h-[3rem] w-[22.3rem] items-center justify-center gap-x-0.5 rounded-[1rem] bg-[#F3EBF1] p-4 ring-1 ring-transparent focus-within:ring-transparent">
@@ -42,7 +78,9 @@ export default function Search() {
           <Input
             type="search"
             placeholder="Search for designer"
-            className="border-none bg-transparent text-lg text-foreground ring-0 ring-transparent placeholder:text-[#49454F] focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+            className="border-none bg-transparent text-lg text-foreground ring-0 ring-transparent placeholder:font-normal placeholder:text-[#49454F] focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+            value={filteredValue}
+            onChange={(e) => setFilteredValue(e.target.value)}
           />
         </div>
       </div>
