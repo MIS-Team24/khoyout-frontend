@@ -1,10 +1,13 @@
 import { checkImg } from "@/assets";
 import { Button } from "@/components/ui";
+import { useNavigate } from "@tanstack/react-router";
 
 function Subscription() {
+  const navigate = useNavigate();
+
   return (
     <section>
-      <div className="main-container mb-[7.69rem]">
+      <div className="main-container mb-[7.69rem] pt-[6.5rem]">
         <div className="mx-auto mb-8 flex h-[2.9375rem] w-full items-center justify-center">
           <h2 className="text-[2.5rem] font-normal leading-normal">
             Subscription plans
@@ -118,6 +121,7 @@ function Subscription() {
                 </div>
                 <div className="w-full">
                   <Button
+                    onClick={() => navigate({ to: "/subscription/standard" })}
                     variant={"outline"}
                     className="mt-10 w-full text-center text-xl font-medium leading-normal text-[#8C236C] hover:text-[#8C236C]"
                   >
@@ -173,6 +177,8 @@ function Subscription() {
                 </div>
                 <div className="w-full">
                   <Button
+                    type="button"
+                    onClick={() => navigate({ to: "/subscription/premium" })}
                     variant={"default"}
                     className="mt-10 w-full text-center text-xl font-medium leading-normal text-[#F9F4F4]"
                   >
