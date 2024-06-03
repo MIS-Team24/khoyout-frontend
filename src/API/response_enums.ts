@@ -24,3 +24,13 @@ export enum UserType {
   DESIGNER = "Designer",
   USER = "User",
 }
+
+export enum notificationType {
+  RescheduleRequest = "RescheduleRequest",
+  BookingConfirmed = "BookingConfirmed",
+  Ideas = "Ideas",
+  AppointmentRequest = "AppointmentRequest",
+  PremiumGranted = "PremiumGranted",
+  PremiumExpired = "PremiumExpired",
+  PremiumRevoked = "PremiumRevoked",
+}
