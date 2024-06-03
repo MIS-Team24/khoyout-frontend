@@ -1,14 +1,21 @@
+import { cn } from "@/lib/utils";
 import DesignerCard from "./DesignerCard";
 import { API_Designer } from "@/API/types/designers/designers";
 
-export default function Designers({
-  desigenrs,
-}: {
+type DesignerProps = {
   desigenrs: API_Designer[];
-}) {
+  isOpen: boolean;
+};
+
+export default function Designers({ desigenrs, isOpen }: DesignerProps) {
   return (
     <section>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div
+        className={cn(
+          "grid grid-cols-1 gap-8 md:grid-cols-2",
+          isOpen ? "md:grid-cols-3" : "lg:grid-cols-3 xl:grid-cols-4",
+        )}
+      >
         {desigenrs?.map(
           ({
             baseAccountId,
@@ -17,6 +24,7 @@ export default function Designers({
             yearsExperience,
             rating,
             avatarUrl,
+            gender,
             name,
             openNow,
             openUntil,
@@ -33,6 +41,7 @@ export default function Designers({
               img={avatarUrl}
               openNow={openNow}
               openUntil={openUntil}
+              gender={gender}
             />
           ),
         )}
