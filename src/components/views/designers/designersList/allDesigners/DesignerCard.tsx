@@ -22,13 +22,14 @@ type DesignerCardProps = {
   address: string;
   openNow: boolean;
   openUntil: string;
+  gender: string;
 };
 
 export default function DesignerCard(props: DesignerCardProps) {
   return (
     <div>
-      <Card className="flex h-full w-full flex-col items-center gap-4 border-gray-300 pb-4">
-        <div className="h-[250px] w-full rounded-lg">
+      <Card className="flex h-full w-full flex-col items-center gap-4 overflow-hidden border-gray-300 pb-4">
+        <div className="h-[280px] w-full rounded-lg">
           <img
             className="h-full w-full rounded-t-lg object-cover"
             src={props.img}
@@ -91,6 +92,8 @@ export default function DesignerCard(props: DesignerCardProps) {
               <Briefcase size={12} />
               {props.yearsOfExperienceCount} Years Of Experience
             </p>
+            {/* TODO: Fix Gender Icon */}
+            <p>{props.gender}</p>
           </div>
         </div>
         <div className="w-full px-4">
