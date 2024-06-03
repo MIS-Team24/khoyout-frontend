@@ -1,6 +1,6 @@
 import { HistoryState, Link, useNavigate } from "@tanstack/react-router";
 import { Mail, UserRound, Lock, EyeOff, Eye } from "lucide-react";
-import { register } from "@/API/register/register";
+import { register } from "@/API/auth/register/register";
 import { useMutation } from "@tanstack/react-query";
 import { sideImg, mainLogo } from "@/assets";
 import {
@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { AxiosResponse } from "axios";
-import { API_SuccessfullRegister } from "@/API/auth";
+import { API_SuccessfullRegister } from "@/API/types/auth/auth";
 import { LoadingState } from "@/components/custom";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
@@ -57,10 +57,10 @@ export default function RegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullName: "Amr Mahmoud",
-      email: "amrmahmoud20022002@gmail.com",
-      password: "Ab@123456789",
-      confirmPassword: "Ab@123456789",
+      fullName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
   });
 
@@ -73,16 +73,16 @@ export default function RegisterForm() {
   ) => {
     const userData: UserDate = data.data as API_SuccessfullRegister;
     toast.success("Successful Sign Up");
-    setTimeout(() => {
-      navigate({
-        to: "/otp",
-        state: {
-          from: "/register",
-          email: userData.user.email,
-          keyVal: userData.Otp.keyVal,
-        } as state,
-      });
-    }, 1000);
+    navigate({
+      to: "/otp",
+      from: "/register",
+      state: {
+        from: "/register",
+        email: userData.user.email,
+        keyVal: userData.Otp.keyVal,
+      } as state,
+    });
+    form.reset();
   };
 
   const registrationMutation = useMutation({

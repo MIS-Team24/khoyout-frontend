@@ -1,4 +1,4 @@
-import { NavigatablePageWrapper } from "@/components/custom";
+import { NavigatablePageWrapper, SectionHeader } from "@/components/custom";
 import {
   Hero,
   Categories,
@@ -13,7 +13,9 @@ export default function Home() {
     <NavigatablePageWrapper>
       <Hero />
       <Categories />
-      <Inspiration title="Inspiration For You" />
+      <Inspiration
+        header={<SectionHeader title="Inspiration For You" className="my-0" />}
+      />
       <About />
       <Designers />
       <Clients />

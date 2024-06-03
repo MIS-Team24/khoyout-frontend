@@ -19,17 +19,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui";
+import useAuth from "@/hooks/useAuth";
 
 const NavigationBar = forwardRef(function (_, ref) {
   // const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const router = useRouterState();
   const matches = router.matches;
   const [isExpanded, setIsExpanded] = useState<boolean>();
+  const { access_token } = useAuth();
+
+  const getCurrentUserFn = () => getCurrentActiveUser(access_token() ?? "");
 
   const userQuery = useQuery({
     queryKey: ["active-user"],
-    queryFn: getCurrentActiveUser,
+    queryFn: getCurrentUserFn,
     retry: false,
   });
 
@@ -78,7 +82,9 @@ const NavigationBar = forwardRef(function (_, ref) {
       </Button>
       <div className="main-container mb-8 mt-16 flex flex-col items-center justify-between pb-0 text-xl lg:mt-0 lg:flex-row">
         <div className="absolute left-4 top-3 h-12 w-20 lg:static">
-          <img className="w-full" src={miniLogo} />
+          <Link to="/">
+            <img className="w-full" src={miniLogo} />
+          </Link>
         </div>
         <div>
           <ul className="flex h-full flex-col items-center gap-6 lg:flex-row">

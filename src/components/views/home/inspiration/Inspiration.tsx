@@ -1,42 +1,25 @@
 import {
-  buttonVariants,
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui";
-import { ChevronRight } from "lucide-react";
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { inspirationImages } from "@/assets";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { SectionHeader } from "@/components/custom";
-import { cn } from "@/lib/utils";
+type InspirationProps = {
+  header: React.ReactNode;
+};
 
-export default function Inspiration({ title }: { title: string }) {
-  const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+export default function Inspiration({ header }: InspirationProps) {
+  const autoplay = useRef(Autoplay({ delay: 20000, stopOnInteraction: true }));
 
   return (
-    <section className="main-container mt-16">
-      {title === "Photos" ? (
-        <div className="flex w-full items-center justify-between">
-          <SectionHeader className="my-0" title={title} />
-          <Link
-            to="/gallery/images"
-            className={cn(
-              buttonVariants({ variant: "ghost" }),
-              "flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]",
-            )}
-          >
-            See more
-            <ChevronRight size={25} />
-          </Link>
-        </div>
-      ) : (
-        <SectionHeader className="mb-8" title={title} />
-      )}
+    <section className="main-container my-16">
+      {header}
       <div className="rounded-[0.5rem] pt-8">
         <Carousel
           plugins={[autoplay.current]}

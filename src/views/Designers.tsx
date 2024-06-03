@@ -1,25 +1,36 @@
-import { NavigatablePageWrapper } from "@/components/custom";
-import DesignerProfileCard from "@/components/views/designers/DesignerProfileCard";
+import { NavigatablePageWrapper, SectionHeader } from "@/components/custom";
+import { buttonVariants } from "@/components/ui";
+
+import { DesignersList, Search } from "@/components/views/designers";
+import { Inspiration } from "@/components/views/home";
+import { cn } from "@/lib/utils";
+import { Link } from "@tanstack/react-router";
+import { ChevronRight } from "lucide-react";
 
 export default function Designers() {
   return (
     <NavigatablePageWrapper>
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nulla
-        itaque molestiae ullam blanditiis neque quos sint aperiam omnis! Iste
-        minima laborum voluptatum quos voluptatibus pariatur vitae atque
-        obcaecati dolorem.
-        <DesignerProfileCard
-          id="damsodR23Dmoa"
-          name="Some Designer Bitch"
-          address={{ city: "Alexandria", province: "Asafra" }}
-          ratings={{ average: 2.5, totalCount: 120 }}
-          wishlisted={false}
-          yearsOfExperienceCount={5}
-          key={"asplflaspf"}
-        />
-        Bank of stones right here
-      </div>
+      <Search />
+      <Inspiration header={<Header />} />
+      <DesignersList />
     </NavigatablePageWrapper>
+  );
+}
+
+function Header() {
+  return (
+    <div className="flex w-full items-center justify-between">
+      <SectionHeader className="my-0" title="Inspiration For You" />
+      <Link
+        to="/gallery/images"
+        className={cn(
+          buttonVariants({ variant: "ghost" }),
+          "flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]",
+        )}
+      >
+        See more
+        <ChevronRight size={25} />
+      </Link>
+    </div>
   );
 }
