@@ -12,6 +12,11 @@ import {
   FormMessage,
   Input,
 } from "@/components/ui";
+import { useMutation } from "@tanstack/react-query";
+import { initiateCheckout } from "@/API/subscriptions/subscriptions";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
+import Loading from "@/components/custom/Loading";
 
 const formSchema = z.object({
   designer_name: z
@@ -40,10 +45,30 @@ const formSchema = z.object({
 
 function Premium() {
   const [fieldAppear, setFieldAppear] = useState(false);
+  const auth = useAuth();
+  const [forceLoading, setForceLoading] = useState<boolean>(false);
 
   function appear() {
     setFieldAppear(!fieldAppear);
   }
+
+  const requestFn = () =>
+    initiateCheckout(auth.access_token() ?? "", "Premium");
+
+  const checkoutMutation = useMutation({
+    mutationKey: ["checkout-premium"],
+    mutationFn: requestFn,
+    onSuccess: (data) => {
+      setForceLoading(true);
+      const responseData = data.data as { paymentURL: string };
+      window.location.href = responseData.paymentURL;
+    },
+    onError: () => {
+      toast.error(
+        "Error submitting the form, please make sure the information is written properly.",
+      );
+    },
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,8 +80,12 @@ function Premium() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function onSubmit() {
+    // checkoutMutation.mutate();
+  }
+
+  function onClickCheckout() {
+    checkoutMutation.mutate();
   }
 
   return (
@@ -222,8 +251,17 @@ function Premium() {
         <Button
           variant={"default"}
           className="mx-auto mb-[6.62rem] flex h-[3.75rem] w-[20rem] items-center  justify-center text-2xl font-medium leading-normal lg:w-[35.25rem]"
+          type="submit"
+          onClick={onClickCheckout}
+          disabled={checkoutMutation.isPending || forceLoading}
         >
-          Subscribe
+          {checkoutMutation.isPending || forceLoading ? (
+            <>
+              <Loading /> Loading ...
+            </>
+          ) : (
+            "Subscribe"
+          )}
         </Button>
       </div>
     </section>
