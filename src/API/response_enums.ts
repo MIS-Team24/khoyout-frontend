@@ -19,3 +19,8 @@ export enum API_Provinces {
   MANDARA = "Mandara",
   "AL AWAID" = "Al Awaid",
 }
+
+export enum UserType {
+  DESIGNER = "Designer",
+  USER = "User",
+}
