@@ -12,3 +12,11 @@ export function login(data: API_LoginBody) {
     password: data.password,
   });
 }
+
+export function logout(access_token: string) {
+  return client.delete("/local/auth/logout", {
+    headers: {
+      Authorization: `Bearer ${access_token}`
+    }
+  })
+}
