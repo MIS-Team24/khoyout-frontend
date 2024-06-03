@@ -208,7 +208,7 @@ export default function LoginHomePage() {
                     {loginMutation.isPending ? (
                       <>
                         {" "}
-                        <LoadingState /> Loging In...
+                        <LoadingState /> Logging In...
                       </>
                     ) : (
                       "Log In"
