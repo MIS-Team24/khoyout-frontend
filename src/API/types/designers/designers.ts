@@ -7,6 +7,7 @@ export type API_Designer = {
   yearsExperience: number;
   rating: number;
   avatarUrl: string;
+  gender: string;
   name: string;
   openNow: boolean;
   openUntil: string;
