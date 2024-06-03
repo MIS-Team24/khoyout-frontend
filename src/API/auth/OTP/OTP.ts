@@ -1,4 +1,4 @@
-import client from "../client";
+import client from "../../client";
 
 export const sendOTP = async (email: string) => {
   return client.post("/auth/send-otp", { email });
