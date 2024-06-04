@@ -80,7 +80,13 @@ export default function DesignersList({ name }: DesignersListProps) {
           <Button
             variant="ghost"
             className="h-[3rem] w-[8rem] rounded-lg text-base font-medium text-gray-300 hover:bg-transparent hover:text-primary focus:!ring-0 focus:!ring-offset-0 focus-visible:!ring-offset-0"
-            onClick={() => SetFilterType({} as FilterType)}
+            onClick={() =>
+              SetFilterType({
+                ...filterType,
+                yearsOfExperience: 0,
+                name: "",
+              } as FilterType)
+            }
           >
             Clear filters
           </Button>
@@ -93,9 +99,7 @@ export default function DesignersList({ name }: DesignersListProps) {
           className={cn(
             `flex h-full flex-col justify-between overflow-hidden transition-all`,
             status && "duration-500",
-            isOpen
-              ? "mr-6 w-[22%] scale-100 opacity-100"
-              : "w-0 scale-0 opacity-0",
+            isOpen ? "w-[22%] scale-100 opacity-100" : "w-0 scale-0 opacity-0",
           )}
         >
           <DesignerFilter
@@ -105,6 +109,7 @@ export default function DesignersList({ name }: DesignersListProps) {
         </div>
         <div
           className={cn(
+            "pl-6",
             status && "duration-500",
             isOpen ? "w-[78%]" : "w-full",
           )}
