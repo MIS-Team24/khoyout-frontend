@@ -88,7 +88,7 @@ export default function DesignersList({ name }: DesignersListProps) {
         <DesignerSorting setFilterType={SetFilterType} />
       </div>
 
-      <div className="flex">
+      <div className="flex justify-between">
         <div
           className={cn(
             `flex h-full flex-col justify-between overflow-hidden transition-all`,
