@@ -42,8 +42,6 @@ export default function DesignerFilter({
 }: DesignerFilterProps) {
   const [open, setOpen] = useState(false);
 
-  console.log(filterType);
-
   return (
     <aside>
       <div className="flex flex-col gap-y-4">
