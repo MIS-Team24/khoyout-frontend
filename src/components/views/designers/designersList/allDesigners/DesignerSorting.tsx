@@ -1,3 +1,4 @@
+import { FilterType } from "@/API/designers/designers";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -6,14 +7,20 @@ import {
   Button,
 } from "@/components/ui";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 
-const sortingOptions = ["Most Booked", "Highest Review", "Highest Rated"];
+const sortingOptions = [
+  { title: "Most Booked", value: "mostBooked" },
+  { title: "Highest Reviews", value: "highestReviews" },
+  { title: "Highest Rated", value: "highestRated" },
+];
 
-export default function DesignerSorting() {
-  const [selectedSubCategory, setSelectedSubCategory] = useState("");
-  console.log(selectedSubCategory);
+type DesignerSortingProps = {
+  setFilterType: React.Dispatch<React.SetStateAction<FilterType>>;
+};
 
+export default function DesignerSorting({
+  setFilterType,
+}: DesignerSortingProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,13 +33,18 @@ export default function DesignerSorting() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[10rem] space-y-2 rounded-[0.5rem] border-[#F3EBF1] py-2 shadow-[0_4px_25px_0px_rgba(108,108,108,0.15)]">
-        {sortingOptions.map((option) => (
+        {sortingOptions.map(({ title, value }) => (
           <DropdownMenuItem
-            key={option}
+            key={value}
             className="cursor-pointer rounded-[0.5rem]"
-            onClick={() => setSelectedSubCategory(option)}
+            onClick={() =>
+              setFilterType((prev) => ({
+                ...prev,
+                sortBy: value,
+              }))
+            }
           >
-            {option}
+            {title}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
