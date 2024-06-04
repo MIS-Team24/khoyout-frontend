@@ -17,6 +17,7 @@ import { Route as ResetPasswordImport } from './routes/reset-password'
 
 // Create Virtual Routes
 
+const SettingsLazyImport = createFileRoute('/settings')()
 const RegisterLazyImport = createFileRoute('/register')()
 const OtpLazyImport = createFileRoute('/otp')()
 const NotificationsLazyImport = createFileRoute('/notifications')()
@@ -38,6 +39,11 @@ const GalleryImagesLazyImport = createFileRoute('/gallery/images')()
 const DesignerIdDesignerLazyImport = createFileRoute('/$designerId/designer')()
 
 // Create/Update Routes
+
+const SettingsLazyRoute = SettingsLazyImport.update({
+  path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/settings.lazy').then((d) => d.Route))
 
 const RegisterLazyRoute = RegisterLazyImport.update({
   path: '/register',
@@ -195,8 +201,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterLazyImport
       parentRoute: typeof rootRoute
     }
+<<<<<<< HEAD
     '/$designerId/designer': {
       preLoaderRoute: typeof DesignerIdDesignerLazyImport
+=======
+    '/settings': {
+      preLoaderRoute: typeof SettingsLazyImport
+>>>>>>> bd91de1 (Add settings component)
       parentRoute: typeof rootRoute
     }
     '/gallery/images': {
@@ -237,7 +248,11 @@ export const routeTree = rootRoute.addChildren([
   NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,
+<<<<<<< HEAD
   DesignerIdDesignerLazyRoute,
+=======
+  SettingsLazyRoute,
+>>>>>>> bd91de1 (Add settings component)
   GalleryImagesLazyRoute,
   GalleryVideosLazyRoute,
   SubscriptionPremiumLazyRoute,
