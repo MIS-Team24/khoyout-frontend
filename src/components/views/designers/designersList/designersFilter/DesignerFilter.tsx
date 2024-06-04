@@ -42,6 +42,8 @@ export default function DesignerFilter({
 }: DesignerFilterProps) {
   const [open, setOpen] = useState(false);
 
+  console.log(filterType);
+
   return (
     <aside>
       <div className="flex flex-col gap-y-4">
@@ -115,6 +117,8 @@ export default function DesignerFilter({
                 minRating: Number(value),
               }));
             }}
+            value={String(filterType.minRating)}
+            defaultValue={String(filterType.minRating)}
             className="flex flex-col-reverse"
           >
             {Array.from({ length: 5 })
@@ -160,6 +164,8 @@ export default function DesignerFilter({
                 gender: value,
               }));
             }}
+            value={filterType.gender}
+            defaultValue={filterType.gender}
             className="flex gap-x-6"
           >
             <div className="flex items-center justify-start gap-x-2">
