@@ -1,7 +1,5 @@
-import {
-  API_Notification,
-  notificationType,
-} from "@/API/types/notifications/notifications";
+import { API_Notification } from "@/API/types/notifications/notifications";
+import { notificationType } from "@/API/response_enums";
 import { Ellipse } from "@/assets";
 import { Link, ReactNode } from "@tanstack/react-router";
 import bell from "@/assets/icons/bell.svg";
