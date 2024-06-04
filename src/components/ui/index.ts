@@ -101,3 +101,5 @@ export {
 export { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 export { RadioGroup, RadioGroupItem } from "./radio-group";
+
+export { Skeleton } from "./skeleton";
