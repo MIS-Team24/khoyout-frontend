@@ -12,7 +12,8 @@ import { initialTabs as tabs } from "./NavLinks";
 import { motion } from "framer-motion";
 import { RefObject, forwardRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { API_LOGGED_IN_USER, getCurrentActiveUser } from "@/API/user/user";
+import { getCurrentActiveUser } from "@/API/user/user";
+import { API_LOGGED_IN_USER } from "@/API/types/user/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import bell from "@/assets/icons/bell.svg";
@@ -76,7 +77,7 @@ const NavigationBar = forwardRef(function (_, ref) {
     queryKey: ["notifications"],
     queryFn: getCurrentNotification,
     retry: false,
-    enabled: !!!processedData,
+    enabled: !processedData,
   });
 
   let hasNotifications: boolean = false;
