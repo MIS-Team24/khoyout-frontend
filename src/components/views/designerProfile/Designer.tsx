@@ -8,34 +8,34 @@ import { ChevronRight } from "lucide-react";
 import AboutDesigner from "./aboutDesigner/AboutDesigner";
 import DesignerVideos from "./designerVideos/DesignerVideos";
 import Service from "./service/Service";
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "@tanstack/react-router";
-import { API_Designer } from "@/API/types/designer/designer";
-import { getDesigner } from "@/API/designer/designer";
+// import { useQuery } from "@tanstack/react-query";
+// import { useParams } from "@tanstack/react-router";
+// import { API_Designer } from "@/API/types/designer/designer";
+// import { getDesigner } from "@/API/designer/designer";
 
 export default function Designer() {
-  const id = useParams({ from: "/$designerId/designer" }).designerId;
+  // const id = useParams({ from: "/$designerId/designer" }).designerId;
 
-  const getDesignerFn = () => getDesigner(String(id));
+  // const getDesignerFn = () => getDesigner(String(id));
 
-  const DesignerQuery = useQuery({
-    queryKey: ["designer", id],
-    queryFn: getDesignerFn,
-  });
+  // const DesignerQuery = useQuery({
+  //   queryKey: ["designer", id],
+  //   queryFn: getDesignerFn,
+  // });
 
-  let RenderElement = <></>;
+  // let RenderElement = <></>;
 
-  if (DesignerQuery.isLoading) {
-    RenderElement = <div>Loading...</div>;
-  }
+  // if (DesignerQuery.isLoading) {
+  //   RenderElement = <div>Loading...</div>;
+  // }
 
-  if (DesignerQuery.isError) {
-    RenderElement = <div>Error...</div>;
-  }
+  // if (DesignerQuery.isError) {
+  //   RenderElement = <div>Error...</div>;
+  // }
 
-  if (DesignerQuery.isSuccess) {
-    const transformedData = DesignerQuery.data.data as API_Designer;
-  }
+  // if (DesignerQuery.isSuccess) {
+  //   const transformedData = DesignerQuery.data.data as API_Designer;
+  // }
 
   return (
     <>
