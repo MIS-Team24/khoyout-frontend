@@ -1,5 +1,6 @@
 export enum API_Provinces {
   "AL-AJMI" = "Al-Ajmi",
+  // "Al Agami" = "Al Agami",
   BAHARY = "Bahary",
   "AL-MANSHEYA" = "Al-Mansheya",
   "AL-RAML" = "Al-Raml",
