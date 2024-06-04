@@ -6,13 +6,15 @@ import { Inspiration } from "@/components/views/home";
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 export default function Designers() {
+  const [name, setName] = useState<string>("");
   return (
     <NavigatablePageWrapper>
-      <Search />
+      <Search setName={setName} />
       <Inspiration header={<Header />} />
-      <DesignersList />
+      <DesignersList name={name} />
     </NavigatablePageWrapper>
   );
 }

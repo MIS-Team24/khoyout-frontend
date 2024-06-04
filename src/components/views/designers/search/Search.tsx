@@ -12,7 +12,7 @@ import {
 } from "@/components/ui";
 
 import { Search as SearchIcon, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const cateogries = ["Casual", "Formal", "Classic", "Soiree"];
 const subCategories = [
@@ -24,7 +24,11 @@ const subCategories = [
   "Suits",
 ];
 
-export default function Search() {
+type SearchProps = {
+  setName: (name: string) => void;
+};
+
+export default function Search({ setName }: SearchProps) {
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [filteredValue, setFilteredValue] = useState("");
 
@@ -32,10 +36,20 @@ export default function Search() {
   console.log(selectedSubCategory);
 
   // TODO: REMOVE "mb-[1rem]" class from the section
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      if (filteredValue !== undefined) {
+        setName(filteredValue);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeOut);
+  }, [filteredValue]);
+
   return (
     <section className="main-container -mb-[1rem] mt-[4.5rem]">
       <div className="flex items-center justify-center gap-x-6">
-        {/* Select Category */}
         <div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -73,7 +87,6 @@ export default function Search() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        {/* Search for designer */}
         <div className="flex h-[3rem] w-[22.3rem] items-center justify-center gap-x-0.5 rounded-[1rem] bg-[#F3EBF1] p-4 ring-1 ring-transparent focus-within:ring-transparent">
           <SearchIcon size={25} className="text-[#49454F]y" />
           <Input
@@ -81,7 +94,9 @@ export default function Search() {
             placeholder="Search for designer"
             className="border-none bg-transparent text-lg text-foreground ring-0 ring-transparent placeholder:font-normal placeholder:text-[#49454F] focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
             value={filteredValue}
-            onChange={(e) => setFilteredValue(e.target.value)}
+            onChange={(e) => {
+              setFilteredValue(e.target.value);
+            }}
           />
         </div>
       </div>

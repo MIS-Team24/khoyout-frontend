@@ -1,5 +1,6 @@
 export enum API_Provinces {
   "AL-AJMI" = "Al-Ajmi",
+  // "Al Agami" = "Al Agami",
   BAHARY = "Bahary",
   "AL-MANSHEYA" = "Al-Mansheya",
   "AL-RAML" = "Al-Raml",
@@ -18,4 +19,19 @@ export enum API_Provinces {
   ASAFRA = "Asafra",
   MANDARA = "Mandara",
   "AL AWAID" = "Al Awaid",
+}
+
+export enum UserType {
+  DESIGNER = "Designer",
+  USER = "User",
+}
+
+export enum notificationType {
+  RescheduleRequest = "RescheduleRequest",
+  BookingConfirmed = "BookingConfirmed",
+  Ideas = "Ideas",
+  AppointmentRequest = "AppointmentRequest",
+  PremiumGranted = "PremiumGranted",
+  PremiumExpired = "PremiumExpired",
+  PremiumRevoked = "PremiumRevoked",
 }

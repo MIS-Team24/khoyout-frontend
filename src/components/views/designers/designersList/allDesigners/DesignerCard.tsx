@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui";
 import { Card } from "@/components/ui/card";
-import { Briefcase, Clock, Heart, MapPin } from "lucide-react";
+import { Briefcase, Clock, Heart, MapPin, User } from "lucide-react";
 import { Rating } from "react-simple-star-rating";
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
@@ -67,14 +67,18 @@ export default function DesignerCard(props: DesignerCardProps) {
           </div>
           <div className="flex flex-col gap-1.5 text-[12px]">
             <p className="flex items-center gap-2">
-              <MapPin size={12} />
+              <span>
+                <MapPin size={12} />
+              </span>
               {/* {props.address.province}, {props.address.city} */}
               <span className="whitespace-nowrap text-sm text-[#49454F]">
                 {props.address}
               </span>
             </p>
             <p className="flex items-center gap-2 whitespace-nowrap text-sm text-[#49454F]">
-              <Clock size={12} />
+              <span>
+                <Clock size={12} />
+              </span>
               <span>
                 {props.openNow ? (
                   <span className="text-green-500">Opened</span>
@@ -89,11 +93,18 @@ export default function DesignerCard(props: DesignerCardProps) {
               )}
             </p>
             <p className="flex items-center gap-2 whitespace-nowrap text-sm text-[#49454F]">
-              <Briefcase size={12} />
+              <span>
+                <Briefcase size={12} />
+              </span>
               {props.yearsOfExperienceCount} Years Of Experience
             </p>
             {/* TODO: Fix Gender Icon */}
-            <p>{props.gender}</p>
+            <p className="flex items-center gap-2 whitespace-nowrap text-sm text-[#49454F]">
+              <span>
+                <User size={13} />
+              </span>
+              {props.gender}
+            </p>
           </div>
         </div>
         <div className="w-full px-4">

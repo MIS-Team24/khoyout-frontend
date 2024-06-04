@@ -1,27 +1,25 @@
 import client from "@/API/client";
 
+export type FilterType = {
+  location: string;
+  gender: string;
+  yearsOfExperience: number;
+  minRating: number;
+  openNow: boolean;
+  name: string;
+  sortBy: string;
+};
+
 export function getDesigners(
   limit: number = 10,
   page: number = 1,
-  name?: string,
-  openNow?: boolean,
-  sortBy?: string,
-  gender?: string,
-  yearsOfExperience?: number,
-  location?: string,
-  mainRating?: number,
+  filterType: FilterType,
 ) {
   return client.get("/designer", {
     params: {
       limit,
       page,
-      name,
-      openNow,
-      sortBy,
-      gender,
-      yearsOfExperience,
-      location,
-      mainRating,
+      ...filterType,
     },
   });
 }
