@@ -464,8 +464,8 @@ export default function BookingDialog({
                     </p>
                     <div className="flex w-full justify-center gap-8 pt-[3.95rem]">
                       <Link
-                        // TODO: Replace this with the actual link
-                        to="/designer-profile"
+                        // TODO: Replace this with the actual link to the user id of the designer
+                        to="/"
                         onClick={() => {
                           onChange(false);
                           setCurrentSegment(0);
