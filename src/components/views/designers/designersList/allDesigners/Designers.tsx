@@ -4,16 +4,14 @@ import { API_Designer } from "@/API/types/designers/designers";
 
 type DesignerProps = {
   desigenrs: API_Designer[];
-  isOpen: boolean;
 };
 
-export default function Designers({ desigenrs, isOpen }: DesignerProps) {
+export default function Designers({ desigenrs }: DesignerProps) {
   return (
-    <section>
+    <section className="w-full">
       <div
         className={cn(
-          "grid grid-cols-1 gap-8 md:grid-cols-2",
-          isOpen ? "md:grid-cols-3" : "lg:grid-cols-3 xl:grid-cols-4",
+          "relative grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
         )}
       >
         {desigenrs?.map(
