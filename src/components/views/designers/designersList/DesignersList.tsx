@@ -13,6 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button, Skeleton } from "@/components/ui";
 import { Heart, Image } from "lucide-react";
+import { designerNotFound } from "@/assets";
 
 type DesignersListProps = {
   name: string;
@@ -60,19 +61,6 @@ export default function DesignersList({ name }: DesignersListProps) {
 
   return (
     <div className="main-container">
-      <div className="pb-[1rem]">
-        {designersQuery.isPending ? (
-          <Skeleton className="h-8 w-48 rounded" />
-        ) : (
-          <p className="text-[2rem] font-normal leading-normal">
-            {(
-              (designersQuery.data?.data as API_DesignersResponse)
-                .designers as API_Designer[]
-            ).length ?? 0}{" "}
-            Results
-          </p>
-        )}
-      </div>
       <div className="flex justify-between pb-8">
         <div className="space-x-2">
           <DesignerToogleView handleToggle={handleToggle} />
@@ -114,13 +102,32 @@ export default function DesignersList({ name }: DesignersListProps) {
             isOpen ? "w-[78%]" : "w-full",
           )}
         >
-          {designersQuery.isPending ? (
+          {designersQuery.isError ? (
+            <div className="flex w-full flex-col items-center gap-y-4">
+              <div className="flex flex-col space-y-0.5 text-center">
+                <h2 className="text-[2rem] font-normal leading-normal">
+                  We didn't find a match
+                </h2>
+                <p className="text-xl font-normal leading-8 text-[#6C6C6C]">
+                  Make sure all words are spelled correctly or select from
+                  categories{" "}
+                </p>
+              </div>
+              <div className="h-[25rem] w-[33rem]">
+                <img
+                  src={designerNotFound}
+                  className="h-full w-full object-cover"
+                  alt="designer-not-found"
+                />
+              </div>
+            </div>
+          ) : designersQuery.isPending ? (
             <DesignersSkeleton />
           ) : (
             <Designers
               desigenrs={
-                (designersQuery.data?.data as API_DesignersResponse)
-                  .designers as API_Designer[]
+                ((designersQuery.data?.data as API_DesignersResponse)
+                  .designers as API_Designer[]) ?? []
               }
             />
           )}
@@ -131,7 +138,9 @@ export default function DesignersList({ name }: DesignersListProps) {
       ) : (
         <DesignerPagination
           pagination={
-            designersQuery.isPending ? {} : designersQuery.data?.data.pagination
+            designersQuery.isPending
+              ? {}
+              : designersQuery.data?.data.pagination ?? {}
           }
           setPageNumber={setPageNumber}
         />
