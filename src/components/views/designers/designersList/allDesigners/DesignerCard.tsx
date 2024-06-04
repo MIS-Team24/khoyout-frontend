@@ -108,6 +108,8 @@ export default function DesignerCard(props: DesignerCardProps) {
         </div>
         <div className="w-full px-4">
           <Link
+            to="/$designerId/designer"
+            params={{ designerId: props.id }}
             className={cn(
               buttonVariants({ variant: "default" }),
               "mt-auto h-8 w-full rounded-full py-5 text-base font-medium leading-normal",

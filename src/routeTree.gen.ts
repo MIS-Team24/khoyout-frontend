@@ -25,7 +25,6 @@ const InspirationLazyImport = createFileRoute('/inspiration')()
 const HomeLazyImport = createFileRoute('/home')()
 const ForgetPasswordLazyImport = createFileRoute('/forget-password')()
 const DesignersLazyImport = createFileRoute('/designers')()
-const DesignerProfileLazyImport = createFileRoute('/designer-profile')()
 const ContactLazyImport = createFileRoute('/contact')()
 const ClientPageLazyImport = createFileRoute('/client-page')()
 const IndexLazyImport = createFileRoute('/')()
@@ -36,6 +35,7 @@ const SubscriptionStandardLazyImport = createFileRoute(
 const SubscriptionPremiumLazyImport = createFileRoute('/subscription/premium')()
 const GalleryVideosLazyImport = createFileRoute('/gallery/videos')()
 const GalleryImagesLazyImport = createFileRoute('/gallery/images')()
+const DesignerIdDesignerLazyImport = createFileRoute('/$designerId/designer')()
 
 // Create/Update Routes
 
@@ -80,13 +80,6 @@ const DesignersLazyRoute = DesignersLazyImport.update({
   path: '/designers',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/designers.lazy').then((d) => d.Route))
-
-const DesignerProfileLazyRoute = DesignerProfileLazyImport.update({
-  path: '/designer-profile',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/designer-profile.lazy').then((d) => d.Route),
-)
 
 const ContactLazyRoute = ContactLazyImport.update({
   path: '/contact',
@@ -143,6 +136,13 @@ const GalleryImagesLazyRoute = GalleryImagesLazyImport.update({
   import('./routes/gallery/images.lazy').then((d) => d.Route),
 )
 
+const DesignerIdDesignerLazyRoute = DesignerIdDesignerLazyImport.update({
+  path: '/$designerId/designer',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/$designerId/designer.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -161,10 +161,6 @@ declare module '@tanstack/react-router' {
     }
     '/contact': {
       preLoaderRoute: typeof ContactLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/designer-profile': {
-      preLoaderRoute: typeof DesignerProfileLazyImport
       parentRoute: typeof rootRoute
     }
     '/designers': {
@@ -199,6 +195,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterLazyImport
       parentRoute: typeof rootRoute
     }
+    '/$designerId/designer': {
+      preLoaderRoute: typeof DesignerIdDesignerLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/gallery/images': {
       preLoaderRoute: typeof GalleryImagesLazyImport
       parentRoute: typeof rootRoute
@@ -229,7 +229,6 @@ export const routeTree = rootRoute.addChildren([
   ResetPasswordRoute,
   ClientPageLazyRoute,
   ContactLazyRoute,
-  DesignerProfileLazyRoute,
   DesignersLazyRoute,
   ForgetPasswordLazyRoute,
   HomeLazyRoute,
@@ -238,6 +237,7 @@ export const routeTree = rootRoute.addChildren([
   NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,
+  DesignerIdDesignerLazyRoute,
   GalleryImagesLazyRoute,
   GalleryVideosLazyRoute,
   SubscriptionPremiumLazyRoute,
