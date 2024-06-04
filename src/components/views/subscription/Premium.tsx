@@ -168,9 +168,9 @@ function Premium() {
             </div>
           </div>
           <div className="mb-8">
-            <div className="mb-6 h-8 w-[13.375rem]">
+            <div className="mb-6 h-8 w-[14.0625rem]">
               <h2 className="text-2xl font-normal leading-8">
-                Contact information
+                Personal information
               </h2>
             </div>
             <div>
@@ -260,7 +260,7 @@ function Premium() {
               <Loading /> Loading ...
             </>
           ) : (
-            "Subscribe"
+            "Confirm Subscribtion"
           )}
         </Button>
       </div>
