@@ -95,7 +95,7 @@ export default function DesignersList({ name }: DesignersListProps) {
             status && "duration-500",
             isOpen
               ? "mr-6 w-[22%] scale-100 opacity-100"
-              : "w-[0px] scale-0 opacity-0",
+              : "w-0 scale-0 opacity-0",
           )}
         >
           <DesignerFilter
