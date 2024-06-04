@@ -85,3 +85,19 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 } from "./dropdown-menu";
+
+export {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+} from "./command";
+
+export { Popover, PopoverContent, PopoverTrigger } from "./popover";
+
+export { RadioGroup, RadioGroupItem } from "./radio-group";
