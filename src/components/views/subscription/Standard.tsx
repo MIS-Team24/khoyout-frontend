@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import {
   Button,
+  Checkbox,
   Form,
   FormControl,
   FormField,
@@ -47,6 +48,7 @@ function Standard() {
   const [fieldAppear, setFieldAppear] = useState(false);
   const auth = useAuth();
   const [forceLoading, setForceLoading] = useState<boolean>(false);
+  const [check, setCheck] = useState(false);
 
   function appear() {
     setFieldAppear(!fieldAppear);
@@ -119,7 +121,11 @@ function Standard() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <input type="checkbox" className="h-4 w-4" />
+                    <Checkbox
+                      checked={check}
+                      onCheckedChange={() => setCheck(!check)}
+                      className="h-4 w-4 rounded-none"
+                    />
                     <p className="text-sm font-normal text-[#49454F]">
                       <Button
                         size={"sm"}
@@ -168,9 +174,9 @@ function Standard() {
             </div>
           </div>
           <div className="mb-8">
-            <div className="mb-4 h-8 w-[13.375rem] lg:mb-6">
+            <div className="mb-4 h-8 w-[14.0625rem] lg:mb-6">
               <h2 className="text-2xl font-normal leading-8">
-                Contact information
+                Personal information
               </h2>
             </div>
             <div>
@@ -250,7 +256,7 @@ function Standard() {
         </div>
         <Button
           variant={"default"}
-          className="mx-auto mb-[6.62rem] flex h-[3.75rem] w-[20rem] items-center  justify-center text-2xl font-medium leading-normal lg:w-[35.25rem]"
+          className="mx-auto mb-[6.62rem] flex h-[3.75rem] w-[20rem] items-center justify-center text-2xl font-medium leading-normal lg:w-[35.25rem]"
           type="submit"
           onClick={onClickCheckout}
           disabled={checkoutMutation.isPending || forceLoading}
@@ -260,7 +266,7 @@ function Standard() {
               <Loading /> Loading ...
             </>
           ) : (
-            "Subscribe"
+            "Confirm Subscribtion"
           )}
         </Button>
       </div>

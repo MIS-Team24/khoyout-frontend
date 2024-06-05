@@ -125,7 +125,7 @@ function Subscription() {
                     variant={"outline"}
                     className="mt-10 w-full text-center text-xl font-medium leading-normal text-[#8C236C] hover:text-[#8C236C]"
                   >
-                    Upgrade
+                    Subscribe
                   </Button>
                 </div>
               </div>
@@ -182,7 +182,7 @@ function Subscription() {
                     variant={"default"}
                     className="mt-10 w-full text-center text-xl font-medium leading-normal text-[#F9F4F4]"
                   >
-                    Upgrade
+                    Subscribe
                   </Button>
                 </div>
               </div>

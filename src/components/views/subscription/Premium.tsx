@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import {
   Button,
+  Checkbox,
   Form,
   FormControl,
   FormField,
@@ -47,6 +48,7 @@ function Premium() {
   const [fieldAppear, setFieldAppear] = useState(false);
   const auth = useAuth();
   const [forceLoading, setForceLoading] = useState<boolean>(false);
+  const [check, setCheck] = useState(false);
 
   function appear() {
     setFieldAppear(!fieldAppear);
@@ -119,7 +121,11 @@ function Premium() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <input type="checkbox" className="h-4 w-4" />
+                    <Checkbox
+                      checked={check}
+                      onCheckedChange={() => setCheck(!check)}
+                      className="h-4 w-4 rounded-none"
+                    />
                     <p className="text-sm font-normal text-[#49454F]">
                       <Button
                         size={"sm"}
@@ -168,9 +174,9 @@ function Premium() {
             </div>
           </div>
           <div className="mb-8">
-            <div className="mb-6 h-8 w-[13.375rem]">
+            <div className="mb-6 h-8 w-[14.0625rem]">
               <h2 className="text-2xl font-normal leading-8">
-                Contact information
+                Personal information
               </h2>
             </div>
             <div>
@@ -260,7 +266,7 @@ function Premium() {
               <Loading /> Loading ...
             </>
           ) : (
-            "Subscribe"
+            "Confirm Subscribtion"
           )}
         </Button>
       </div>
