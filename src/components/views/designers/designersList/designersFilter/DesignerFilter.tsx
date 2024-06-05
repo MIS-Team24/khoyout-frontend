@@ -115,6 +115,8 @@ export default function DesignerFilter({
                 minRating: Number(value),
               }));
             }}
+            value={String(filterType.minRating)}
+            defaultValue={String(filterType.minRating)}
             className="flex flex-col-reverse"
           >
             {Array.from({ length: 5 })
@@ -160,6 +162,8 @@ export default function DesignerFilter({
                 gender: value,
               }));
             }}
+            value={filterType.gender}
+            defaultValue={filterType.gender}
             className="flex gap-x-6"
           >
             <div className="flex items-center justify-start gap-x-2">

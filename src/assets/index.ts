@@ -47,6 +47,7 @@ import team1 from "./team-1.png";
 import team2 from "./team-2.png";
 import team3 from "./team-3.png";
 import checkImg from "./icons/check_24px.svg";
+import designerNotFound from "./designer-not-found.png";
 
 const inspirationImages = [
   {
@@ -208,4 +209,5 @@ export {
   designerGalleryImages,
   team,
   checkImg,
+  designerNotFound,
 };

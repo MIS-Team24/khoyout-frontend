@@ -7,7 +7,7 @@ import {
 } from "@/API/notification/notification";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { API_NotificationResponse } from "@/API/types/notifications/notifications";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui";
 
 export default function Notification() {
   const { access_token } = useAuth();

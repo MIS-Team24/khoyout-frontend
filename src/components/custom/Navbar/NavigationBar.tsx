@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import { getCurrentActiveUser } from "@/API/user/user";
 import { API_LOGGED_IN_USER } from "@/API/types/user/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui";
 import bell from "@/assets/icons/bell.svg";
 import { ChevronDown, LogOut, SearchIcon, User } from "lucide-react";
 import {

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui";
+import { Button, buttonVariants } from "@/components/ui";
 import { Card } from "@/components/ui/card";
 import { Briefcase, Clock, Heart, MapPin, User } from "lucide-react";
 import { Rating } from "react-simple-star-rating";
@@ -38,7 +38,7 @@ export default function DesignerCard(props: DesignerCardProps) {
         </div>
         <div className="flex w-full flex-col gap-2 px-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl">{props.name}</h3>
+            <h3 className="whitespace-nowrap text-2xl">{props.name}</h3>
             <Button className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent">
               <Heart
                 className={cn(
@@ -98,7 +98,6 @@ export default function DesignerCard(props: DesignerCardProps) {
               </span>
               {props.yearsOfExperienceCount} Years Of Experience
             </p>
-            {/* TODO: Fix Gender Icon */}
             <p className="flex items-center gap-2 whitespace-nowrap text-sm text-[#49454F]">
               <span>
                 <User size={13} />
@@ -108,10 +107,15 @@ export default function DesignerCard(props: DesignerCardProps) {
           </div>
         </div>
         <div className="w-full px-4">
-          <Link className="w-full">
-            <Button className="mt-auto h-8 w-full rounded-full py-0">
-              View Profile
-            </Button>
+          <Link
+            to="/$designerId/designer"
+            params={{ designerId: props.id }}
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "mt-auto h-8 w-full rounded-full py-5 text-base font-medium leading-normal",
+            )}
+          >
+            View Profile
           </Link>
         </div>
       </Card>

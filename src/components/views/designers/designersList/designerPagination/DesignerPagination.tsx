@@ -11,26 +11,16 @@ import {
 } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { LoadingState } from "@/components/custom";
 
 type DesignerPaginationProps = {
   pagination: API_Pagination;
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
-  DesignerLimits: number;
 };
 
 export default function DesignerPagination({
   pagination,
   setPageNumber,
 }: DesignerPaginationProps) {
-  // const currentPagination: API_Pagination = {
-  //   current_page: 0,
-  //   total_pages: 0,
-  //   entry_counts: 0,
-  //   next_page: null,
-  //   prev_page: null,
-  // };
-
   const { prev_page, next_page } = pagination;
 
   return (
@@ -58,45 +48,39 @@ export default function DesignerPagination({
               </Button>
             </PaginationItem>
             <div className="flex gap-x-4">
-              {Object.keys(pagination).length === 0 ? (
-                <LoadingState />
-              ) : (
-                Array.from(
-                  {
-                    length: pagination?.total_pages
-                      ? pagination?.total_pages
-                      : 2,
-                  },
-                  (_, i) => i + 1,
-                ).map((page) => (
-                  <PaginationItem
-                    key={page}
-                    onClick={() => setPageNumber(page)}
-                    className="cursor-pointer"
+              {Array.from(
+                {
+                  length: pagination?.total_pages ? pagination?.total_pages : 2,
+                },
+                (_, i) => i + 1,
+              ).map((page) => (
+                <PaginationItem
+                  key={page}
+                  onClick={() => setPageNumber(page)}
+                  className="cursor-pointer"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    }}
                   >
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      }}
+                    <PaginationLink
+                      className={cn(
+                        buttonVariants({ variant: "outline" }),
+                        "rounded-xl text-primary hover:bg-primary hover:text-white",
+                        pagination.current_page === page &&
+                          "bg-primary text-white hover:bg-primary hover:text-white",
+                      )}
                     >
-                      <PaginationLink
-                        className={cn(
-                          buttonVariants({ variant: "outline" }),
-                          "rounded-xl text-primary hover:bg-primary hover:text-white",
-                          pagination.current_page === page &&
-                            "bg-primary text-white hover:bg-primary hover:text-white",
-                        )}
-                      >
-                        {page}
-                      </PaginationLink>
-                    </motion.div>
-                  </PaginationItem>
-                ))
-              )}
+                      {page}
+                    </PaginationLink>
+                  </motion.div>
+                </PaginationItem>
+              ))}
             </div>
             <PaginationItem>
               <Button
@@ -120,7 +104,6 @@ export default function DesignerPagination({
           </PaginationContent>
         </Pagination>
       </div>
-      <div></div>
     </>
   );
 }
