@@ -243,6 +243,7 @@ export const routeTree = rootRoute.addChildren([
   NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,
+  SettingsLazyRoute,
   GalleryImagesLazyRoute,
   GalleryVideosLazyRoute,
   SubscriptionPremiumLazyRoute,
