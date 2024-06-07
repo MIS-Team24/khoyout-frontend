@@ -107,7 +107,7 @@ function Settings() {
                                 type="email"
                                 placeholder="Email"
                                 {...field}
-                                className="h-[3.5rem] w-[20rem] items-center border-none bg-transparent text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                                className="h-[3.5rem] w-[20rem] items-center border-none bg-transparent text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                               />
                             </div>
                           </FormControl>
@@ -139,7 +139,7 @@ function Settings() {
                               type={showPassword.password ? "text" : "password"}
                               placeholder="Password"
                               {...field}
-                              className="h-[3.5rem] w-[20rem] items-center border-none bg-transparent text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                              className="h-[3.5rem] w-[20rem] items-center border-none bg-transparent text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                             />
                             <div className="cursor-pointer p-2">
                               {showPassword.password ? (
@@ -189,7 +189,7 @@ function Settings() {
                               }
                               placeholder="Confirm Password"
                               {...field}
-                              className="h-[3.5rem] w-[20rem] items-center border-none bg-transparent text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                              className="h-[3.5rem] w-[20rem] items-center border-none bg-transparent text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                             />
                             <div className="cursor-pointer p-2">
                               {showPassword.confirmPassword ? (

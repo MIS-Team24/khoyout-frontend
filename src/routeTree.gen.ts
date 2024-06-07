@@ -26,6 +26,7 @@ const InspirationLazyImport = createFileRoute('/inspiration')()
 const HomeLazyImport = createFileRoute('/home')()
 const ForgetPasswordLazyImport = createFileRoute('/forget-password')()
 const DesignersLazyImport = createFileRoute('/designers')()
+const DeleteAccountLazyImport = createFileRoute('/delete-account')()
 const ContactLazyImport = createFileRoute('/contact')()
 const ClientPageLazyImport = createFileRoute('/client-page')()
 const IndexLazyImport = createFileRoute('/')()
@@ -86,6 +87,13 @@ const DesignersLazyRoute = DesignersLazyImport.update({
   path: '/designers',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/designers.lazy').then((d) => d.Route))
+
+const DeleteAccountLazyRoute = DeleteAccountLazyImport.update({
+  path: '/delete-account',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/delete-account.lazy').then((d) => d.Route),
+)
 
 const ContactLazyRoute = ContactLazyImport.update({
   path: '/contact',
@@ -169,6 +177,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactLazyImport
       parentRoute: typeof rootRoute
     }
+    '/delete-account': {
+      preLoaderRoute: typeof DeleteAccountLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/designers': {
       preLoaderRoute: typeof DesignersLazyImport
       parentRoute: typeof rootRoute
@@ -239,6 +251,7 @@ export const routeTree = rootRoute.addChildren([
   ResetPasswordRoute,
   ClientPageLazyRoute,
   ContactLazyRoute,
+  DeleteAccountLazyRoute,
   DesignersLazyRoute,
   ForgetPasswordLazyRoute,
   HomeLazyRoute,
