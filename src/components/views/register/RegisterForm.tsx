@@ -11,8 +11,12 @@ import {
   FormItem,
   FormControl,
   FormMessage,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui";
-
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -22,6 +26,7 @@ import { API_SuccessfullRegister } from "@/API/types/auth/auth";
 import { LoadingState } from "@/components/custom";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { UserType } from "@/API/response_enums";
 
 type UserDate = {
   Otp: {
@@ -37,6 +42,7 @@ const formSchema = z
     email: z.string().email({
       message: "Please enter a valid email address (user@xyz.com).",
     }),
+    userType: z.nativeEnum(UserType),
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters." }),
@@ -251,6 +257,36 @@ export default function RegisterForm() {
                           </div>
                         </div>
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="userType"
+                  render={({ field }) => (
+                    <FormItem className="mx-auto w-[23rem] space-y-0 pb-6 text-center">
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="h-[3.5rem] w-full rounded-[0.5rem] border-[#B1B1B1] bg-transparent text-base transition hover:border-primary focus:border-primary focus:!ring-0 focus:!ring-offset-0 focus-visible:!ring-offset-0">
+                            <SelectValue placeholder="Select a User Type" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="rounded">
+                          {(
+                            Object.keys(UserType) as Array<
+                              keyof typeof UserType
+                            >
+                          ).map((el) => (
+                            <SelectItem key={el} value={UserType[el]}>
+                              {UserType[el]}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}

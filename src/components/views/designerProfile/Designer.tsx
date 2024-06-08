@@ -11,39 +11,72 @@ import Service from "./service/Service";
 // import { useQuery } from "@tanstack/react-query";
 // import { useParams } from "@tanstack/react-router";
 // import { API_Designer } from "@/API/types/designer/designer";
-// import { getDesigner } from "@/API/designer/designer";
+// import { getDesigner, getDesignerPortfolio } from "@/API/designer/designer";
+// // import { clients, inspirationImages } from "@/assets";
+// import {
+//   AboutSkeleton,
+//   DesigenrProfileSkeleton,
+//   DesignerVideosSkeleton,
+//   InspirationSkeleton,
+//   ServiceSkeleton,
+// } from "./skeletons";
 
 export default function Designer() {
-  // const id = useParams({ from: "/$designerId/designer" }).designerId;
+  //   const id = useParams({ from: "/desginer/$designerId/" }).designerId;
 
-  // const getDesignerFn = () => getDesigner(String(id));
+  //   const getDesignerFn = () => getDesigner(String(id));
+  //   const getDesignerPortfolioFn = () => getDesignerPortfolio(String(id));
 
-  // const DesignerQuery = useQuery({
-  //   queryKey: ["designer", id],
-  //   queryFn: getDesignerFn,
-  // });
+  //   const DesignerQuery = useQuery({
+  //     queryKey: ["designer", id],
+  //     queryFn: getDesignerFn,
+  //   });
 
-  // let RenderElement = <></>;
+  //   const DesignerPortfolioQuery = useQuery({
+  //     queryKey: ["designer-portfolio", id],
+  //     queryFn: getDesignerPortfolioFn,
+  //   });
 
-  // if (DesignerQuery.isLoading) {
-  //   RenderElement = <div>Loading...</div>;
-  // }
+  //    // let RenderElement = <></>;
 
-  // if (DesignerQuery.isError) {
-  //   RenderElement = <div>Error...</div>;
-  // }
+  //   // if (DesignerQuery.isLoading) {
+  //   //   RenderElement = <div>Loading...</div>;
+  //   // }
 
-  // if (DesignerQuery.isSuccess) {
-  //   const transformedData = DesignerQuery.data.data as API_Designer;
-  // }
+  //   // if (DesignerQuery.isError) {
+  //   //   RenderElement = <div>Error...</div>;
+  //   // }
+
+  //   // if (DesignerQuery.isSuccess) {
+  //   //   const transformedData = DesignerQuery.data.data as API_Designer;
+  //   // }
+
+  //   // const date = new Date();
+  //   // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  //  if (DesignerQuery.isError) {
+  //     return <div>Error...</div>;
+  //   }
 
   return (
     <>
+      {/* {DesignerQuery.isError ? (
+        <div>error.....</div>
+      ) : DesignerQuery.isPending ? (
+        <div>Loading...</div>
+      ) : (
+        <div>Success...</div>
+      )} */}
       <ProfileDetails wishlisted={false} />
       <AboutDesigner />
       <Inspiration header={<Header />} />
       <DesignerVideos />
       <Service />
+      {/* <DesigenrProfileSkeleton />
+      <AboutSkeleton />
+      <InspirationSkeleton arrayLength={3} />
+      <DesignerVideosSkeleton />
+      <ServiceSkeleton membersLength={3} reviewsLength={3} serviceLength={4} /> */}
     </>
   );
 }
@@ -65,3 +98,12 @@ function Header() {
     </div>
   );
 }
+
+/*
+if DesignerQuery.isError
+=> Error
+ else if DesignerQuery.data?.data as API_Designer.length === 0
+=> Error   
+else if DesignerQuery.isPending || DesignerQuery.isLoading 
+ => All Skeletons 
+*/

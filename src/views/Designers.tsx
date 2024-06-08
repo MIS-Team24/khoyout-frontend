@@ -13,7 +13,7 @@ export default function Designers() {
   return (
     <NavigatablePageWrapper>
       <Search setName={setName} />
-      <Inspiration header={<Header />} />
+      <Inspiration header={<Header />} className="2xl:basis-1/4" />
       <DesignersList name={name} />
     </NavigatablePageWrapper>
   );
