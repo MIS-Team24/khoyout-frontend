@@ -29,8 +29,6 @@ export default function DesignersList({ name }: DesignersListProps) {
     yearsOfExperience: 0,
   } as FilterType);
 
-  // console.log(filterType);
-
   useEffect(() => {
     SetFilterType((prev) => ({ ...prev, name }));
   }, [name]);
@@ -60,11 +58,10 @@ export default function DesignersList({ name }: DesignersListProps) {
   }, [isOpen]);
 
   return (
-    <div className="main-container">
+    <div className="main-container mt-16">
       <div className="flex justify-between pb-8">
         <div className="space-x-2">
           <DesignerToogleView handleToggle={handleToggle} />
-          {/* TODO: ADD BUTTON COLOR */}
           <Button
             variant="ghost"
             className="h-[3rem] w-[8rem] rounded-lg text-base font-medium text-gray-300 hover:bg-transparent hover:text-primary focus:!ring-0 focus:!ring-offset-0 focus-visible:!ring-offset-0"
@@ -85,7 +82,7 @@ export default function DesignersList({ name }: DesignersListProps) {
       <div className="flex justify-between">
         <div
           className={cn(
-            `flex h-full flex-col justify-between overflow-hidden transition-all`,
+            `flex h-full flex-col justify-between overflow-hidden pb-10 transition-all`,
             status && "duration-500",
             isOpen ? "w-[22%] scale-100 opacity-100" : "w-0 scale-0 opacity-0",
           )}
@@ -103,26 +100,14 @@ export default function DesignersList({ name }: DesignersListProps) {
           )}
         >
           {designersQuery.isError ? (
-            <div className="flex w-full flex-col items-center gap-y-4">
-              <div className="flex flex-col space-y-0.5 text-center">
-                <h2 className="text-[2rem] font-normal leading-normal">
-                  We didn't find a match
-                </h2>
-                <p className="text-xl font-normal leading-8 text-[#6C6C6C]">
-                  Make sure all words are spelled correctly or select from
-                  categories{" "}
-                </p>
-              </div>
-              <div className="h-[25rem] w-[33rem]">
-                <img
-                  src={designerNotFound}
-                  className="h-full w-full object-cover"
-                  alt="designer-not-found"
-                />
-              </div>
-            </div>
+            <Error />
           ) : designersQuery.isPending ? (
             <DesignersSkeleton />
+          ) : (
+              (designersQuery.data?.data as API_DesignersResponse)
+                .designers as API_Designer[]
+            ).length === 0 ? (
+            <Error />
           ) : (
             <Designers
               desigenrs={
@@ -133,7 +118,9 @@ export default function DesignersList({ name }: DesignersListProps) {
           )}
         </div>
       </div>
-      {designersQuery.isPending ? (
+      {designersQuery.isError ? (
+        <div className="hidden"></div>
+      ) : designersQuery.isPending ? (
         <DesigenrPaginationSkeleton />
       ) : (
         <DesignerPagination
@@ -152,7 +139,7 @@ export default function DesignersList({ name }: DesignersListProps) {
 const DesignersSkeleton = () => {
   return (
     <section>
-      <div className="relative grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="relative grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {Array.from({ length: 12 }).map((_, i) => (
           <div className="h-[540px] flex-1 rounded-lg" key={i}>
             <div className="relative flex h-[280px] w-full items-center justify-center rounded-t-lg">
@@ -187,7 +174,7 @@ const DesigenrPaginationSkeleton = () => {
     <div className="-mt-10 flex w-full items-center justify-center gap-x-2 pb-16">
       <div className="flex gap-x-2">
         <Skeleton className="h-10 w-20 rounded" />
-        {Array.from({ length: 21 }).map((_, i) => (
+        {Array.from({ length: 13 }).map((_, i) => (
           <Skeleton key={i} className="rounded px-5 py-4" />
         ))}
         <Skeleton className="h-10 w-20 rounded" />
@@ -195,3 +182,23 @@ const DesigenrPaginationSkeleton = () => {
     </div>
   );
 };
+
+const Error = () => (
+  <div className="flex w-full flex-col items-center gap-y-4">
+    <div className="flex flex-col space-y-0.5 text-center">
+      <h2 className="text-[2rem] font-normal leading-normal">
+        We didn't find a match
+      </h2>
+      <p className="text-xl font-normal leading-8 text-[#6C6C6C]">
+        Make sure all words are spelled correctly or select from categories{" "}
+      </p>
+    </div>
+    <div className="h-[25rem] w-[33rem]">
+      <img
+        src={designerNotFound}
+        className="h-full w-full object-cover"
+        alt="designer-not-found"
+      />
+    </div>
+  </div>
+);
