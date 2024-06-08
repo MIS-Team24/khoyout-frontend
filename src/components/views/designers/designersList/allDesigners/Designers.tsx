@@ -11,7 +11,7 @@ export default function Designers({ desigenrs }: DesignerProps) {
     <section className="w-full">
       <div
         className={cn(
-          "relative grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3",
+          "relative grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
         )}
       >
         {desigenrs?.map(
