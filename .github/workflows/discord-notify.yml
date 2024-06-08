@@ -22,7 +22,14 @@ jobs:
     - name: Load user photo URL
       id: load_photo
       run: |
-        PHOTO_URL=$(jq -r --arg user "${{ github.actor }}" '.[$user]' .github/user_photos.json)
+        PHOTO_DATA=$(jq -r --arg user "${{ github.actor }}" '.[$user]' .github/user_photos.json)
+        if [[ $PHOTO_DATA == \[ * ]]; then
+          PHOTO_ARRAY=($(echo $PHOTO_DATA | jq -r '.[]'))
+          RANDOM_INDEX=$((RANDOM % ${#PHOTO_ARRAY[@]}))
+          PHOTO_URL=${PHOTO_ARRAY[$RANDOM_INDEX]}
+        else
+          PHOTO_URL=$PHOTO_DATA
+        fi
         echo "PHOTO_URL=$PHOTO_URL" >> $GITHUB_ENV
         echo "Loaded photo URL: $PHOTO_URL"
 
