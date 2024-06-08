@@ -46,7 +46,10 @@ export type API_Designer = {
   ordersFinished: number;
   yearsExperience: number;
   about: string;
-  workingDays: string[];
+  workingDays: {
+    day: string;
+    time: string;
+  }[];
   rating: number;
   baseAccount: BaseAccount;
   openNow: boolean;
@@ -56,5 +59,5 @@ export type API_Designer = {
   services: Service[];
   teamMembers: TeamMember[];
   categories: { Category: Category }[];
-  portfolios: Portfolio[]; // Adjust the structure as needed
+  portfolios: Portfolio[];
 };
