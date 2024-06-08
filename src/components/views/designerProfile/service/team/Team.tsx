@@ -1,12 +1,13 @@
 import { Card, CardContent } from "@/components/ui";
 import { team } from "@/assets";
+import { SectionHeader } from "@/components/custom";
 
 export default function Team() {
   return (
     <section>
       <div>
-        <p className="mb-8 text-[2rem] text-foreground">Team</p>
-        <div className="no-scrollbar flex flex-row gap-6 overflow-auto whitespace-nowrap">
+        <SectionHeader title="Team" className="mt-0" />
+        <div className="no-scrollbar flex flex-row gap-6 overflow-y-auto overflow-x-hidden whitespace-nowrap">
           {team.map((member, i) => (
             <Card
               className="min-w-48 p-2"
