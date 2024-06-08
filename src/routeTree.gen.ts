@@ -39,9 +39,7 @@ const SubscriptionPremiumLazyImport = createFileRoute(
 )();
 const GalleryVideosLazyImport = createFileRoute("/gallery/videos")();
 const GalleryImagesLazyImport = createFileRoute("/gallery/images")();
-const DesginerDesignerIdIndexLazyImport = createFileRoute(
-  "/desginer/$designerId/",
-)();
+const DesignerIdDesignerLazyImport = createFileRoute("/$designerId/designer")();
 
 // Create/Update Routes
 
@@ -156,13 +154,12 @@ const GalleryImagesLazyRoute = GalleryImagesLazyImport.update({
   import("./routes/gallery/images.lazy").then((d) => d.Route),
 );
 
-const DesginerDesignerIdIndexLazyRoute =
-  DesginerDesignerIdIndexLazyImport.update({
-    path: "/desginer/$designerId/",
-    getParentRoute: () => rootRoute,
-  } as any).lazy(() =>
-    import("./routes/desginer/$designerId/index.lazy").then((d) => d.Route),
-  );
+const DesignerIdDesignerLazyRoute = DesignerIdDesignerLazyImport.update({
+  path: "/$designerId/designer",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import("./routes/$designerId/designer.lazy").then((d) => d.Route),
+);
 
 // Populate the FileRoutesByPath interface
 
@@ -182,10 +179,6 @@ declare module "@tanstack/react-router" {
     };
     "/contact": {
       preLoaderRoute: typeof ContactLazyImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/delete-account": {
-      preLoaderRoute: typeof DeleteAccountLazyImport;
       parentRoute: typeof rootRoute;
     };
     "/designers": {
@@ -244,10 +237,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof SubscriptionIndexLazyImport;
       parentRoute: typeof rootRoute;
     };
-    "/desginer/$designerId/": {
-      preLoaderRoute: typeof DesginerDesignerIdIndexLazyImport;
-      parentRoute: typeof rootRoute;
-    };
   }
 }
 
@@ -267,13 +256,11 @@ export const routeTree = rootRoute.addChildren([
   NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,
-  DesignerIdDesignerLazyRoute,
   GalleryImagesLazyRoute,
   GalleryVideosLazyRoute,
   SubscriptionPremiumLazyRoute,
   SubscriptionStandardLazyRoute,
   SubscriptionIndexLazyRoute,
-  DesginerDesignerIdIndexLazyRoute,
 ]);
 
 /* prettier-ignore-end */
