@@ -85,6 +85,20 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 } from "./dropdown-menu";
+export {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+} from "./tabs.tsx";
+export {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "./breadcrumb.tsx";
 
 export {
   Command,
