@@ -7,3 +7,4 @@ export { default as SegmentStep } from "./Segmentation/SegmentStep";
 export { default as BookingDialog } from "./bookingDialog/BookingDialog";
 export { default as CustomPagination } from "./customPagination/CustomPagination";
 export { default as SectionHeader } from "./sectionHeader/SectionHeader";
+export { default as Error } from "./Error";
