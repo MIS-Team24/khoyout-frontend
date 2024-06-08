@@ -73,7 +73,7 @@ export default function comingAppointmentPage() {
                     )}
                 </BreadcrumbList>
             </Breadcrumb>
-            <div className="w-11/12 sm:w-[400px] xl:w-1/2 2xl:w-[40%] mx-auto">
+            <div className="sm:w-[400px] xl:w-1/2 2xl:w-[40%] mx-auto">
                 <Tabs defaultValue="upcoming">
                     <TabsList className="flex w-full justify-between bg-transparent mb-8">
                         <TabsTrigger value="upcoming" onClick={() => setValue({
@@ -94,16 +94,16 @@ export default function comingAppointmentPage() {
               upcoming-appointment-${i}
             `} className="bg-transparent">
                                 <CardHeader>
-                                    <CardDescription className="lg:text-xl text-foreground">
+                                    <CardDescription className="text-base lg:text-xl text-foreground">
                                         Enjoy your upcoming appointment with <span
-                                        className=" lg:text-xl font-semibold text-primary">{name}</span>
+                                        className="lg:text-xl font-semibold text-primary">{name}</span>
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-2">
                                     <div className="flex gap-8 place-items-center">
                                         <div className="flex gap-2 place-items-center">
                                             <Calendar size={24} className="text-secondary"/>
-                                            <p className="text-[#49454F] text-lg lg:text-xl">{date}</p>
+                                            <p className="text-[#49454F] text-base lg:text-xl">{date}</p>
                                         </div>
                                         <div className="flex gap-2 place-items-center">
                                             <Clock size={24} className="text-secondary"/>
@@ -129,29 +129,29 @@ export default function comingAppointmentPage() {
               history-appointment-${i}
             `} className="bg-transparent">
                                 <CardHeader>
-                                    <CardDescription className="lg:text-xl text-foreground">
+                                    <CardDescription className="text-base lg:text-xl text-foreground">
                                         Your previous appointment with <span
-                                        className=" lg:text-xl font-semibold text-primary">{name}</span>
+                                        className="text-base lg:text-xl font-semibold text-primary">{name}</span>
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-2">
                                     <div className="flex gap-8 place-items-center">
                                         <div className="flex gap-2 place-items-center">
                                             <Calendar size={24} className="text-secondary"/>
-                                            <p className="text-[#49454F] text-lg lg:text-xl">{date}</p>
+                                            <p className="text-[#49454F] text-base lg:text-xl">{date}</p>
                                         </div>
                                         <div className="flex gap-2 place-items-center">
                                             <Clock size={24} className="text-secondary"/>
-                                            <p className="text-[#49454F] text-lg lg:text-xl">
+                                            <p className="text-[#49454F] text-base lg:text-xl">
                                                 {time}
                                             </p>
                                         </div>
                                     </div>
                                 </CardContent>
                                 <CardFooter className="flex gap-4">
-                                    <Button className="h-12 text-xl font-medium">Write a review</Button>
+                                    <Button className="h-12 text-base lg:text-xl font-medium">Write a review</Button>
                                     <Button variant="outline"
-                                            className="text-primary font-medium text-xl hover:text-primary bg-transparent h-12">Message</Button>
+                                            className="text-primary font-medium text-base lg:text-xl hover:text-primary bg-transparent h-12">Message</Button>
                                 </CardFooter>
                             </Card>
                         ))}
