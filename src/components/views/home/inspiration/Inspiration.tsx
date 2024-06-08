@@ -10,28 +10,33 @@ import Autoplay from "embla-carousel-autoplay";
 import { inspirationImages } from "@/assets";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 type InspirationProps = {
   header: React.ReactNode;
+  className?: string;
 };
 
-export default function Inspiration({ header }: InspirationProps) {
-  const autoplay = useRef(Autoplay({ delay: 20000, stopOnInteraction: true }));
+export default function Inspiration({ header, className }: InspirationProps) {
+  const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
-    <section className="main-container my-16">
+    <section className="main-container mt-16">
       {header}
       <div className="rounded-[0.5rem] pt-8">
         <Carousel
           plugins={[autoplay.current]}
           onMouseEnter={autoplay.current.stop}
           onMouseLeave={autoplay.current.play}
-          className="rounded-[0.5rem]"
+          className="h-full w-full rounded-[0.5rem]"
         >
           <CarouselContent>
             {inspirationImages.map(({ alt, src }, i) => (
               <CarouselItem
                 key={`inspiration-image-${i}`}
-                className="h-full basis-full overflow-hidden rounded-[0.5rem] lg:basis-1/2 2xl:basis-1/3"
+                className={cn(
+                  "h-full basis-full overflow-hidden rounded-[0.5rem] lg:basis-1/2",
+                  className ?? "2xl:basis-1/3",
+                )}
               >
                 <div className="group relative h-full w-full rounded-[0.5rem]">
                   <img
