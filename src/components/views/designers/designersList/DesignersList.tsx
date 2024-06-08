@@ -13,7 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button, Skeleton } from "@/components/ui";
 import { Heart, Image } from "lucide-react";
-import { designerNotFound } from "@/assets";
+import { Error } from "@/components/custom";
 
 type DesignersListProps = {
   name: string;
@@ -100,14 +100,20 @@ export default function DesignersList({ name }: DesignersListProps) {
           )}
         >
           {designersQuery.isError ? (
-            <Error />
+            <Error
+              title="We didn't find a match"
+              description="Make sure all words are spelled correctly or select from categories"
+            />
           ) : designersQuery.isPending ? (
             <DesignersSkeleton />
           ) : (
               (designersQuery.data?.data as API_DesignersResponse)
                 .designers as API_Designer[]
             ).length === 0 ? (
-            <Error />
+            <Error
+              title="We didn't find a match"
+              description="Make sure all words are spelled correctly or select from categories"
+            />
           ) : (
             <Designers
               desigenrs={
@@ -182,23 +188,3 @@ const DesigenrPaginationSkeleton = () => {
     </div>
   );
 };
-
-const Error = () => (
-  <div className="flex w-full flex-col items-center gap-y-4">
-    <div className="flex flex-col space-y-0.5 text-center">
-      <h2 className="text-[2rem] font-normal leading-normal">
-        We didn't find a match
-      </h2>
-      <p className="text-xl font-normal leading-8 text-[#6C6C6C]">
-        Make sure all words are spelled correctly or select from categories{" "}
-      </p>
-    </div>
-    <div className="h-[25rem] w-[33rem]">
-      <img
-        src={designerNotFound}
-        className="h-full w-full object-cover"
-        alt="designer-not-found"
-      />
-    </div>
-  </div>
-);
