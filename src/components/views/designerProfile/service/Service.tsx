@@ -27,6 +27,7 @@ type ServiceProps = {
   };
   name: string;
   workingDays: WorkingDay[];
+  designerId: string;
 };
 
 export default function Service({
@@ -36,6 +37,7 @@ export default function Service({
   ratingDetails,
   name,
   workingDays,
+  designerId,
 }: ServiceProps) {
   return (
     <div className="main-container">
@@ -87,6 +89,7 @@ export default function Service({
               ordersFinished: ratingDetails.ordersFinished,
               workingDays,
               services,
+              designerId,
             }}
           />
         </div>

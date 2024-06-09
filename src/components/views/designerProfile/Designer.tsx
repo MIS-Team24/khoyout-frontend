@@ -169,6 +169,7 @@ export default function Designer() {
             ordersFinished: (DesignerQuery.data?.data as API_Designer)
               .ordersFinished,
           }}
+          designerId={(DesignerQuery.data?.data as API_Designer).baseAccountId}
           name={(DesignerQuery.data?.data as API_Designer).baseAccount.name}
           workingDays={(DesignerQuery.data?.data as API_Designer).workingDays}
         />

@@ -16,6 +16,7 @@ type BookingCardProps = {
   bookingDetails: {
     name: string;
     rating: number;
+    designerId: string;
     ordersFinished: number;
     workingDays: WorkingDay[];
     services: Service[];
@@ -86,6 +87,7 @@ export default function BookingCard({ bookingDetails }: BookingCardProps) {
         services={bookingDetails.services}
         open={open}
         onChange={setOpen}
+        designerId={bookingDetails.designerId}
       />
     </div>
   );
