@@ -63,6 +63,7 @@ export default function LoginHomePage() {
               email: userData.user.email,
               phone: userData.user.phone,
               emailActivated: userData.user.emailActivated,
+              type: userData.user.type,
             },
             access_token: userData.access_token,
           },
