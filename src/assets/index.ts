@@ -48,6 +48,11 @@ import team2 from "./team-2.png";
 import team3 from "./team-3.png";
 import checkImg from "./icons/check_24px.svg";
 import designerNotFound from "./designer-not-found.png";
+import design3 from "./Design3.png";
+import design4 from "./Design4.png";
+import member1 from "./member1.png";
+import member2 from "./member2.webp";
+import member3 from "./member3.png";
 
 const inspirationImages = [
   {
@@ -210,4 +215,10 @@ export {
   team,
   checkImg,
   designerNotFound,
+  design2,
+  design3,
+  design4,
+  member1,
+  member2,
+  member3,
 };
