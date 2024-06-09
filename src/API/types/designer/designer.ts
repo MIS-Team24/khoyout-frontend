@@ -63,6 +63,4 @@ export type API_Designer = {
   categories: { Category: Category }[];
 };
 
-export type API_DesignerPortfolios = {
-  portfolios: Portfolio[];
-};
+export type API_DesignerPortfolios = Portfolio[];
