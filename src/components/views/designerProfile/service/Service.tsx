@@ -14,6 +14,7 @@ import {
   Review,
   Service as ServiceBody,
   TeamMember,
+  WorkingDay,
 } from "@/API/types/designer/designer";
 
 type ServiceProps = {
@@ -24,6 +25,8 @@ type ServiceProps = {
     rating: number;
     ordersFinished: number;
   };
+  name: string;
+  workingDays: WorkingDay[];
 };
 
 export default function Service({
@@ -31,6 +34,8 @@ export default function Service({
   teamMembers,
   reviews,
   ratingDetails,
+  name,
+  workingDays,
 }: ServiceProps) {
   return (
     <div className="main-container">
@@ -75,7 +80,15 @@ export default function Service({
           <Reviews reviews={reviews} ratingDetails={ratingDetails} />
         </div>
         <div className="sticky top-24 lg:w-2/5">
-          <BookingCard />
+          <BookingCard
+            bookingDetails={{
+              name,
+              rating: ratingDetails.rating,
+              ordersFinished: ratingDetails.ordersFinished,
+              workingDays,
+              services,
+            }}
+          />
         </div>
       </div>
     </div>
