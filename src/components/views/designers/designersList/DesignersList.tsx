@@ -29,6 +29,8 @@ export default function DesignersList({ name }: DesignersListProps) {
     yearsOfExperience: 0,
   } as FilterType);
 
+  console.log(filterType);
+
   useEffect(() => {
     SetFilterType((prev) => ({ ...prev, name }));
   }, [name]);
@@ -67,7 +69,6 @@ export default function DesignersList({ name }: DesignersListProps) {
             className="h-[3rem] w-[8rem] rounded-lg text-base font-medium text-gray-300 hover:bg-transparent hover:text-primary focus:!ring-0 focus:!ring-offset-0 focus-visible:!ring-offset-0"
             onClick={() =>
               SetFilterType({
-                ...filterType,
                 yearsOfExperience: 0,
                 name: "",
               } as FilterType)
