@@ -218,11 +218,14 @@ const NavigationBar = forwardRef(function (_, ref) {
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                      <DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
                         <User className="mr-2 h-4 w-4" />
                         <span>Profile</span>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={onClickLogout}>
+                      <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={onClickLogout}
+                      >
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>Log out</span>
                       </DropdownMenuItem>
