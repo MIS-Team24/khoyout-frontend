@@ -42,7 +42,7 @@ type Category = {
 };
 
 type Portfolio = {
-  // Assuming portfolios have a certain structure, define it here
+  url: string;
 };
 
 // Define the main type
@@ -61,5 +61,8 @@ export type API_Designer = {
   services: Service[];
   teamMembers: TeamMember[];
   categories: { Category: Category }[];
+};
+
+export type API_DesignerPortfolios = {
   portfolios: Portfolio[];
 };
