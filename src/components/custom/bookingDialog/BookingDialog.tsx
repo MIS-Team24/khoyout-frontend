@@ -27,13 +27,26 @@ import {
 } from "@/components/custom";
 import { Clamp } from "@/utilities/clamp";
 import { z } from "zod";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarDays, CircleCheck, Clock, FileUp } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
+import { Service } from "@/API/types/designer/designer";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import useAuth from "@/hooks/useAuth";
+import {
+  getAvailableTimes,
+  bookAppointment,
+} from "@/API/appointments/appointments";
+import {
+  API_AvailableTimes,
+  AvailableTimeBody,
+} from "@/API/types/appointments/appointments";
+import { convertTo12HourFormat } from "@/utilities/convertTime";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   date: z.date({
@@ -42,6 +55,7 @@ const formSchema = z.object({
   time: z.string({
     required_error: "A time is required.",
   }),
+  timeId: z.coerce.number(),
   service: z.string().optional(),
   message: z.string(),
   photo: z.union([
@@ -71,6 +85,8 @@ type BookingDialogProps = {
   open: boolean;
   onChange: (open: boolean) => void;
   designerName: string;
+  services: Service[];
+  designerId: string;
 };
 
 type FormKey = keyof typeof formSchema.shape;
@@ -81,32 +97,25 @@ const fieldOfSegments: FormKey[][] = [
   ["service", "photo", "message"],
 ];
 
-// TODO: Replace this with a dynamic array of available times
-const fixedTimeArray = [
-  { time: "10:00 AM" },
-  { time: "11:00 AM" },
-  { time: "12:00 PM" },
-  { time: "01:00 PM" },
-  { time: "02:00 PM" },
-  { time: "03:00 PM" },
-  { time: "04:00 PM" },
-  { time: "05:00 PM" },
-  { time: "06:00 PM" },
-];
-const customServices = [
-  { title: "Design from scratch" },
-  { title: "Design implementation" },
-  { title: "Hand made" },
-  { title: "Redesign" },
-];
-
 export default function BookingDialog({
   open,
   onChange,
   designerName,
+  services,
+  designerId,
 }: BookingDialogProps) {
   const [currentSegment, setCurrentSegment] = useState<number>(0);
   const [selectedTime, setSelectedTime] = useState<string>("");
+  const timeZoneRef = useRef(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  const { access_token } = useAuth();
+
+  const getAvailableTimesFn = () =>
+    getAvailableTimes(access_token() ?? "", designerId, timeZoneRef.current);
+
+  const availableTimesQuery = useQuery({
+    queryKey: ["available-times", designerId, timeZoneRef.current],
+    queryFn: getAvailableTimesFn,
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -116,6 +125,26 @@ export default function BookingDialog({
       photo: null as File | null | undefined,
     },
   });
+
+  const bookAppointmentFn = (values: z.infer<typeof formSchema>) =>
+    bookAppointment(
+      access_token() ?? "",
+      designerId,
+      values.timeId,
+      values.message,
+      format(values.date, "yyyy-MM-dd"),
+    );
+
+  const bookAppointmentMutation = useMutation({
+    mutationFn: bookAppointmentFn,
+    onError: () => {
+      toast.error("Failed to book an appointment");
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    bookAppointmentMutation.mutate(values);
+  };
 
   async function validateAndForwardSegment() {
     let areFieldsValid = true;
@@ -138,10 +167,6 @@ export default function BookingDialog({
     );
   }
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-  };
-
   useEffect(() => {
     if (!open && currentSegment === 3) {
       setCurrentSegment(0);
@@ -149,9 +174,6 @@ export default function BookingDialog({
       setSelectedTime("");
     }
   }, [open, currentSegment, form]);
-
-  // const date = new Date();
-  // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   return (
     <Dialog open={open} onOpenChange={onChange}>
@@ -256,35 +278,53 @@ export default function BookingDialog({
                             Edit
                           </Button>
                         </div>
-                        <div className="flex w-full flex-wrap justify-center gap-6 pt-4">
-                          {fixedTimeArray.map(({ time }) => (
-                            <FormControl
-                              key={time}
-                              className={cn(
-                                "h-[5rem] w-[12.375rem] border border-[#B1B1B1] bg-[#F3EBF1] px-[2rem] py-[1.5rem] text-[#49454F]",
-                                selectedTime === time &&
-                                  "focus-within:rong-0 !bg-primary text-white",
-                              )}
-                            >
-                              <Input
-                                readOnly
-                                {...field}
-                                value={time}
-                                className="cursor-pointer bg-transparent text-center text-[1.5rem] font-medium leading-normal hover:bg-transparent hover:text-primary focus:bg-primary focus:text-white focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
-                                onClick={() => {
-                                  const currentTime = time.replace(" ", "");
-                                  setSelectedTime(time);
-                                  field.onChange(currentTime);
-                                }}
-                              />
-                            </FormControl>
-                          ))}
-                          <FormMessage className="text-xl capitalize" />
+                        <div className="flex h-96 w-full flex-wrap justify-center gap-6 overflow-y-auto pt-4">
+                          {availableTimesQuery.isError ? (
+                            <div></div>
+                          ) : availableTimesQuery.isPending ? (
+                            <div></div>
+                          ) : availableTimesQuery.isSuccess ? (
+                            <>
+                              {(
+                                (
+                                  availableTimesQuery.data
+                                    ?.data as API_AvailableTimes
+                                ).data as AvailableTimeBody[]
+                              ).map(({ startTime, id }) => (
+                                <FormControl
+                                  key={startTime}
+                                  className={cn(
+                                    "h-[5rem] w-[12.375rem] border border-[#B1B1B1] bg-[#F3EBF1] px-[2rem] py-[1.5rem] text-[#49454F]",
+                                    selectedTime ===
+                                      convertTo12HourFormat(startTime) &&
+                                      "focus-within:rong-0 !bg-primary text-white",
+                                  )}
+                                >
+                                  <Input
+                                    readOnly
+                                    {...field}
+                                    value={convertTo12HourFormat(startTime)}
+                                    className="cursor-pointer bg-transparent text-center text-[1.5rem] font-medium leading-normal hover:bg-transparent hover:text-primary focus:bg-primary focus:text-white focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                                    onClick={() => {
+                                      setSelectedTime(
+                                        convertTo12HourFormat(startTime),
+                                      );
+                                      field.onChange(
+                                        convertTo12HourFormat(startTime),
+                                      );
+                                      form.setValue("timeId", id);
+                                    }}
+                                  />
+                                </FormControl>
+                              ))}
+                            </>
+                          ) : null}
                         </div>
+                        <FormMessage className="text-xl capitalize" />
                       </FormItem>
                     )}
                   />
-                  <div className="flex w-full justify-center gap-8 pt-[8rem]">
+                  <div className="flex w-full justify-center gap-8 pt-[6rem]">
                     <Button
                       variant="ghost"
                       type="button"
@@ -364,7 +404,7 @@ export default function BookingDialog({
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {customServices.map(({ title }) => (
+                            {services.map(({ title }) => (
                               <SelectItem key={title} value={title}>
                                 {title}
                               </SelectItem>
@@ -456,7 +496,6 @@ export default function BookingDialog({
                     <h2 className="pb-[2rem] pt-[1.5rem] text-[2.5rem] font-medium leading-normal">
                       Well Done!
                     </h2>
-                    {/* TODO: Change Span User Name */}
                     <p className="w-[35.2rem] text-[1.5rem] leading-8 text-[#49454F]">
                       We sent a booking request to{" "}
                       <span className="font-medium text-primary">
