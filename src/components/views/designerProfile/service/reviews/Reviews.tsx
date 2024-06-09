@@ -38,7 +38,7 @@ export default function Reviews({ reviews, ratingDetails }: ReviewsProps) {
           </div>
         </div>
         <div>
-          {reviews.map(({ avatarUrl, comment, postedOn, rating, user }, i) => (
+          {reviews.map(({ avatarUrl, comment, postedOn, rating, name }, i) => (
             <div
               key={`client-${i}`}
               className="mb-8 flex flex-col gap-2 lg:w-11/12"
@@ -47,12 +47,12 @@ export default function Reviews({ reviews, ratingDetails }: ReviewsProps) {
                 <div>
                   <img
                     src={avatarUrl}
-                    alt={`${user.name ?? "User"}`}
+                    alt={`${name ?? "User"}`}
                     className="h-12 w-12 rounded-full object-cover object-center"
                   />
                 </div>
                 <div>
-                  <p>{user.name ?? "N/A"}</p>
+                  <p>{name ?? "N/A"}</p>
                   <p className="text-sm text-secondary">
                     {new Date(postedOn).toLocaleDateString("en-US", {
                       month: "long",

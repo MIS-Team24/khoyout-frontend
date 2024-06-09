@@ -15,9 +15,7 @@ export type Review = {
   comment: string;
   postedOn: string;
   avatarUrl: string;
-  user: {
-    name: string;
-  };
+  name: string;
 };
 
 export type Service = {
