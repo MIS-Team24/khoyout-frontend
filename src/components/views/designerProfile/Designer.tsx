@@ -10,9 +10,11 @@ import DesignerVideos from "./designerVideos/DesignerVideos";
 import Service from "./service/Service";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import { API_Designer } from "@/API/types/designer/designer";
+import {
+  API_Designer,
+  API_DesignerPortfolios,
+} from "@/API/types/designer/designer";
 import { getDesigner, getDesignerPortfolio } from "@/API/designer/designer";
-// import { clients, inspirationImages } from "@/assets";
 import {
   AboutSkeleton,
   DesigenrProfileSkeleton,
@@ -37,96 +39,147 @@ export default function Designer() {
     queryFn: getDesignerPortfolioFn,
   });
 
-  // if (DesignerQuery.isSuccess) {
-  //   const transformedData = DesignerQuery.data.data as API_Designer;
-  // }
-
-  let RenderElement = <></>;
   let RenderInspiration = <></>;
 
-  if (DesignerPortfolioQuery.isError) {
+  if (DesignerPortfolioQuery.isError)
     RenderInspiration = (
-      <div className="my-8">
+      <div className="my-10">
         <Error
           title="Designer Portfolio images are not avaialble!"
           description="Designer Portfolio images are not available at the moment. Please try again later."
         />
       </div>
     );
-  }
 
-  if (DesignerPortfolioQuery.isPending) {
+  if (DesignerPortfolioQuery.isPending)
     RenderInspiration = <InspirationSkeleton arrayLength={3} />;
-  }
 
   if (DesignerPortfolioQuery.isSuccess) {
-    RenderInspiration = <Inspiration header={<Header />} />;
-  }
+    const transformedData = DesignerPortfolioQuery.data
+      ?.data as API_DesignerPortfolios;
 
-  if (DesignerQuery.isError) {
-    RenderElement = (
-      <div className="my-8">
-        <Error
-          title="Profile data is not avaialble!"
-          description="Profile data is not available at the moment. Please try again later."
-        />
-      </div>
+    RenderInspiration = (
+      <Inspiration header={<Header />} portfolios={transformedData} />
     );
   }
 
-  if (DesignerQuery.isPending) {
-    RenderElement = (
-      <>
+  return (
+    <>
+      {DesignerQuery.isError ? (
+        <div className="my-8">
+          <Error
+            title="Profile data is not avaialble!"
+            description="Profile data is not available at the moment. Please try again later."
+          />
+        </div>
+      ) : DesignerQuery.isPending ? (
         <DesigenrProfileSkeleton />
+      ) : DesignerQuery.isSuccess ? (
+        <ProfileDetails
+          wishlisted={false}
+          designerDetails={{
+            avatarUrl: (DesignerQuery.data?.data as API_Designer).baseAccount
+              .avatarUrl,
+            name: (DesignerQuery.data?.data as API_Designer).baseAccount.name,
+            ordersFinished: (DesignerQuery.data?.data as API_Designer)
+              .ordersFinished,
+            openNow: (DesignerQuery.data?.data as API_Designer).openNow,
+            openUntil: (DesignerQuery.data?.data as API_Designer).openUntil,
+            rating: (DesignerQuery.data?.data as API_Designer).rating,
+          }}
+        />
+      ) : (
+        <div className="my-8">
+          <Error
+            title="Profile data is not avaialble!"
+            description="Profile data is not available at the moment. Please try again later."
+          />
+        </div>
+      )}
+
+      {DesignerQuery.isError ? (
+        <div className="my-8">
+          <Error
+            title="About Profile data is not avaialble!"
+            description="About Profile data is not available at the moment. Please try again later."
+          />
+        </div>
+      ) : DesignerQuery.isPending ? (
         <AboutSkeleton />
+      ) : DesignerQuery.isSuccess ? (
+        <AboutDesigner
+          aboutDesigner={{
+            locationDetails: (DesignerQuery.data?.data as API_Designer)
+              .locationDetails,
+            workingDays: (DesignerQuery.data?.data as API_Designer).workingDays,
+            about: (DesignerQuery.data?.data as API_Designer).about,
+          }}
+        />
+      ) : (
+        <div className="my-8">
+          <Error
+            title="About Profile data is not avaialble!"
+            description="About Profile data is not available at the moment. Please try again later."
+          />
+        </div>
+      )}
+
+      {RenderInspiration}
+
+      {DesignerQuery.isError ? (
+        <div className="my-8">
+          <Error
+            title="Profile videos are not avaialble!"
+            description="Profile videos are not avaialble at the moment. Please try again later."
+          />
+        </div>
+      ) : DesignerQuery.isPending ? (
         <DesignerVideosSkeleton />
+      ) : DesignerQuery.isSuccess ? (
+        <DesignerVideos />
+      ) : (
+        <div className="my-8">
+          <Error
+            title="Profile videos are not avaialble!"
+            description="Profile videos are not avaialble at the moment. Please try again later."
+          />
+        </div>
+      )}
+
+      {DesignerQuery.isError ? (
+        <div className="my-8">
+          <Error
+            title="Services are not avaialble!"
+            description="Services are not avaialble at the moment. Please try again later."
+          />
+        </div>
+      ) : DesignerQuery.isPending ? (
         <ServiceSkeleton
           membersLength={3}
           reviewsLength={3}
           serviceLength={4}
         />
-      </>
-    );
-  }
-
-  if (DesignerQuery.isSuccess) {
-    const transformedData = DesignerQuery.data?.data as API_Designer;
-    // Profile details of the designer
-    const designerDetails = {
-      avatarUrl: transformedData.baseAccount.avatarUrl,
-      name: transformedData.baseAccount.name,
-      ordersFinished: transformedData.ordersFinished,
-      openNow: transformedData.openNow,
-      openUntil: transformedData.openUntil,
-      rating: transformedData.rating,
-    };
-    // About details of the designer
-    const aboutDesigner = {
-      locationDetails: transformedData.locationDetails,
-      workingDays: transformedData.workingDays,
-      about: transformedData.about,
-    };
-
-    RenderElement = (
-      <>
-        <ProfileDetails designerDetails={designerDetails} wishlisted={false} />
-        <AboutDesigner aboutDesigner={aboutDesigner} />
-        {RenderInspiration}
-        <DesignerVideos />
+      ) : DesignerQuery.isSuccess ? (
         <Service
-          services={transformedData.services}
-          teamMembers={transformedData.teamMembers}
-          reviews={transformedData.reviews}
+          services={(DesignerQuery.data?.data as API_Designer).services}
+          teamMembers={(DesignerQuery.data?.data as API_Designer).teamMembers}
+          reviews={(DesignerQuery.data?.data as API_Designer).reviews}
           ratingDetails={{
-            rating: transformedData.rating,
-            ordersFinished: transformedData.ordersFinished,
+            rating: (DesignerQuery.data?.data as API_Designer).rating,
+            ordersFinished: (DesignerQuery.data?.data as API_Designer)
+              .ordersFinished,
           }}
         />
-      </>
-    );
-  }
-
-  return RenderElement;
+      ) : (
+        <div className="my-8">
+          <Error
+            title="Services are not avaialble!"
+            description="Services are not avaialble at the moment. Please try again later."
+          />
+        </div>
+      )}
+    </>
+  );
 }
 
 function Header() {
@@ -146,111 +199,3 @@ function Header() {
     </div>
   );
 }
-
-/*
- <>
-      {DesignerQuery.isError ? (
-        <div className="my-8">
-          <Error
-            title="Profile data is not avaialble!"
-            description="Profile data is not available at the moment. Please try again later."
-          />
-        </div>
-      ) : DesignerQuery.isPending ? (
-        <DesigenrProfileSkeleton />
-      ) : DesignerQuery.isSuccess ? (
-        <ProfileDetails />
-      ) : (
-        <div className="my-8">
-          <Error
-            title="Profile data is not avaialble!"
-            description="Profile data is not available at the moment. Please try again later."
-          />
-        </div>
-      )}
-
-      {DesignerQuery.isError ? (
-        <div className="my-8">
-          <Error
-            title="About Profile data is not avaialble!"
-            description="About Profile data is not available at the moment. Please try again later."
-          />
-        </div>
-      ) : DesignerQuery.isPending ? (
-        <AboutSkeleton />
-      ) : DesignerQuery.isSuccess ? (
-        <AboutDesigner />
-      ) : (
-        <div className="my-8">
-          <Error
-            title="About Profile data is not avaialble!"
-            description="About Profile data is not available at the moment. Please try again later."
-          />
-        </div>
-      )}
-
-      {DesignerPortfolioQuery.isError ? (
-        <div className="my-8">
-          <Error
-            title="Designer Portfolio images are not avaialble!"
-            description="Designer Portfolio images are not available at the moment. Please try again later."
-          />
-        </div>
-      ) : DesignerPortfolioQuery.isPending ? (
-        <InspirationSkeleton arrayLength={3} />
-      ) : DesignerPortfolioQuery.isSuccess ? (
-        <Inspiration header={<Header />} />
-      ) : (
-        <div className="my-8">
-          <Error
-            title="Designer Portfolio images are not avaialble!"
-            description="Designer Portfolio images are not available at the moment. Please try again later."
-          />
-        </div>
-      )}
-
-      {DesignerQuery.isError ? (
-        <div className="my-8">
-          <Error
-            title="Profile videos are not avaialble!"
-            description="Profile videos are not avaialble at the moment. Please try again later."
-          />
-        </div>
-      ) : DesignerQuery.isPending ? (
-        <DesignerVideosSkeleton />
-      ) : DesignerQuery.isSuccess ? (
-        <DesignerVideos />
-      ) : (
-        <div className="my-8">
-          <Error
-            title="Profile videos are not avaialble!"
-            description="Profile videos are not avaialble at the moment. Please try again later."
-          />
-        </div>
-      )}
-
-      {DesignerQuery.isError ? (
-        <div className="my-8">
-          <Error
-            title="Services are not avaialble!"
-            description="Services are not avaialble at the moment. Please try again later."
-          />
-        </div>
-      ) : DesignerQuery.isPending ? (
-        <ServiceSkeleton
-          membersLength={3}
-          reviewsLength={3}
-          serviceLength={4}
-        />
-      ) : DesignerQuery.isSuccess ? (
-        <Service />
-      ) : (
-        <div className="my-8">
-          <Error
-            title="Services are not avaialble!"
-            description="Services are not avaialble at the moment. Please try again later."
-          />
-        </div>
-      )}
-    </>
-*/
