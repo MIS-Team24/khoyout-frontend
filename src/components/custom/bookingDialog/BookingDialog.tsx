@@ -150,6 +150,9 @@ export default function BookingDialog({
     }
   }, [open, currentSegment, form]);
 
+  // const date = new Date();
+  // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   return (
     <Dialog open={open} onOpenChange={onChange}>
       <DialogContent className="flex h-[55rem] w-full max-w-6xl flex-col items-center justify-start gap-y-0 rounded-lg bg-[#F9F4F4] p-4 pt-14 shadow-lg">
