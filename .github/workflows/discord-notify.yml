@@ -42,13 +42,7 @@ jobs:
         echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
         echo "Commit message: $COMMIT_MSG"
         echo "Number of changed files: $CHANGED_FILES"
-        if echo "$COMMIT_MSG" | grep -iqE "typo|fix|small change|minor"; then
-          echo "SUBSTANTIAL_PUSH=false" >> $GITHUB_ENV
-        elif [ $CHANGED_FILES -le 2 ]; then
-          echo "SUBSTANTIAL_PUSH=false" >> $GITHUB_ENV
-        else
-          echo "SUBSTANTIAL_PUSH=true" >> $GITHUB_ENV
-        fi
+        echo "SUBSTANTIAL_PUSH=true" >> $GITHUB_ENV
 
     - name: Send notification to Discord
       if: env.SUBSTANTIAL_PUSH == 'true'
