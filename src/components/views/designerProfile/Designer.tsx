@@ -58,9 +58,20 @@ export default function Designer() {
     const transformedData = DesignerPortfolioQuery.data
       ?.data as API_DesignerPortfolios;
 
-    RenderInspiration = (
-      <Inspiration header={<Header />} portfolios={transformedData} />
-    );
+    if (transformedData.length === 0) {
+      RenderInspiration = (
+        <div className="my-10">
+          <Error
+            title="Designer Portfolio images are not avaialble!"
+            description="Designer Portfolio images are not available at the moment. Please try again later."
+          />
+        </div>
+      );
+    } else {
+      RenderInspiration = (
+        <Inspiration header={<Header />} portfolios={transformedData} />
+      );
+    }
   }
 
   return (
