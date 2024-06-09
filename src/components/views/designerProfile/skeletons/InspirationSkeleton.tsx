@@ -13,8 +13,8 @@ type InspirationSkeletonProps = {
 const InspirationSkeleton = ({ arrayLength }: InspirationSkeletonProps) => (
   <section className="main-container mt-16">
     <div className="flex w-full items-start justify-between">
-      <Skeleton className="mb-0 mt-16 h-[40px] w-[120px] rounded bg-gray-100" />
-      <Skeleton className="mb-0 mt-16 h-[35px] w-[140px] rounded bg-gray-100" />
+      <Skeleton className="mb-0 mt-16 h-[40px] w-[120px] rounded bg-gray-300" />
+      <Skeleton className="mb-0 mt-16 h-[35px] w-[140px] rounded bg-gray-300" />
     </div>
     <div className="rounded pt-8">
       <Carousel className="relative h-full w-full rounded">
@@ -29,8 +29,8 @@ const InspirationSkeleton = ({ arrayLength }: InspirationSkeletonProps) => (
                 }
               >
                 <div className="relative flex h-[574px] w-full items-center justify-center rounded">
-                  <Skeleton className="absolute h-full w-full rounded bg-gray-100" />
-                  <Image size={50} className="animate-pulse text-gray-200" />
+                  <Skeleton className="absolute h-full w-full rounded bg-gray-300" />
+                  <Image size={50} className="animate-pulse text-gray-400" />
                 </div>
               </CarouselItem>
             ))}
