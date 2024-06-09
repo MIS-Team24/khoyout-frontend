@@ -3,6 +3,7 @@ export type API_User = {
   email: string;
   phone: string;
   emailActivated: boolean;
+  type: string;
 };
 
 export type API_SuccessfullRegister = {
