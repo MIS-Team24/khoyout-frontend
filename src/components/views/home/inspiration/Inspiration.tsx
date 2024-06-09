@@ -16,7 +16,7 @@ import { API_DesignerPortfolios } from "@/API/types/designer/designer";
 type InspirationProps = {
   header: React.ReactNode;
   className?: string;
-  portfolios: API_DesignerPortfolios;
+  portfolios?: API_DesignerPortfolios;
 };
 
 export default function Inspiration({
