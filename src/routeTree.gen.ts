@@ -179,90 +179,156 @@ const DesginerDesignerIdIndexLazyRoute =
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordImport
       parentRoute: typeof rootRoute
     }
     '/client-page': {
+      id: '/client-page'
+      path: '/client-page'
+      fullPath: '/client-page'
       preLoaderRoute: typeof ClientPageLazyImport
       parentRoute: typeof rootRoute
     }
     '/coming-appointment': {
+      id: '/coming-appointment'
+      path: '/coming-appointment'
+      fullPath: '/coming-appointment'
       preLoaderRoute: typeof ComingAppointmentLazyImport
       parentRoute: typeof rootRoute
     }
     '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
       preLoaderRoute: typeof ContactLazyImport
       parentRoute: typeof rootRoute
     }
     '/delete-account': {
+      id: '/delete-account'
+      path: '/delete-account'
+      fullPath: '/delete-account'
       preLoaderRoute: typeof DeleteAccountLazyImport
       parentRoute: typeof rootRoute
     }
     '/designers': {
+      id: '/designers'
+      path: '/designers'
+      fullPath: '/designers'
       preLoaderRoute: typeof DesignersLazyImport
       parentRoute: typeof rootRoute
     }
     '/forget-password': {
+      id: '/forget-password'
+      path: '/forget-password'
+      fullPath: '/forget-password'
       preLoaderRoute: typeof ForgetPasswordLazyImport
       parentRoute: typeof rootRoute
     }
     '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
       preLoaderRoute: typeof HomeLazyImport
       parentRoute: typeof rootRoute
     }
     '/inspiration': {
+      id: '/inspiration'
+      path: '/inspiration'
+      fullPath: '/inspiration'
       preLoaderRoute: typeof InspirationLazyImport
       parentRoute: typeof rootRoute
     }
     '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
       preLoaderRoute: typeof LoginLazyImport
       parentRoute: typeof rootRoute
     }
     '/my-profile': {
+      id: '/my-profile'
+      path: '/my-profile'
+      fullPath: '/my-profile'
       preLoaderRoute: typeof MyProfileLazyImport
       parentRoute: typeof rootRoute
     }
     '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
       preLoaderRoute: typeof NotificationsLazyImport
       parentRoute: typeof rootRoute
     }
     '/otp': {
+      id: '/otp'
+      path: '/otp'
+      fullPath: '/otp'
       preLoaderRoute: typeof OtpLazyImport
       parentRoute: typeof rootRoute
     }
     '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
       preLoaderRoute: typeof RegisterLazyImport
       parentRoute: typeof rootRoute
     }
     '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
       preLoaderRoute: typeof SettingsLazyImport
       parentRoute: typeof rootRoute
     }
     '/gallery/images': {
+      id: '/gallery/images'
+      path: '/gallery/images'
+      fullPath: '/gallery/images'
       preLoaderRoute: typeof GalleryImagesLazyImport
       parentRoute: typeof rootRoute
     }
     '/gallery/videos': {
+      id: '/gallery/videos'
+      path: '/gallery/videos'
+      fullPath: '/gallery/videos'
       preLoaderRoute: typeof GalleryVideosLazyImport
       parentRoute: typeof rootRoute
     }
     '/subscription/premium': {
+      id: '/subscription/premium'
+      path: '/subscription/premium'
+      fullPath: '/subscription/premium'
       preLoaderRoute: typeof SubscriptionPremiumLazyImport
       parentRoute: typeof rootRoute
     }
     '/subscription/standard': {
+      id: '/subscription/standard'
+      path: '/subscription/standard'
+      fullPath: '/subscription/standard'
       preLoaderRoute: typeof SubscriptionStandardLazyImport
       parentRoute: typeof rootRoute
     }
     '/subscription/': {
+      id: '/subscription/'
+      path: '/subscription'
+      fullPath: '/subscription'
       preLoaderRoute: typeof SubscriptionIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/desginer/$designerId/': {
+      id: '/desginer/$designerId/'
+      path: '/desginer/$designerId'
+      fullPath: '/desginer/$designerId'
       preLoaderRoute: typeof DesginerDesignerIdIndexLazyImport
       parentRoute: typeof rootRoute
     }
@@ -271,7 +337,7 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([
+export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   ResetPasswordRoute,
   ClientPageLazyRoute,
@@ -294,7 +360,106 @@ export const routeTree = rootRoute.addChildren([
   SubscriptionStandardLazyRoute,
   SubscriptionIndexLazyRoute,
   DesginerDesignerIdIndexLazyRoute,
-])
+})
 
 /* prettier-ignore-end */
 
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/reset-password",
+        "/client-page",
+        "/coming-appointment",
+        "/contact",
+        "/delete-account",
+        "/designers",
+        "/forget-password",
+        "/home",
+        "/inspiration",
+        "/login",
+        "/my-profile",
+        "/notifications",
+        "/otp",
+        "/register",
+        "/settings",
+        "/gallery/images",
+        "/gallery/videos",
+        "/subscription/premium",
+        "/subscription/standard",
+        "/subscription/",
+        "/desginer/$designerId/"
+      ]
+    },
+    "/": {
+      "filePath": "index.lazy.tsx"
+    },
+    "/reset-password": {
+      "filePath": "reset-password.tsx"
+    },
+    "/client-page": {
+      "filePath": "client-page.lazy.tsx"
+    },
+    "/coming-appointment": {
+      "filePath": "coming-appointment.lazy.tsx"
+    },
+    "/contact": {
+      "filePath": "contact.lazy.tsx"
+    },
+    "/delete-account": {
+      "filePath": "delete-account.lazy.tsx"
+    },
+    "/designers": {
+      "filePath": "designers.lazy.tsx"
+    },
+    "/forget-password": {
+      "filePath": "forget-password.lazy.tsx"
+    },
+    "/home": {
+      "filePath": "home.lazy.tsx"
+    },
+    "/inspiration": {
+      "filePath": "inspiration.lazy.tsx"
+    },
+    "/login": {
+      "filePath": "login.lazy.tsx"
+    },
+    "/my-profile": {
+      "filePath": "my-profile.lazy.tsx"
+    },
+    "/notifications": {
+      "filePath": "notifications.lazy.tsx"
+    },
+    "/otp": {
+      "filePath": "otp.lazy.tsx"
+    },
+    "/register": {
+      "filePath": "register.lazy.tsx"
+    },
+    "/settings": {
+      "filePath": "settings.lazy.tsx"
+    },
+    "/gallery/images": {
+      "filePath": "gallery/images.lazy.tsx"
+    },
+    "/gallery/videos": {
+      "filePath": "gallery/videos.lazy.tsx"
+    },
+    "/subscription/premium": {
+      "filePath": "subscription/premium.lazy.tsx"
+    },
+    "/subscription/standard": {
+      "filePath": "subscription/standard.lazy.tsx"
+    },
+    "/subscription/": {
+      "filePath": "subscription/index.lazy.tsx"
+    },
+    "/desginer/$designerId/": {
+      "filePath": "desginer/$designerId/index.lazy.tsx"
+    }
+  }
+}
+ROUTE_MANIFEST_END */

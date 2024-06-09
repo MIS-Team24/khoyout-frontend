@@ -1,6 +1,5 @@
 import { NavigatablePageWrapper, SectionHeader } from "@/components/custom";
 import { buttonVariants } from "@/components/ui";
-
 import { DesignersList, Search } from "@/components/views/designers";
 import { Inspiration } from "@/components/views/home";
 import { cn } from "@/lib/utils";
@@ -10,6 +9,7 @@ import { useState } from "react";
 
 export default function Designers() {
   const [name, setName] = useState<string>("");
+
   return (
     <NavigatablePageWrapper>
       <Search setName={setName} />
@@ -27,7 +27,7 @@ function Header() {
         to="/gallery/images"
         className={cn(
           buttonVariants({ variant: "ghost" }),
-          "flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]",
+          "flex items-center gap-x-1 text-base font-medium leading-normal text-primary hover:bg-transparent hover:text-primary md:text-[1.2rem]"
         )}
       >
         See more
