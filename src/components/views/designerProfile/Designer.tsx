@@ -22,41 +22,34 @@ import Service from "./service/Service";
 // } from "./skeletons";
 
 export default function Designer() {
-  //   const id = useParams({ from: "/desginer/$designerId/" }).designerId;
+  // const id = useParams({ from: "/desginer/$designerId/" }).designerId;
 
-  //   const getDesignerFn = () => getDesigner(String(id));
-  //   const getDesignerPortfolioFn = () => getDesignerPortfolio(String(id));
+  // const getDesignerFn = () => getDesigner(String(id));
+  // const getDesignerPortfolioFn = () => getDesignerPortfolio(String(id));
 
-  //   const DesignerQuery = useQuery({
-  //     queryKey: ["designer", id],
-  //     queryFn: getDesignerFn,
-  //   });
+  // const DesignerQuery = useQuery({
+  //   queryKey: ["designer", id],
+  //   queryFn: getDesignerFn,
+  // });
 
-  //   const DesignerPortfolioQuery = useQuery({
-  //     queryKey: ["designer-portfolio", id],
-  //     queryFn: getDesignerPortfolioFn,
-  //   });
+  // const DesignerPortfolioQuery = useQuery({
+  //   queryKey: ["designer-portfolio", id],
+  //   queryFn: getDesignerPortfolioFn,
+  // });
 
-  //    // let RenderElement = <></>;
+  // let RenderElement = <></>;
 
-  //   // if (DesignerQuery.isLoading) {
-  //   //   RenderElement = <div>Loading...</div>;
-  //   // }
+  // if (DesignerQuery.isLoading) {
+  //   RenderElement = <div>Loading...</div>;
+  // }
 
-  //   // if (DesignerQuery.isError) {
-  //   //   RenderElement = <div>Error...</div>;
-  //   // }
+  // if (DesignerQuery.isError) {
+  //   RenderElement = <div>Error...</div>;
+  // }
 
-  //   // if (DesignerQuery.isSuccess) {
-  //   //   const transformedData = DesignerQuery.data.data as API_Designer;
-  //   // }
-
-  //   // const date = new Date();
-  //   // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-  //  if (DesignerQuery.isError) {
-  //     return <div>Error...</div>;
-  //   }
+  // if (DesignerQuery.isSuccess) {
+  //   const transformedData = DesignerQuery.data.data as API_Designer;
+  // }
 
   return (
     <>
