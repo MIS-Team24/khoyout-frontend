@@ -1,29 +1,28 @@
 import { Card, CardContent } from "@/components/ui";
-import { team } from "@/assets";
 import { SectionHeader } from "@/components/custom";
+import { TeamMember } from "@/API/types/designer/designer";
 
-export default function Team() {
+type TeamProps = {
+  teamMembers: TeamMember[];
+};
+
+export default function Team({ teamMembers }: TeamProps) {
   return (
     <section>
       <div>
         <SectionHeader title="Team" className="mt-0" />
         <div className="no-scrollbar flex flex-row gap-6 overflow-y-auto overflow-x-hidden whitespace-nowrap">
-          {team.map((member, i) => (
-            <Card
-              className="min-w-48 p-2"
-              key={`
-              team-member-${i}
-            `}
-            >
+          {teamMembers.map(({ avatarUrl, name, role }) => (
+            <Card className="min-w-48 p-2" key={`${name}`}>
               <CardContent className="p-0 text-center">
                 <img
-                  src={member.image.src}
-                  alt={member.image.alt}
+                  src={avatarUrl}
+                  alt={`team member name ${name} role ${role}`}
                   className="rounded-md object-cover object-center"
                 />
                 <div className="mt-6 ">
-                  <p className="mb-2 text-2xl font-medium">{member.name}</p>
-                  <p className="text-base text-secondary">{member.job}</p>
+                  <p className="mb-2 text-2xl font-medium">{name}</p>
+                  <p className="text-base text-secondary">{role}</p>
                 </div>
               </CardContent>
             </Card>
