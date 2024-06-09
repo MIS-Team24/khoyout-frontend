@@ -169,6 +169,8 @@ export default function Designer() {
             ordersFinished: (DesignerQuery.data?.data as API_Designer)
               .ordersFinished,
           }}
+          name={(DesignerQuery.data?.data as API_Designer).baseAccount.name}
+          workingDays={(DesignerQuery.data?.data as API_Designer).workingDays}
         />
       ) : (
         <div className="my-8">
