@@ -150,24 +150,24 @@ const DesignersSkeleton = () => {
         {Array.from({ length: 12 }).map((_, i) => (
           <div className="h-[540px] flex-1 rounded-lg" key={i}>
             <div className="relative flex h-[280px] w-full items-center justify-center rounded-t-lg">
-              <Skeleton className="absolute h-full w-full rounded-t-lg bg-gray-100" />
-              <Image size={30} className="animate-pulse text-gray-300" />
+              <Skeleton className="absolute h-full w-full rounded-t-lg bg-gray-300" />
+              <Image size={30} className="animate-pulse text-gray-500" />
             </div>
             <div className="mt-3 flex w-full items-center justify-between gap-2 px-1">
-              <Skeleton className="h-8 w-[9rem] rounded bg-gray-100" />
+              <Skeleton className="h-8 w-[9rem] rounded bg-gray-300" />
               <Heart
                 strokeWidth={1.5}
-                className="animate-pulse text-gray-300"
+                className="animate-pulse text-gray-500"
               />
             </div>
             <div className="mt-2 space-y-2 px-1">
-              <Skeleton className="h-4 w-[9rem] rounded bg-gray-100" />
-              <Skeleton className="h-4 w-[7.75rem] rounded bg-gray-100" />
-              <Skeleton className="h-3 w-[8rem] rounded bg-gray-100" />
-              <Skeleton className="h-3 w-[4rem] rounded bg-gray-100" />
+              <Skeleton className="h-4 w-[9rem] rounded bg-gray-300" />
+              <Skeleton className="h-4 w-[7.75rem] rounded bg-gray-300" />
+              <Skeleton className="h-3 w-[8rem] rounded bg-gray-300" />
+              <Skeleton className="h-3 w-[4rem] rounded bg-gray-300" />
             </div>
             <div className="mt-2 px-4">
-              <Skeleton className="h-8 w-full rounded-full bg-gray-100 py-5" />
+              <Skeleton className="h-8 w-full rounded-full bg-gray-300 py-5" />
             </div>
           </div>
         ))}
