@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import {
   Card,
@@ -10,30 +10,42 @@ import {
 } from "@/components/ui";
 import { Clock } from "lucide-react";
 import { BookingDialog } from "@/components/custom";
+import { Service, WorkingDay } from "@/API/types/designer/designer";
 
-export default function BookingCard() {
+type BookingCardProps = {
+  bookingDetails: {
+    name: string;
+    rating: number;
+    ordersFinished: number;
+    workingDays: WorkingDay[];
+    services: Service[];
+  };
+};
+
+export default function BookingCard({ bookingDetails }: BookingCardProps) {
   const [open, setOpen] = useState(false);
 
-  const data = {
-    storeRating: "5.0",
-    time: "12:00 PM to 10:00 PM",
-    totalReviews: "(124)",
-  };
+  const filteredOpenedTimes = useMemo(() => {
+    return bookingDetails.workingDays.filter((x) => x.hours !== "Closed");
+  }, [bookingDetails.workingDays]);
+
   return (
     <div>
       <Card className="px-8 py-10">
         <CardHeader className="p-0">
           <CardTitle className="text-[2.5rem] text-foreground">
-            Diamond Atelier
+            {bookingDetails.name}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="my-8 flex place-items-center gap-4">
             <p className="text-2xl font-medium text-foreground">
-              {data.storeRating}
+              {bookingDetails.rating.toString().length > 3
+                ? bookingDetails.rating.toFixed(1)
+                : bookingDetails.rating}
             </p>
             <Rating
-              initialValue={5}
+              initialValue={bookingDetails.rating}
               className="relative bottom-[2px] w-full"
               iconsCount={5}
               readonly={true}
@@ -41,27 +53,24 @@ export default function BookingCard() {
               allowFraction={true}
               size={32}
             />
-            {/*Store Rating*/}
             <div className="flex gap-4">
               <p className="text-2xl font-medium text-primary">
-                {data.totalReviews}
+                ({bookingDetails.ordersFinished}) finished order
               </p>
             </div>
           </div>
-          <div className="mb-6 flex gap-2">
-            <Clock />
-            <p className="text-xl text-foreground">
-              <span className="text-success">Opened</span> opens from{" "}
-              {data.time}
-            </p>
-          </div>
-          <div className="mb-6 flex gap-2">
-            <Clock />
-            <p className="text-xl text-foreground">
-              <span className="text-success">Opened</span> opens from{" "}
-              {data.time}
-            </p>
-          </div>
+          {filteredOpenedTimes.map(({ day, hours }) => {
+            const hoursArr = hours.split(" - ");
+            return (
+              <div className="mb-6 flex gap-2" key={day}>
+                <Clock />
+                <p className="text-xl text-foreground">
+                  {day} <span className="text-success">Opened</span> from{" "}
+                  {hoursArr[0]} to {hoursArr[1]}
+                </p>
+              </div>
+            );
+          })}
         </CardContent>
         <CardFooter className="p-0">
           <Button
