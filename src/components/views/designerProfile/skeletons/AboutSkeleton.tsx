@@ -17,7 +17,7 @@ const AboutSkeleton = () => (
             {Array(7)
               .fill(0)
               .map((_, i) => (
-                <div className="flex justify-between">
+                <div className="flex justify-between" key={i}>
                   <Skeleton className="h-[25px] w-[100px] rounded bg-gray-300" />
                   {i === 6 ? (
                     <Skeleton className="h-[28px] w-[100px] rounded bg-gray-300" />
