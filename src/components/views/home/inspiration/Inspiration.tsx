@@ -7,16 +7,22 @@ import {
 } from "@/components/ui";
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { inspirationImages } from "@/assets";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { API_DesignerPortfolios } from "@/API/types/designer/designer";
+
 type InspirationProps = {
   header: React.ReactNode;
   className?: string;
+  portfolios: API_DesignerPortfolios;
 };
 
-export default function Inspiration({ header, className }: InspirationProps) {
+export default function Inspiration({
+  header,
+  className,
+  portfolios,
+}: InspirationProps) {
   const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
@@ -30,7 +36,7 @@ export default function Inspiration({ header, className }: InspirationProps) {
           className="h-full w-full rounded-[0.5rem]"
         >
           <CarouselContent>
-            {inspirationImages.map(({ alt, src }, i) => (
+            {portfolios.map(({ url }, i) => (
               <CarouselItem
                 key={`inspiration-image-${i}`}
                 className={cn(
@@ -40,8 +46,8 @@ export default function Inspiration({ header, className }: InspirationProps) {
               >
                 <div className="group relative h-full w-full rounded-[0.5rem]">
                   <img
-                    src={src}
-                    alt={alt}
+                    src={url}
+                    alt={`inspiration-image-${i}`}
                     className="h-full w-full rounded-[0.5rem] object-cover"
                   />
                   <motion.span
