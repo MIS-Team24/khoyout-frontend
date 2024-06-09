@@ -42,7 +42,7 @@ export default function BookingCard({ bookingDetails }: BookingCardProps) {
             <p className="text-2xl font-medium text-foreground">
               {bookingDetails.rating.toString().length > 3
                 ? bookingDetails.rating.toFixed(1)
-                : bookingDetails.rating}
+                : bookingDetails.rating.toFixed(1)}
             </p>
             <Rating
               initialValue={bookingDetails.rating}
@@ -81,7 +81,12 @@ export default function BookingCard({ bookingDetails }: BookingCardProps) {
           </Button>
         </CardFooter>
       </Card>
-      <BookingDialog designerName="Basma Adel" open={open} onChange={setOpen} />
+      <BookingDialog
+        designerName={bookingDetails.name}
+        services={bookingDetails.services}
+        open={open}
+        onChange={setOpen}
+      />
     </div>
   );
 }
