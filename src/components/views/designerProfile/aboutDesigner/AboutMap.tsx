@@ -14,11 +14,7 @@ const legalIcon = new Icon({
 
 const position: [number, number] = [31.214457, 29.994616];
 
-export default function AboutMap({
-  location,
-}: {
-  location?: [number, number];
-}) {
+export default function AboutMap({ location }: { location: [number, number] }) {
   return (
     <MapContainer
       className="z-0 h-full w-full rounded-[0.25rem]"
