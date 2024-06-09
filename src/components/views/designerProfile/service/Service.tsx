@@ -10,34 +10,28 @@ import Team from "./team/Team";
 import Reviews from "./reviews/Reviews";
 import BookingCard from "./stickyBookingCard/StickyBookingCard";
 import { SectionHeader } from "@/components/custom";
+import {
+  Review,
+  Service as ServiceBody,
+  TeamMember,
+} from "@/API/types/designer/designer";
 
-const data = [
-  {
-    title: "Design from scratch",
-    description:
-      '"Crafting your vision from the ground up – our design from scratch service brings your ideas to life with creativity and precision."',
-    price: "250 EGP",
-  },
-  {
-    title: "Design implementation",
-    description:
-      '"Expertly executing your designs with precision and passion."',
-    price: "200 EGP",
-  },
-  {
-    title: "Hand made",
-    description:
-      '"Artisanal elegance tailored just for you – where every stitch tells a story."',
-    price: "300 EGP",
-  },
-  {
-    title: "Redesign",
-    description:
-      '"Elevating tradition with a modern twist – our redesign service breathes new life into timeless garments."',
-    price: "200 EGP",
-  },
-];
-export default function Service() {
+type ServiceProps = {
+  services: ServiceBody[];
+  teamMembers: TeamMember[];
+  reviews: Review[];
+  ratingDetails: {
+    rating: number;
+    ordersFinished: number;
+  };
+};
+
+export default function Service({
+  services,
+  teamMembers,
+  reviews,
+  ratingDetails,
+}: ServiceProps) {
   return (
     <div className="main-container">
       <SectionHeader title="Services" />
@@ -46,7 +40,7 @@ export default function Service() {
           <section>
             <div>
               <div className="flex flex-col gap-6">
-                {data.map((item, i) => (
+                {services.map((item, i) => (
                   <Card
                     className="rounded-2xl"
                     key={`
@@ -77,8 +71,8 @@ export default function Service() {
               </div>
             </div>
           </section>
-          <Team />
-          <Reviews />
+          <Team teamMembers={teamMembers} />
+          <Reviews reviews={reviews} ratingDetails={ratingDetails} />
         </div>
         <div className="sticky top-24 lg:w-2/5">
           <BookingCard />
