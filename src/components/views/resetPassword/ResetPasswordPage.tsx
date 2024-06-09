@@ -131,7 +131,7 @@ export default function ResetPasswordPage() {
                             type={showPassword.password ? "text" : "password"}
                             placeholder="Enter your password"
                             {...field}
-                            className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                            className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
                           />
                           <div className="cursor-pointer">
                             {showPassword.password ? (
@@ -178,7 +178,7 @@ export default function ResetPasswordPage() {
                             }
                             placeholder="Confirm Password"
                             {...field}
-                            className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                            className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
                           />
                           <div className="cursor-pointer">
                             {showPassword.confirmPassword ? (
