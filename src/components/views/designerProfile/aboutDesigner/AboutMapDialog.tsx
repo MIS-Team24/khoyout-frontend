@@ -19,7 +19,7 @@ const position: [number, number] = [31.214457, 29.994616];
 type AboutMapDialogProps = {
   isOpen: boolean;
   onChange: (isOpen: boolean) => void;
-  location?: [number, number];
+  location: [number, number];
 };
 
 export default function AboutMapDialog({

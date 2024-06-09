@@ -21,6 +21,7 @@ const SettingsLazyImport = createFileRoute('/settings')()
 const RegisterLazyImport = createFileRoute('/register')()
 const OtpLazyImport = createFileRoute('/otp')()
 const NotificationsLazyImport = createFileRoute('/notifications')()
+const MyProfileLazyImport = createFileRoute('/my-profile')()
 const LoginLazyImport = createFileRoute('/login')()
 const InspirationLazyImport = createFileRoute('/inspiration')()
 const HomeLazyImport = createFileRoute('/home')()
@@ -28,6 +29,7 @@ const ForgetPasswordLazyImport = createFileRoute('/forget-password')()
 const DesignersLazyImport = createFileRoute('/designers')()
 const DeleteAccountLazyImport = createFileRoute('/delete-account')()
 const ContactLazyImport = createFileRoute('/contact')()
+const ComingAppointmentLazyImport = createFileRoute('/coming-appointment')()
 const ClientPageLazyImport = createFileRoute('/client-page')()
 const IndexLazyImport = createFileRoute('/')()
 const SubscriptionIndexLazyImport = createFileRoute('/subscription/')()
@@ -62,6 +64,11 @@ const NotificationsLazyRoute = NotificationsLazyImport.update({
   path: '/notifications',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/notifications.lazy').then((d) => d.Route))
+
+const MyProfileLazyRoute = MyProfileLazyImport.update({
+  path: '/my-profile',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/my-profile.lazy').then((d) => d.Route))
 
 const LoginLazyRoute = LoginLazyImport.update({
   path: '/login',
@@ -101,6 +108,13 @@ const ContactLazyRoute = ContactLazyImport.update({
   path: '/contact',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/contact.lazy').then((d) => d.Route))
+
+const ComingAppointmentLazyRoute = ComingAppointmentLazyImport.update({
+  path: '/coming-appointment',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/coming-appointment.lazy').then((d) => d.Route),
+)
 
 const ClientPageLazyRoute = ClientPageLazyImport.update({
   path: '/client-page',
@@ -176,6 +190,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClientPageLazyImport
       parentRoute: typeof rootRoute
     }
+    '/coming-appointment': {
+      preLoaderRoute: typeof ComingAppointmentLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/contact': {
       preLoaderRoute: typeof ContactLazyImport
       parentRoute: typeof rootRoute
@@ -202,6 +220,10 @@ declare module '@tanstack/react-router' {
     }
     '/login': {
       preLoaderRoute: typeof LoginLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/my-profile': {
+      preLoaderRoute: typeof MyProfileLazyImport
       parentRoute: typeof rootRoute
     }
     '/notifications': {
@@ -253,6 +275,7 @@ export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   ResetPasswordRoute,
   ClientPageLazyRoute,
+  ComingAppointmentLazyRoute,
   ContactLazyRoute,
   DeleteAccountLazyRoute,
   DesignersLazyRoute,
@@ -260,6 +283,7 @@ export const routeTree = rootRoute.addChildren([
   HomeLazyRoute,
   InspirationLazyRoute,
   LoginLazyRoute,
+  MyProfileLazyRoute,
   NotificationsLazyRoute,
   OtpLazyRoute,
   RegisterLazyRoute,

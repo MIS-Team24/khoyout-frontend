@@ -4,32 +4,35 @@ type BaseAccount = {
   name: string;
 };
 
-type LocationDetails = {
+export type LocationDetails = {
   latitude: string;
   longitude: string;
   address: string;
 };
 
-type Review = {
+export type Review = {
   rating: number;
   comment: string;
   postedOn: string;
   avatarUrl: string;
-  user: {
-    baseAccountId: string;
-  };
+  name: string;
 };
 
-type Service = {
+export type Service = {
   title: string;
   description: string;
   price: number;
 };
 
-type TeamMember = {
+export type TeamMember = {
   name: string;
   role: string;
   avatarUrl: string;
+};
+
+export type WorkingDay = {
+  day: string;
+  hours: string;
 };
 
 type Category = {
@@ -37,7 +40,7 @@ type Category = {
 };
 
 type Portfolio = {
-  // Assuming portfolios have a certain structure, define it here
+  url: string;
 };
 
 // Define the main type
@@ -46,10 +49,7 @@ export type API_Designer = {
   ordersFinished: number;
   yearsExperience: number;
   about: string;
-  workingDays: {
-    day: string;
-    time: string;
-  }[];
+  workingDays: WorkingDay[];
   rating: number;
   baseAccount: BaseAccount;
   openNow: boolean;
@@ -59,5 +59,6 @@ export type API_Designer = {
   services: Service[];
   teamMembers: TeamMember[];
   categories: { Category: Category }[];
-  portfolios: Portfolio[];
 };
+
+export type API_DesignerPortfolios = Portfolio[];
