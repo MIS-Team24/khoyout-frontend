@@ -252,10 +252,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WishlistLazyImport
       parentRoute: typeof rootRoute
     }
-    '/$designerId/designer': {
-      preLoaderRoute: typeof DesignerIdDesignerLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/gallery/images': {
       preLoaderRoute: typeof GalleryImagesLazyImport
       parentRoute: typeof rootRoute
@@ -303,7 +299,6 @@ export const routeTree = rootRoute.addChildren([
   RegisterLazyRoute,
   SettingsLazyRoute,
   WishlistLazyRoute,
-  DesignerIdDesignerLazyRoute,
   GalleryImagesLazyRoute,
   GalleryVideosLazyRoute,
   SubscriptionPremiumLazyRoute,

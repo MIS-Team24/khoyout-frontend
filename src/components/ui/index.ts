@@ -112,15 +112,6 @@ export {
     CommandSeparator,
 } from "./command";
 
-export {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "./breadcrumb.tsx";
-
 export {Popover, PopoverContent, PopoverTrigger} from "./popover";
 
 export {RadioGroup, RadioGroupItem} from "./radio-group";
