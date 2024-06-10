@@ -13,7 +13,6 @@ import {selectWishlist} from '@/store/features/wishlist/index.ts';
 
 export default function WishlistPage() {
     const wishlist = useSelector(selectWishlist);
-    console.log(wishlist)
     return (
         <div className="main-container">
             <Breadcrumb className="my-6 lg:my-12">
