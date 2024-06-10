@@ -47,6 +47,7 @@ import {
 } from "@/API/types/appointments/appointments";
 import { convertTo12HourFormat } from "@/utilities/convertTime";
 import toast from "react-hot-toast";
+import { capitalizeFirstLetter } from "@/utilities/capitalizeFirstLetter";
 
 const formSchema = z.object({
   date: z.date({
@@ -290,33 +291,46 @@ export default function BookingDialog({
                                   availableTimesQuery.data
                                     ?.data as API_AvailableTimes
                                 ).data as AvailableTimeBody[]
-                              ).map(({ startTime, id }) => (
-                                <FormControl
-                                  key={startTime}
-                                  className={cn(
-                                    "h-[5rem] w-[12.375rem] border border-[#B1B1B1] bg-[#F3EBF1] px-[2rem] py-[1.5rem] text-[#49454F]",
-                                    selectedTime ===
-                                      convertTo12HourFormat(startTime) &&
-                                      "focus-within:rong-0 !bg-primary text-white",
-                                  )}
-                                >
-                                  <Input
-                                    readOnly
-                                    {...field}
-                                    value={convertTo12HourFormat(startTime)}
-                                    className="cursor-pointer bg-transparent text-center text-[1.5rem] font-medium leading-normal hover:bg-transparent hover:text-primary focus:bg-primary focus:text-white focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
-                                    onClick={() => {
-                                      setSelectedTime(
-                                        convertTo12HourFormat(startTime),
-                                      );
-                                      field.onChange(
-                                        convertTo12HourFormat(startTime),
-                                      );
-                                      form.setValue("timeId", id);
-                                    }}
-                                  />
-                                </FormControl>
-                              ))}
+                              )
+                                .filter((el) => {
+                                  if (form.getValues("date") as Date) {
+                                    const currentday = format(
+                                      form.getValues("date") as Date,
+                                      "EEEE",
+                                    );
+                                    return (
+                                      capitalizeFirstLetter(el.dayOfWeek) ===
+                                      currentday
+                                    );
+                                  }
+                                })
+                                .map(({ startTime, id }) => (
+                                  <FormControl
+                                    key={startTime}
+                                    className={cn(
+                                      "h-[5rem] w-[12.375rem] border border-[#B1B1B1] bg-[#F3EBF1] px-[2rem] py-[1.5rem] text-[#49454F]",
+                                      selectedTime ===
+                                        convertTo12HourFormat(startTime) &&
+                                        "focus-within:rong-0 !bg-primary text-white",
+                                    )}
+                                  >
+                                    <Input
+                                      readOnly
+                                      {...field}
+                                      value={convertTo12HourFormat(startTime)}
+                                      className="cursor-pointer bg-transparent text-center text-[1.5rem] font-medium leading-normal hover:bg-transparent hover:text-primary focus:bg-primary focus:text-white focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+                                      onClick={() => {
+                                        setSelectedTime(
+                                          convertTo12HourFormat(startTime),
+                                        );
+                                        field.onChange(
+                                          convertTo12HourFormat(startTime),
+                                        );
+                                        form.setValue("timeId", id);
+                                      }}
+                                    />
+                                  </FormControl>
+                                ))}
                             </>
                           ) : null}
                         </div>
@@ -485,8 +499,9 @@ export default function BookingDialog({
                       type="submit"
                       onClick={validateAndForwardSegment}
                       className="w-[20rem] rounded-[1rem] py-[1.5rem] text-[1.5rem] font-medium leading-normal text-white"
+                      disabled={bookAppointmentMutation.isPending}
                     >
-                      Continue
+                      Book
                     </Button>
                   </div>
                 </Segment>

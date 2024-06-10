@@ -7,9 +7,9 @@ const AboutSkeleton = () => (
     <div className="grid grid-cols-1 gap-x-10 gap-y-10 lg:grid-cols-2 lg:gap-y-0">
       <div className="flex flex-1 flex-col gap-y-[2.5rem]">
         <div className="space-y-2">
-          <Skeleton className="h-[28px] w-[710px] rounded bg-gray-300" />
-          <Skeleton className="h-[28px] w-[710px] rounded bg-gray-300" />
-          <Skeleton className="h-[28px] w-[710px] rounded bg-gray-300" />
+          <Skeleton className="h-[28px] w-full rounded bg-gray-300" />
+          <Skeleton className="h-[28px] w-full rounded bg-gray-300" />
+          <Skeleton className="h-[28px] w-full rounded bg-gray-300" />
         </div>
         <div className="space-y-8">
           <Skeleton className="h-[32px] w-[180px] rounded bg-gray-300" />
