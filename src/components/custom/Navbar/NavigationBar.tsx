@@ -30,7 +30,7 @@ const NavigationBar = forwardRef(function (_, ref) {
   const router = useRouterState();
   const matches = router.matches;
   const [isExpanded, setIsExpanded] = useState<boolean>();
-  const { access_token } = useAuth();
+  const { access_token, auth } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -87,6 +87,11 @@ const NavigationBar = forwardRef(function (_, ref) {
     logoutMutation.mutate();
   }
 
+  const toBeUsedTabs =
+    auth.user?.user.type === "designer"
+      ? tabs
+      : tabs.filter((e) => e.label !== "Subscription");
+
   return (
     <motion.nav
       className={cn(
@@ -138,7 +143,7 @@ const NavigationBar = forwardRef(function (_, ref) {
         </div>
         <div>
           <ul className="flex h-full flex-col items-center gap-6 lg:flex-row">
-            {tabs.map((item) => {
+            {toBeUsedTabs.map((item) => {
               const isMatched =
                 matches.findIndex(
                   (e) =>
@@ -166,16 +171,6 @@ const NavigationBar = forwardRef(function (_, ref) {
           </ul>
         </div>
         <div className="flex items-center gap-10">
-          <div>
-            <Link>
-              <Button
-                variant={"outline"}
-                className="rounded-2xl px-5 py-7 text-xl text-primary hover:text-primary"
-              >
-                For Business
-              </Button>
-            </Link>
-          </div>
           {userQuery.isPending ? (
             <UserSkeleton />
           ) : userQuery.isSuccess ? (
@@ -197,7 +192,7 @@ const NavigationBar = forwardRef(function (_, ref) {
                     <div className="flex cursor-pointer items-center gap-2">
                       {processedData?.avatarURL ? (
                         <img
-                          src={processedData?.avatarURL ?? ""}
+                          src={processedData?.avatarURL + "?q=" + Math.random()}
                           className="aspect-square w-12 rounded-full object-cover"
                         />
                       ) : (
@@ -219,8 +214,10 @@ const NavigationBar = forwardRef(function (_, ref) {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <DropdownMenuItem className="cursor-pointer">
-                        <User className="mr-2 h-4 w-4" />
-                        <span>Profile</span>
+                        <Link to="/my-profile" className=" flex">
+                          <User className="mr-2 h-4 w-4" />
+                          <span>Profile</span>
+                        </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="cursor-pointer"

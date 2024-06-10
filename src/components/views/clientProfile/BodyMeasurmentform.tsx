@@ -13,12 +13,18 @@ import {
 } from "@/components/ui";
 import { SectionHeader } from "@/components/custom";
 import { useState } from "react";
+import { fullUserType } from "../myProfile/MyProfile";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateBodyMeasurementsAPI } from "@/API/profile/profile";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
+import Loading from "@/components/custom/Loading";
 
 const formSchema = z.object({
   body_shape: z
     .string()
     .min(2, {
-      message: "Input must be between 2 characters and 50 characters",
+      message: "Body Shape must be between 2 characters and 50 characters",
     })
     .max(50),
   weight: z.coerce
@@ -29,7 +35,7 @@ const formSchema = z.object({
     .number()
     .positive()
     .gte(0, { message: "The value must be greater than 0" }),
-  shoulder_width: z.coerce
+  shoulderWidth: z.coerce
     .number()
     .positive()
     .gte(0, { message: "The value must be greater than 0" }),
@@ -69,11 +75,11 @@ const formSchema = z.object({
     .number()
     .positive()
     .gte(0, { message: "The value must be greater than 0" }),
-  above_kinee: z.coerce
+  aboveKnee: z.coerce
     .number()
     .positive()
     .gte(0, { message: "The value must be greater than 0" }),
-  below_kinee: z.coerce
+  belowKnee: z.coerce
     .number()
     .positive()
     .gte(0, { message: "The value must be greater than 0" }),
@@ -83,33 +89,54 @@ const formSchema = z.object({
     .gte(0, { message: "The value must be greater than 0" }),
 });
 
-function BodyMeasurmentform() {
+export type bodyMeasurementsType = z.infer<typeof formSchema>;
+
+function BodyMeasurmentform(props: { user: fullUserType }) {
   const [edit, setEdit] = useState(false);
+  const bm = props.user.user?.bodyMeasurements;
+  const auth = useAuth();
+  const queryClient = useQueryClient();
+
+  const updateMutation = useMutation({
+    mutationKey: ["update-body-measurement"],
+    mutationFn: (values: bodyMeasurementsType) =>
+      updateBodyMeasurementsAPI(auth.access_token() ?? "", values),
+    onSuccess: () => {
+      setEdit(false);
+      toast.success("Successfully updated your body measurements.");
+      queryClient.invalidateQueries({ queryKey: ["user-me-client"] });
+    },
+    onError: () => {
+      toast.success(
+        "Failed to update your body measurements. Try again later.",
+      );
+    },
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      body_shape: "",
-      weight: 0,
-      length: 0,
-      shoulder_width: 0,
-      neck: 0,
-      chest: 0,
-      arms: 0,
-      forearms: 0,
-      wrists: 0,
-      waist: 0,
-      hips: 0,
-      thigh: 0,
-      belly: 0,
-      below_kinee: 0,
-      above_kinee: 0,
-      calf: 0,
+      body_shape: bm?.body_shape ?? "",
+      weight: bm?.weight ?? 0,
+      length: bm?.length ?? 0,
+      shoulderWidth: bm?.shoulderWidth ?? 0,
+      neck: bm?.neck ?? 0,
+      chest: bm?.chest ?? 0,
+      arms: bm?.arms ?? 0,
+      forearms: bm?.forearms ?? 0,
+      wrists: bm?.wrists ?? 0,
+      waist: bm?.waist ?? 0,
+      hips: bm?.hips ?? 0,
+      thigh: bm?.thigh ?? 0,
+      belly: bm?.belly ?? 0,
+      belowKnee: bm?.belowKnee ?? 0,
+      aboveKnee: bm?.aboveKnee ?? 0,
+      calf: bm?.calf ?? 0,
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    updateMutation.mutate(values);
   }
 
   return (
@@ -194,14 +221,14 @@ function BodyMeasurmentform() {
             <div className="flex w-full items-center justify-between gap-x-4">
               <FormField
                 control={form.control}
-                name="shoulder_width"
+                name="shoulderWidth"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
                         disabled={!edit}
                         type="number"
-                        placeholder="Shoulder_Width"
+                        placeholder="Should Width"
                         {...field}
                         className="h-14 gap-2 rounded border border-[#B1B1B1] bg-transparent text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                       />
@@ -384,7 +411,7 @@ function BodyMeasurmentform() {
             <div className="flex w-full items-center justify-between gap-x-4">
               <FormField
                 control={form.control}
-                name="above_kinee"
+                name="aboveKnee"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormControl>
@@ -402,7 +429,7 @@ function BodyMeasurmentform() {
               />
               <FormField
                 control={form.control}
-                name="below_kinee"
+                name="belowKnee"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormControl>
@@ -441,9 +468,15 @@ function BodyMeasurmentform() {
               <Button
                 type="submit"
                 className="h-[2.9375rem] w-[17.5rem] text-xl font-medium text-[#F9F4F4]"
-                disabled={!edit}
+                disabled={!edit || updateMutation.isPending}
               >
-                Save
+                {updateMutation.isPending ? (
+                  <>
+                    <Loading /> Saving...
+                  </>
+                ) : (
+                  "Save"
+                )}
               </Button>
             </div>
           </form>

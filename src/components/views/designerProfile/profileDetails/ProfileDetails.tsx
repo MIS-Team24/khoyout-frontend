@@ -34,7 +34,7 @@ export default function ProfileDetails({
           <div className="pt-5 text-center sm:text-start">
             <h1 className="text-[2rem] leading-10">{designerDetails.name}</h1>
             <p className="text-base leading-normal text-[#49454F]">
-              {designerDetails.ordersFinished} finished order
+              {designerDetails.ordersFinished} Finished Order
             </p>
             <p className="flex items-center gap-2 whitespace-nowrap pt-1 text-[0.75rem] text-[#49454F]">
               <span>
@@ -67,21 +67,6 @@ export default function ProfileDetails({
               />
               <span>({designerDetails.ordersFinished})</span>
             </p>
-            <div className="space-x-3 pt-3">
-              <Button
-                type="button"
-                className="px[1rem] h-[2rem] w-[6.3rem] rounded-[0.5rem] py-[0.5rem]"
-              >
-                Follow
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                className="px[1rem] h-[2rem] w-[6.3rem] rounded-[0.5rem] py-[0.5rem] text-primary"
-              >
-                Message
-              </Button>
-            </div>
           </div>
         </div>
         <div className="flex flex-row-reverse gap-x-8 lg:w-2/5">

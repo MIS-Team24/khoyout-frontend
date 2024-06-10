@@ -61,6 +61,12 @@ export default function Notification() {
             <NotificationsSkeleton />
             <NotificationsSkeleton />
           </>
+        ) : transformedData?.data.length === 0 ? (
+          <div className="flex h-[200px] w-full items-center justify-center">
+            <h1 className="text-wrap text-6xl uppercase text-primary">
+              You don't have any notifications
+            </h1>
+          </div>
         ) : (
           transformedData?.data.map((notif) => (
             <NotificationItem key={notif.id} notification={notif} />

@@ -56,7 +56,7 @@ export default function BookingCard({ bookingDetails }: BookingCardProps) {
             />
             <div className="flex gap-4">
               <p className="text-2xl font-medium text-primary">
-                ({bookingDetails.ordersFinished}) finished order
+                ({bookingDetails.ordersFinished}) Finished Orders
               </p>
             </div>
           </div>
