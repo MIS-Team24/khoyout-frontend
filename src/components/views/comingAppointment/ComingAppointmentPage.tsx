@@ -19,33 +19,30 @@ import {
 import { Clock, Calendar } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getAppointments } from "@/API/appointments/appointments";
+import {
+  API_AppointmentsResponse,
+  API_AppointmentBody,
+} from "@/API/types/appointments/appointments";
+import useAuth from "@/hooks/useAuth";
+import { Error } from "@/components/custom";
+import { convertTo12HourFormat } from "@/utilities/convertTime";
+import { format } from "date-fns";
 
 export default function ComingAppointmentPage() {
   const [value, setValue] = useState({
     upcoming: true,
   });
-  const data = [
-    {
-      date: "In 19 Aug 2024",
-      time: "11 : 00 AM",
-      name: "Basma Adel",
-    },
-    {
-      date: "In 20 Aug 2024",
-      time: "12 : 00 AM",
-      name: "Basma Adel",
-    },
-    {
-      date: "In 21 Aug 2024",
-      time: "1 : 00 PM",
-      name: "Basma Adel",
-    },
-    {
-      date: "In 22 Aug 2024",
-      time: "2 : 00 PM",
-      name: "Basma Adel",
-    },
-  ];
+  const { access_token } = useAuth();
+
+  const getAppointmentsFn = () => getAppointments(access_token() ?? "");
+
+  const getAppointmentsQuery = useQuery({
+    queryKey: ["appointments"],
+    queryFn: getAppointmentsFn,
+  });
+
   return (
     <section className="main-container">
       <Breadcrumb className="my-6 lg:my-12">
@@ -104,59 +101,77 @@ export default function ComingAppointmentPage() {
             value="upcoming"
             className="mb-8 flex-col gap-8 data-[state='active']:flex"
           >
-            {data.map(({ date, time, name }, i) => (
-              <Card
-                key={`
-              upcoming-appointment-${i}
-            `}
-                className="bg-transparent"
-              >
-                <CardHeader>
-                  <CardDescription className="text-base text-foreground lg:text-xl">
-                    Enjoy your upcoming appointment with{" "}
-                    <span className="font-semibold text-primary lg:text-xl">
-                      {name}
-                    </span>
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <div className="flex place-items-center gap-8">
-                    <div className="flex place-items-center gap-2">
-                      <Calendar size={24} className="text-secondary" />
-                      <p className="text-base text-[#49454F] lg:text-xl">
-                        {date}
-                      </p>
+            {getAppointmentsQuery.isError ? (
+              <Error
+                title="Error"
+                description="An error occurred while fetching appointments"
+              />
+            ) : getAppointmentsQuery.isPending ? (
+              <p>Loading...</p>
+            ) : getAppointmentsQuery.isSuccess ? (
+              (
+                (getAppointmentsQuery.data?.data as API_AppointmentsResponse)
+                  .data as API_AppointmentBody[]
+              ).map(({ designer, startTime, id }) => (
+                <Card
+                  key={`
+                upcoming-appointment-id-${id}
+              `}
+                  className="bg-transparent"
+                >
+                  <CardHeader>
+                    <CardDescription className="text-base text-foreground lg:text-xl">
+                      Enjoy your upcoming appointment with{" "}
+                      <span className="font-semibold text-primary lg:text-xl">
+                        {designer.baseAccount.firstName}{" "}
+                        {designer.baseAccount.lastName}
+                      </span>
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <div className="flex place-items-center gap-8">
+                      <div className="flex place-items-center gap-2">
+                        <Calendar size={24} className="text-secondary" />
+                        <p className="text-base text-[#49454F] lg:text-xl">
+                          In {format(new Date(startTime), "dd MMMM yyyy")}
+                        </p>
+                      </div>
+                      {/* <div className="flex place-items-center gap-2">
+                        <Clock size={24} className="text-secondary" />
+                        <p className="text-lg text-[#49454F] lg:text-xl">
+                          {convert}
+                        </p>
+                      </div> */}
                     </div>
-                    <div className="flex place-items-center gap-2">
-                      <Clock size={24} className="text-secondary" />
-                      <p className="text-lg text-[#49454F] lg:text-xl">
-                        {time}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter className="flex gap-4">
-                  <Button
-                    variant="outline"
-                    className="bg-transparent text-xl font-medium text-primary hover:text-primary"
-                  >
-                    Reschedule
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="text-xl font-medium text-primary hover:text-primary"
-                  >
-                    Cancel
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
+                  </CardContent>
+                  <CardFooter className="flex gap-4">
+                    <Button
+                      variant="outline"
+                      className="bg-transparent text-xl font-medium text-primary hover:text-primary"
+                    >
+                      Reschedule
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="text-xl font-medium text-primary hover:text-primary"
+                    >
+                      Cancel
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))
+            ) : (
+              <Error
+                title="Error"
+                description="An error occurred while fetching appointments"
+              />
+            )}
           </TabsContent>
           <TabsContent
             value="history"
             className=" mb-8 flex-col gap-8 data-[state='active']:flex"
           >
-            {data.map(({ date, time, name }, i) => (
+            {/* {data.map(({ date, time, name }, i) => (
               <Card
                 key={`
               history-appointment-${i}
@@ -199,7 +214,8 @@ export default function ComingAppointmentPage() {
                   </Button>
                 </CardFooter>
               </Card>
-            ))}
+            ))} */}
+            <div>Hello</div>
           </TabsContent>
         </Tabs>
       </div>
