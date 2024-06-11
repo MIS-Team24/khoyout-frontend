@@ -10,7 +10,7 @@ import { API_LOGGED_IN_USER } from "@/API/types/user/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui";
 import bell from "@/assets/icons/bell.svg";
-import { ChevronDown, LogOut, User } from "lucide-react";
+import { ChevronDown, LogOut, NotepadText, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -213,10 +213,16 @@ const NavigationBar = forwardRef(function (_, ref) {
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                      <DropdownMenuItem className="cursor-pointer">
-                        <Link to="/my-profile" className=" flex">
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <Link to="/my-profile" className="flex">
                           <User className="mr-2 h-4 w-4" />
                           <span>Profile</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <Link to="/coming-appointment" className="flex">
+                          <NotepadText className="mr-2 h-4 w-4" />
+                          <span>Booking</span>
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem
