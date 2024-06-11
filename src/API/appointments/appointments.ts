@@ -54,10 +54,6 @@ export function cancelRequest(
   designerId: string,
   requestId: number,
 ) {
-  console.log(access_token);
-  console.log(designerId);
-  console.log(requestId);
-
   return client.delete(`/appointments/${designerId}/requests/${requestId}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
