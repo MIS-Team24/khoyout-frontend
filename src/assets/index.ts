@@ -53,7 +53,7 @@ import design4 from "./Design4.png";
 import member1 from "./member1.png";
 import member2 from "./member2.webp";
 import member3 from "./member3.png";
-import requestImg from "./requestImg.png";
+import requestImg from "./requests.png";
 import upcomingImg from "./Upcoming.png";
 
 const inspirationImages = [
