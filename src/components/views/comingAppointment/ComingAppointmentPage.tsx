@@ -16,31 +16,55 @@ import {
   BreadcrumbSeparator,
   BreadcrumbLink,
 } from "@/components/ui";
-import { Clock, Calendar } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getAppointments } from "@/API/appointments/appointments";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  getAppointments,
+  cancelRequest,
+} from "@/API/appointments/appointments";
 import {
   API_AppointmentsResponse,
   API_AppointmentBody,
 } from "@/API/types/appointments/appointments";
 import useAuth from "@/hooks/useAuth";
-import { Error } from "@/components/custom";
-import { convertTo12HourFormat } from "@/utilities/convertTime";
+import { Error, LoadingState } from "@/components/custom";
 import { format } from "date-fns";
+import toast from "react-hot-toast";
 
 export default function ComingAppointmentPage() {
+  const queryClient = useQueryClient();
   const [value, setValue] = useState({
     upcoming: true,
   });
   const { access_token } = useAuth();
-
   const getAppointmentsFn = () => getAppointments(access_token() ?? "");
 
   const getAppointmentsQuery = useQuery({
     queryKey: ["appointments"],
     queryFn: getAppointmentsFn,
+  });
+
+  const cancelRequestFn = (mutationData: {
+    designerId: string;
+    requestId: number;
+  }) =>
+    cancelRequest(
+      access_token() ?? "",
+      mutationData.designerId,
+      mutationData.requestId,
+    );
+
+  const cancelRequestMutation = useMutation({
+    mutationFn: cancelRequestFn,
+    onSuccess: () => {
+      toast.success("Appointment cancelled successfully");
+      queryClient.invalidateQueries({ queryKey: ["appointments"] });
+    },
+    onError: () => {
+      toast.error("An error occurred while cancelling the appointment");
+    },
   });
 
   return (
@@ -112,7 +136,7 @@ export default function ComingAppointmentPage() {
               (
                 (getAppointmentsQuery.data?.data as API_AppointmentsResponse)
                   .data as API_AppointmentBody[]
-              ).map(({ designer, startTime, id }) => (
+              ).map(({ designer, startTime, id, designerId }) => (
                 <Card
                   key={`
                 upcoming-appointment-id-${id}
@@ -144,18 +168,34 @@ export default function ComingAppointmentPage() {
                       </div> */}
                     </div>
                   </CardContent>
-                  <CardFooter className="flex gap-4">
-                    <Button
+                  <CardFooter className="flex justify-end gap-4">
+                    {/* <Button
                       variant="outline"
                       className="bg-transparent text-xl font-medium text-primary hover:text-primary"
                     >
                       Reschedule
-                    </Button>
+                    </Button> */}
                     <Button
-                      variant="ghost"
-                      className="text-xl font-medium text-primary hover:text-primary"
+                      variant="default"
+                      className="text-xl font-medium"
+                      onClick={() =>
+                        cancelRequestMutation.mutate({
+                          designerId: designerId,
+                          requestId: id,
+                        })
+                      }
+                      disabled={cancelRequestMutation.isPending}
                     >
-                      Cancel
+                      {cancelRequestMutation.isPending ? (
+                        <>
+                          <span>
+                            <LoadingState />
+                          </span>
+                          Cancelling...
+                        </>
+                      ) : (
+                        "Cancel"
+                      )}
                     </Button>
                   </CardFooter>
                 </Card>
@@ -215,7 +255,7 @@ export default function ComingAppointmentPage() {
                 </CardFooter>
               </Card>
             ))} */}
-            <div>Hello</div>
+            <Error title="Error" description="No history found" />
           </TabsContent>
         </Tabs>
       </div>
