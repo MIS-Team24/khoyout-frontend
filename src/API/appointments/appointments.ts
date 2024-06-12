@@ -40,3 +40,11 @@ export function bookAppointment(
     },
   );
 }
+
+export function getAppointments(access_token: string) {
+  return client.get("/appointments", {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+}

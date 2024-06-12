@@ -24,8 +24,41 @@ type DesignerCardProps = {
   openUntil: string;
   gender: string;
 };
+import { addItem, removeItem } from "@/store/features/wishlist";
+import { WishlistItem } from "@/store/features/wishlist/index.ts";
+import { useDispatch, useSelector } from "react-redux";
+import { useCallback } from "react";
+import { selectWishlist } from "@/store/features/wishlist";
 
 export default function DesignerCard(props: DesignerCardProps) {
+  const dispatch = useDispatch();
+  const wishlistItems = useSelector(selectWishlist);
+
+  const handleAddItem = useCallback(() => {
+    const newItem: WishlistItem = {
+      id: props.id,
+      name: props.name,
+      ratings: {
+        average: props.ratings.average,
+        totalCount: props.ratings.totalCount,
+      },
+      yearsOfExperienceCount: props.yearsOfExperienceCount,
+      wishlisted: true,
+      // address: {
+      //   province: string;
+      //   city: string;
+      // };
+      img: props.img,
+      address: props.address,
+      openNow: props.openNow,
+      openUntil: props.openUntil,
+      gender: props.gender,
+    };
+    dispatch(addItem(newItem));
+  }, [props]);
+  const handleRemoveItem = useCallback(() => {
+    dispatch(removeItem(props.id));
+  }, [props.id]);
   return (
     <div>
       <Card className="flex h-full w-full flex-col items-center gap-4 overflow-hidden border-gray-300 pb-4">
@@ -39,19 +72,44 @@ export default function DesignerCard(props: DesignerCardProps) {
         <div className="flex w-full flex-col gap-2 px-4">
           <div className="flex items-center justify-between">
             <h3 className="whitespace-nowrap text-2xl">{props.name}</h3>
-            <Button className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent">
-              <Heart
-                className={cn(
-                  "text-primary transition-all",
-                  props.wishlisted ? "fill-primary" : "fill-none",
-                )}
-                strokeWidth={1.5}
-              />
-              <Heart
-                className="absolute fill-primary text-primary opacity-0 transition-all group-hover:opacity-100 group-hover:active:fill-muted-foreground"
-                strokeWidth={1.5}
-              />
-            </Button>
+            {props.wishlisted ? (
+              <Button
+                className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent"
+                onClick={handleRemoveItem}
+              >
+                <Heart
+                  className={cn(
+                    "text-primary transition-all",
+                    props.wishlisted ? "fill-primary" : "fill-none",
+                  )}
+                  strokeWidth={1.5}
+                />
+                <Heart
+                  className="absolute fill-primary text-primary opacity-0 transition-all group-hover:opacity-100 group-hover:active:fill-muted-foreground"
+                  strokeWidth={1.5}
+                />
+              </Button>
+            ) : (
+              <Button
+                className="group m-0 h-fit bg-transparent p-0 hover:bg-transparent"
+                onClick={handleAddItem}
+              >
+                <Heart
+                  className={cn(
+                    "text-primary transition-all",
+                    wishlistItems?.find((item) => item.id === props.id)?.id ===
+                      props.id
+                      ? "fill-primary"
+                      : "fill-none",
+                  )}
+                  strokeWidth={1.5}
+                />
+                <Heart
+                  className="absolute fill-primary text-primary opacity-0 transition-all group-hover:opacity-100 group-hover:active:fill-muted-foreground"
+                  strokeWidth={1.5}
+                />
+              </Button>
+            )}
           </div>
           <div className="flex items-center gap-4">
             <Rating

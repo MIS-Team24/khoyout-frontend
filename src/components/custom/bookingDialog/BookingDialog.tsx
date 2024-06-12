@@ -24,6 +24,7 @@ import {
   SegmentStep,
   Segment,
   Segmentator,
+  LoadingState,
 } from "@/components/custom";
 import { Clamp } from "@/utilities/clamp";
 import { z } from "zod";
@@ -138,6 +139,9 @@ export default function BookingDialog({
 
   const bookAppointmentMutation = useMutation({
     mutationFn: bookAppointmentFn,
+    onSuccess: () => {
+      setCurrentSegment(3);
+    },
     onError: () => {
       toast.error("Failed to book an appointment");
     },
@@ -175,6 +179,13 @@ export default function BookingDialog({
       setSelectedTime("");
     }
   }, [open, currentSegment, form]);
+
+  let availableTimes: AvailableTimeBody[] = [];
+
+  if (availableTimesQuery.isSuccess) {
+    availableTimes = (availableTimesQuery.data?.data as API_AvailableTimes)
+      .data as AvailableTimeBody[];
+  }
 
   return (
     <Dialog open={open} onOpenChange={onChange}>
@@ -216,6 +227,16 @@ export default function BookingDialog({
                             onSelect={field.onChange}
                             className="mx-auto rounded-lg"
                             numberOfMonths={2}
+                            disabled={(e) => {
+                              const value = e
+                                .toLocaleDateString("en-US", {
+                                  weekday: "long",
+                                })
+                                .toUpperCase();
+                              return !availableTimes.some(
+                                (el) => el.dayOfWeek === value,
+                              );
+                            }}
                           />
                         </FormControl>
                         <FormMessage />
@@ -281,7 +302,7 @@ export default function BookingDialog({
                         </div>
                         <div className="flex h-96 w-full flex-wrap justify-center gap-6 overflow-y-auto pt-4">
                           {availableTimesQuery.isError ? (
-                            <div></div>
+                            <div>Loading....</div>
                           ) : availableTimesQuery.isPending ? (
                             <div></div>
                           ) : availableTimesQuery.isSuccess ? (
@@ -497,11 +518,17 @@ export default function BookingDialog({
                     </Button>
                     <Button
                       type="submit"
-                      onClick={validateAndForwardSegment}
                       className="w-[20rem] rounded-[1rem] py-[1.5rem] text-[1.5rem] font-medium leading-normal text-white"
                       disabled={bookAppointmentMutation.isPending}
                     >
-                      Book
+                      {bookAppointmentMutation.isPending ? (
+                        <>
+                          <LoadingState />
+                          Booking...
+                        </>
+                      ) : (
+                        "Book Appointment"
+                      )}
                     </Button>
                   </div>
                 </Segment>

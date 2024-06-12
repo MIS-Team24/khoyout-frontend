@@ -17,6 +17,11 @@ import {
 } from "@/components/ui";
 import { SectionHeader } from "@/components/custom";
 import { useState } from "react";
+import { fullUserType } from "../myProfile/MyProfile";
+import { useMutation } from "@tanstack/react-query";
+import { updateUserClientPersonalInfoAPi } from "@/API/profile/profile";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   first_name: z
@@ -68,27 +73,43 @@ const formSchema = z.object({
     .trim(),
 });
 
-export default function PersonalInfoForm() {
+export type userClientBasicInfoBody = z.infer<typeof formSchema>;
+
+export default function PersonalInfoForm(props: { user: fullUserType }) {
   const [edit, setEdit] = useState(false);
+  const auth = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      first_name: "",
-      last_name: "",
-      phone_number: "+20",
-      email: "",
+      first_name: props.user.firstName,
+      last_name: props.user.lastName,
+      phone_number: props.user.phone ?? "",
+      email: props.user.email,
       age: 0,
-      gender: "",
-      country: "",
-      city: "",
+      gender: props.user?.gender ?? "Male",
+      country: props.user.user?.country ?? "",
+      city: props.user.user?.city ?? "",
     },
   });
 
-  // TODO: Implement Mutation function
+  const updateMutation = useMutation({
+    mutationKey: ["user-update-personal"],
+    mutationFn: (values: userClientBasicInfoBody) =>
+      updateUserClientPersonalInfoAPi(auth.access_token() ?? "", values),
+    onSuccess: () => {
+      toast.success("Successfully updated information.");
+      setEdit(false);
+    },
+    onError: () => {
+      toast.error(
+        "Failed to update please make sure you entered the right data",
+      );
+    },
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    updateMutation.mutate(values);
   }
 
   return (
@@ -215,10 +236,10 @@ export default function PersonalInfoForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="rounded-none">
-                        <SelectItem className="rounded-none" value="male">
+                        <SelectItem className="rounded-none" value="Male">
                           Male
                         </SelectItem>
-                        <SelectItem className="rounded-none" value="female">
+                        <SelectItem className="rounded-none" value="Female">
                           Female
                         </SelectItem>
                       </SelectContent>
@@ -268,7 +289,7 @@ export default function PersonalInfoForm() {
               <Button
                 type="submit"
                 className="h-[2.9375rem] w-[17.5rem] items-center text-xl font-medium text-[#F9F4F4]"
-                disabled={!edit}
+                disabled={!edit || updateMutation.isPending}
               >
                 Save
               </Button>

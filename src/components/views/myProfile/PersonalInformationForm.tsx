@@ -24,6 +24,11 @@ import {
 } from "@/components/ui";
 import { SectionHeader } from "@/components/custom";
 import { useState } from "react";
+import { fullUserType } from "./MyProfile";
+import { useMutation } from "@tanstack/react-query";
+import useAuth from "@/hooks/useAuth";
+import { updateUserPersonalInfoAPI } from "@/API/profile/profile";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   first_name: z
@@ -84,21 +89,39 @@ const formSchema = z.object({
     .trim(),
 });
 
-export default function PersonalInfoForm() {
+export type userUpdateBasicInfoBody = z.infer<typeof formSchema>;
+
+export default function PersonalInfoForm(props: { fullUser: fullUserType }) {
   const [edit, setEdit] = useState(false);
+  const auth = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      first_name: "",
-      last_name: "",
-      bio: "",
-      phone_number: "",
-      email: "",
-      experience: 0,
-      gender: "",
-      country: "",
-      city: "",
+      first_name: props.fullUser.firstName,
+      last_name: props.fullUser.lastName,
+      bio: props.fullUser.designer?.about,
+      phone_number: props.fullUser.phone ?? undefined,
+      email: props.fullUser.email,
+      experience: props.fullUser.designer?.yearsExperience,
+      gender: props.fullUser.gender ?? undefined,
+      country: props.fullUser.designer?.location,
+      city: props.fullUser.designer?.address,
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationKey: ["designer-update-personal"],
+    mutationFn: (values: userUpdateBasicInfoBody) =>
+      updateUserPersonalInfoAPI(auth.access_token() ?? "", values),
+    onSuccess: () => {
+      toast.success("Successfully updated information.");
+      setEdit(false);
+    },
+    onError: () => {
+      toast.error(
+        "Failed to update please make sure you entered the right data",
+      );
     },
   });
 
@@ -111,7 +134,7 @@ export default function PersonalInfoForm() {
   // }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    updateMutation.mutate(values);
   }
 
   return (
@@ -298,10 +321,10 @@ export default function PersonalInfoForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="rounded-none">
-                          <SelectItem className="rounded-none" value="male">
+                          <SelectItem className="rounded-none" value="Male">
                             Male
                           </SelectItem>
-                          <SelectItem className="rounded-none" value="female">
+                          <SelectItem className="rounded-none" value="Female">
                             Female
                           </SelectItem>
                         </SelectContent>
@@ -352,7 +375,7 @@ export default function PersonalInfoForm() {
               <Button
                 type="submit"
                 className="h-[2.9375rem] w-[17.5rem] items-center text-xl font-medium text-[#F9F4F4]"
-                disabled={!edit}
+                disabled={!edit || updateMutation.isPending}
               >
                 Save
               </Button>

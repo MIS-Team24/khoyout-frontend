@@ -22,9 +22,13 @@ const mainStateReducer = createSlice({
       state.user = action.payload.user;
       return state;
     },
+    stateSetLogout: (state) => {
+      state.user = null;
+      return state;
+    },
   },
 });
 
-export const { stateSetNewAuthUser } = mainStateReducer.actions;
+export const { stateSetNewAuthUser, stateSetLogout } = mainStateReducer.actions;
 
 export default mainStateReducer.reducer;

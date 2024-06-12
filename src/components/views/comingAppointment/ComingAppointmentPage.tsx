@@ -1,163 +1,296 @@
 import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    Button,
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbLink,
 } from "@/components/ui";
-import {Clock, Calendar} from "lucide-react";
-import {Link} from "@tanstack/react-router";
-import {useState} from "react";
+import { Calendar, Clock } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getAppointments } from "@/API/appointments/appointments";
+import {
+  API_AppointmentsResponse,
+  API_AppointmentBody,
+} from "@/API/types/appointments/appointments";
+import useAuth from "@/hooks/useAuth";
+import { Error, LoadingState } from "@/components/custom";
+import { format } from "date-fns";
+import { upcomingImg } from "@/assets";
 
+const timeFormatter = new Intl.DateTimeFormat("en-US", {
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+});
 
-export default function comingAppointmentPage() {
-    const [value, setValue] = useState({
-        upcoming: true,
-    });
-    const data = [
-        {
-            date: "In 19 Aug 2024",
-            time:
-                '11 : 00 AM',
-            name: "Basma Adel",
-        },
-        {
-            date: "In 20 Aug 2024",
-            time:
-                '12 : 00 AM',
-            name: "Basma Adel",
-        },
-        {
-            date: "In 21 Aug 2024",
-            time:
-                '1 : 00 PM',
-            name: "Basma Adel",
-        },
-        {
-            date: "In 22 Aug 2024",
-            time:
-                '2 : 00 PM',
-            name: "Basma Adel",
-        },
-    ];
-    return (
-        <section className="main-container">
-            <Breadcrumb className="my-6 lg:my-12">
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink>
-                            <Link to="/home" className="text-foreground">Home</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator/>
-                    {value.upcoming ? (
-                        <BreadcrumbItem>
-                            <BreadcrumbPage className="font-semibold text-foreground">Upcoming
-                                appointments</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    ) : (
-                        <BreadcrumbItem>
-                            <BreadcrumbPage className="font-semibold text-foreground">History</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    )}
-                </BreadcrumbList>
-            </Breadcrumb>
-            <div className="sm:w-[400px] xl:w-1/2 2xl:w-[40%] mx-auto">
-                <Tabs defaultValue="upcoming">
-                    <TabsList className="flex w-full justify-between bg-transparent mb-8">
-                        <TabsTrigger value="upcoming" onClick={() => setValue({
-                            upcoming: true
-                        })
-                        }
-                                     className="text-foreground text-lg lg:text-[2rem] text-[#49454F] rounded-none data-[state='active']:!bg-transparent data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!shadow-none data-[state='active']:ring-0 data-[state='active']:text-foreground">Upcoming</TabsTrigger>
-                        <hr className="bg-border w-0.5 h-6 rounded"/>
-                        <TabsTrigger value="history" onClick={() => setValue({
-                            upcoming: false
-                        })
-                        }
-                                     className="text-foreground text-lg lg:text-[2rem] text-[#49454F] rounded-none data-[state='active']:!bg-transparent data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!shadow-none data-[state='active']:ring-0 data-[state='active']:text-foreground">History</TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="upcoming" className="flex-col gap-8 data-[state='active']:flex mb-8">
-                        {data.map(({date, time, name}, i) => (
-                            <Card key={`
-              upcoming-appointment-${i}
-            `} className="bg-transparent">
-                                <CardHeader>
-                                    <CardDescription className="text-base lg:text-xl text-foreground">
-                                        Enjoy your upcoming appointment with <span
-                                        className="lg:text-xl font-semibold text-primary">{name}</span>
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent className="space-y-2">
-                                    <div className="flex gap-8 place-items-center">
-                                        <div className="flex gap-2 place-items-center">
-                                            <Calendar size={24} className="text-secondary"/>
-                                            <p className="text-[#49454F] text-base lg:text-xl">{date}</p>
-                                        </div>
-                                        <div className="flex gap-2 place-items-center">
-                                            <Clock size={24} className="text-secondary"/>
-                                            <p className="text-[#49454F] text-lg lg:text-xl">
-                                                {time}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                                <CardFooter className="flex gap-4">
-                                    <Button variant="outline"
-                                            className="text-primary font-medium text-xl hover:text-primary bg-transparent">Reschedule</Button>
-                                    <Button variant="ghost"
-                                            className="text-primary text-xl font-medium hover:text-primary">Cancel</Button>
-                                </CardFooter>
-                            </Card>
-                        ))}
-                    </TabsContent>
-                    <TabsContent value="history" className=" flex-col gap-8 mb-8 data-[state='active']:flex">
-                        {data.map(({date, time, name}, i) => (
-                            <Card
-                                key={`
-              history-appointment-${i}
-            `} className="bg-transparent">
-                                <CardHeader>
-                                    <CardDescription className="text-base lg:text-xl text-foreground">
-                                        Your previous appointment with <span
-                                        className="text-base lg:text-xl font-semibold text-primary">{name}</span>
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent className="space-y-2">
-                                    <div className="flex gap-8 place-items-center">
-                                        <div className="flex gap-2 place-items-center">
-                                            <Calendar size={24} className="text-secondary"/>
-                                            <p className="text-[#49454F] text-base lg:text-xl">{date}</p>
-                                        </div>
-                                        <div className="flex gap-2 place-items-center">
-                                            <Clock size={24} className="text-secondary"/>
-                                            <p className="text-[#49454F] text-base lg:text-xl">
-                                                {time}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                                <CardFooter className="flex gap-4">
-                                    <Button className="h-12 text-base lg:text-xl font-medium">Write a review</Button>
-                                    <Button variant="outline"
-                                            className="text-primary font-medium text-base lg:text-xl hover:text-primary bg-transparent h-12">Message</Button>
-                                </CardFooter>
-                            </Card>
-                        ))}
-                    </TabsContent>
-                </Tabs>
-            </div>
-        </section>
-    );
+export default function ComingAppointmentPage() {
+  const { access_token } = useAuth();
+
+  const [value, setValue] = useState({
+    upcoming: true,
+  });
+  const getAppointmentsFn = () => getAppointments(access_token() ?? "");
+
+  const getAppointmentsQuery = useQuery({
+    queryKey: ["appointments"],
+    queryFn: getAppointmentsFn,
+  });
+
+  return (
+    <section className="main-container">
+      <Breadcrumb className="my-6 lg:my-12">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink>
+              <Link to="/home" className="text-foreground">
+                Home
+              </Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          {value.upcoming ? (
+            <BreadcrumbItem>
+              <BreadcrumbPage className="font-semibold text-foreground">
+                Upcoming appointments
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          ) : (
+            <BreadcrumbItem>
+              <BreadcrumbPage className="font-semibold text-foreground">
+                History
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          )}
+        </BreadcrumbList>
+      </Breadcrumb>
+      <div className="mx-auto sm:w-[400px] xl:w-1/2 2xl:w-[40%]">
+        <Tabs defaultValue="upcoming">
+          <TabsList className="mb-8 flex w-full justify-between bg-transparent">
+            <TabsTrigger
+              value="upcoming"
+              onClick={() =>
+                setValue({
+                  upcoming: true,
+                })
+              }
+              className="relative rounded-none text-lg text-[#49454F] text-foreground data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!bg-transparent data-[state='active']:text-foreground data-[state='active']:!shadow-none data-[state='active']:ring-0 lg:text-[2rem]"
+            >
+              Upcoming
+              <span className="absolute -right-5 top-0 flex h-[1.7rem] w-[1.7rem] items-center justify-center rounded-full bg-primary text-base font-medium text-white">
+                {getAppointmentsQuery.isError ? (
+                  <div className="hidden"></div>
+                ) : getAppointmentsQuery.isPending ? (
+                  <LoadingState className="mx-auto h-4 w-4" />
+                ) : getAppointmentsQuery.isSuccess ? (
+                  (
+                    (
+                      getAppointmentsQuery.data
+                        ?.data as API_AppointmentsResponse
+                    ).data as API_AppointmentBody[]
+                  ).filter((x) => x.status === "Booked").length
+                ) : (
+                  0
+                )}
+              </span>
+            </TabsTrigger>
+            <hr className="h-6 w-0.5 rounded bg-border" />
+            <TabsTrigger
+              value="history"
+              onClick={() =>
+                setValue({
+                  upcoming: false,
+                })
+              }
+              className="relative rounded-none text-lg text-[#49454F] text-foreground data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!bg-transparent data-[state='active']:text-foreground data-[state='active']:!shadow-none data-[state='active']:ring-0 lg:text-[2rem]"
+            >
+              History
+              <span className="absolute -right-5 top-0 flex h-[1.7rem] w-[1.7rem] items-center justify-center rounded-full bg-primary text-base font-medium text-white">
+                {getAppointmentsQuery.isError ? (
+                  <div className="hidden"></div>
+                ) : getAppointmentsQuery.isPending ? (
+                  <LoadingState className="mx-auto h-4 w-4" />
+                ) : getAppointmentsQuery.isSuccess ? (
+                  (
+                    (
+                      getAppointmentsQuery.data
+                        ?.data as API_AppointmentsResponse
+                    ).data as API_AppointmentBody[]
+                  ).filter(
+                    (x) => x.status === "Finished" || x.status === "Missed",
+                  ).length
+                ) : (
+                  0
+                )}
+              </span>
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent
+            value="upcoming"
+            className="mb-8 flex-col gap-8 data-[state='active']:flex"
+          >
+            {getAppointmentsQuery.isError ? (
+              <Error
+                title="Error"
+                description="An error occurred while fetching appointments"
+                image={upcomingImg}
+              />
+            ) : getAppointmentsQuery.isPending ? (
+              <p>Loading...</p>
+            ) : getAppointmentsQuery.isSuccess ? (
+              (
+                (getAppointmentsQuery.data?.data as API_AppointmentsResponse)
+                  .data as API_AppointmentBody[]
+              ).filter((x) => x.status === "Booked").length === 0 ? (
+                <div className="my-10">
+                  <Error
+                    title="No history available"
+                    description="You have no history of appointments at the moment."
+                    image={upcomingImg}
+                  />
+                </div>
+              ) : (
+                (
+                  (getAppointmentsQuery.data?.data as API_AppointmentsResponse)
+                    .data as API_AppointmentBody[]
+                )
+                  .filter((x) => x.status === "Booked")
+                  .map(({ designer, startTime, id }) => (
+                    <Card
+                      key={`
+                upcoming-appointment-id-${id}
+              `}
+                      className="bg-transparent"
+                    >
+                      <CardHeader>
+                        <CardDescription className="text-base text-foreground lg:text-xl">
+                          Enjoy your upcoming appointment with{" "}
+                          <span className="font-semibold text-primary lg:text-xl">
+                            {designer.baseAccount.firstName}{" "}
+                            {designer.baseAccount.lastName}
+                          </span>
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-2">
+                        <div className="flex place-items-center gap-8">
+                          <div className="flex place-items-center gap-2">
+                            <Calendar size={24} className="text-secondary" />
+                            <p className="text-base text-[#49454F] lg:text-xl">
+                              In {format(new Date(startTime), "dd MMMM yyyy")}
+                            </p>
+                          </div>
+                          <div className="flex place-items-center gap-2">
+                            <Clock size={24} className="text-secondary" />
+                            <p className="text-lg text-[#49454F] lg:text-xl">
+                              {timeFormatter.format(new Date(startTime))}
+                            </p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))
+              )
+            ) : (
+              <Error
+                title="Error"
+                description="An error occurred while fetching appointments"
+                image={upcomingImg}
+              />
+            )}
+          </TabsContent>
+          <TabsContent
+            value="history"
+            className=" mb-8 flex-col gap-8 data-[state='active']:flex"
+          >
+            {getAppointmentsQuery.isError ? (
+              <Error
+                title="Error"
+                description="An error occurred while fetching appointments"
+                image={upcomingImg}
+              />
+            ) : getAppointmentsQuery.isPending ? (
+              <p>Loading...</p>
+            ) : getAppointmentsQuery.isSuccess ? (
+              (
+                (getAppointmentsQuery.data?.data as API_AppointmentsResponse)
+                  .data as API_AppointmentBody[]
+              ).filter((x) => x.status === "Finished" || x.status === "Missed")
+                .length === 0 ? (
+                <div className="my-10">
+                  <Error
+                    title="No history available"
+                    description="You have no history of appointments at the moment."
+                    image={upcomingImg}
+                  />
+                </div>
+              ) : (
+                (
+                  (getAppointmentsQuery.data?.data as API_AppointmentsResponse)
+                    .data as API_AppointmentBody[]
+                )
+                  .filter(
+                    (x) => x.status === "Finished" || x.status === "Missed",
+                  )
+                  .map(({ designer, startTime, id }) => (
+                    <Card
+                      key={`
+                upcoming-appointment-id-${id}
+              `}
+                      className="bg-transparent"
+                    >
+                      <CardHeader>
+                        <CardDescription className="text-base text-foreground lg:text-xl">
+                          Enjoy your upcoming appointment with{" "}
+                          <span className="font-semibold text-primary lg:text-xl">
+                            {designer.baseAccount.firstName}{" "}
+                            {designer.baseAccount.lastName}
+                          </span>
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-2">
+                        <div className="flex place-items-center gap-8">
+                          <div className="flex place-items-center gap-2">
+                            <Calendar size={24} className="text-secondary" />
+                            <p className="text-base text-[#49454F] lg:text-xl">
+                              In {format(new Date(startTime), "dd MMMM yyyy")}
+                            </p>
+                          </div>
+                          <div className="flex place-items-center gap-2">
+                            <Clock size={24} className="text-secondary" />
+                            <p className="text-lg text-[#49454F] lg:text-xl">
+                              {timeFormatter.format(new Date(startTime))}
+                            </p>
+                          </div>
+                          <div className="flex place-items-center gap-2">
+                            <p className="text-lg text-[#49454F] lg:text-xl">
+                              {status}
+                            </p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))
+              )
+            ) : (
+              <Error
+                title="Error"
+                description="An error occurred while fetching appointments"
+                image={upcomingImg}
+              />
+            )}
+          </TabsContent>
+        </Tabs>
+      </div>
+    </section>
+  );
 }
