@@ -15,27 +15,27 @@ export default function Reviews({ reviews, ratingDetails }: ReviewsProps) {
     <section className="lg:mb-[4.25rem]">
       <div>
         <div className="mb-8">
-          <SectionHeader title="Reviews" className="my-0 mb-8" />
-          <Rating
-            initialValue={ratingDetails.rating}
-            className="relative bottom-[2px] my-3 w-full"
-            iconsCount={5}
-            readonly={true}
-            SVGclassName={`inline-block`}
-            allowFraction={true}
-            size={32}
-          />
-          {/*Store Rating*/}
-          <div className="flex gap-4">
+          <div className="flex gap-2">
+            <SectionHeader title="Reviews" className="my-0 mb-8" />
+            <p className="text-2xl text-primary">({reviews.length})</p>{" "}
+          </div>
+          <div className="flex items-center gap-4">
+            <Rating
+              initialValue={ratingDetails.rating}
+              className="relative bottom-[2px] my-3 w-full"
+              iconsCount={5}
+              readonly={true}
+              SVGclassName={`inline-block`}
+              allowFraction={true}
+              size={32}
+            />
             <p className="text-2xl text-foreground">
               {ratingDetails.rating.toString().length > 3
                 ? ratingDetails.rating.toFixed(1)
                 : ratingDetails.rating}
             </p>
-            <p className="text-2xl text-primary">
-              ({ratingDetails.ordersFinished})
-            </p>
           </div>
+          <div className="flex gap-4"></div>
         </div>
         <div>
           {reviews.map(({ avatarUrl, comment, postedOn, rating, name }, i) => (

@@ -248,7 +248,7 @@ export default function DesignerAppointmentsPage() {
                     .data as API_AppointmentBody[]
                 )
                   .filter((x) => x.status === "Waiting")
-                  .map(({ startTime, id, description, user }) => (
+                  .map(({ startTime, id, description, user, service }) => (
                     <Card
                       key={`
                 upcoming-appointment-id-${id}
@@ -279,7 +279,12 @@ export default function DesignerAppointmentsPage() {
                             </p>
                           </div>
                         </div>
-                        <p>
+                        {service ? (
+                          <p className="text-[#49454F]">
+                            Want to do : {service.title}
+                          </p>
+                        ) : null}
+                        <p className="text-[#49454F]">
                           Note: <br />{" "}
                           <span>
                             {description

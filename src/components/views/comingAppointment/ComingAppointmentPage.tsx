@@ -13,6 +13,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
   BreadcrumbLink,
+  Button,
 } from "@/components/ui";
 import { Calendar, Clock } from "lucide-react";
 import { Link } from "@tanstack/react-router";
@@ -27,6 +28,7 @@ import useAuth from "@/hooks/useAuth";
 import { Error, LoadingState } from "@/components/custom";
 import { format } from "date-fns";
 import { upcomingImg } from "@/assets";
+import WriteAReview from "./WriteReview";
 
 const timeFormatter = new Intl.DateTimeFormat("en-US", {
   hour: "2-digit",
@@ -36,6 +38,13 @@ const timeFormatter = new Intl.DateTimeFormat("en-US", {
 
 export default function ComingAppointmentPage() {
   const { access_token } = useAuth();
+  const [reviewdEntity, setReviewdEntity] = useState({
+    designerId: "",
+    appointmentId: 0,
+    designerName: "",
+  });
+
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
 
   const [value, setValue] = useState({
     upcoming: true,
@@ -46,6 +55,19 @@ export default function ComingAppointmentPage() {
     queryKey: ["appointments"],
     queryFn: getAppointmentsFn,
   });
+
+  function onClickWriteReview(
+    designerId: string,
+    designerName: string,
+    appotId: number,
+  ) {
+    setReviewdEntity({
+      appointmentId: appotId,
+      designerId: designerId,
+      designerName: designerName,
+    });
+    setIsReviewOpen(true);
+  }
 
   return (
     <section className="main-container">
@@ -241,7 +263,7 @@ export default function ComingAppointmentPage() {
                   .filter(
                     (x) => x.status === "Finished" || x.status === "Missed",
                   )
-                  .map(({ designer, startTime, id }) => (
+                  .map(({ designer, startTime, id, status, leftReview }) => (
                     <Card
                       key={`
                 upcoming-appointment-id-${id}
@@ -277,6 +299,19 @@ export default function ComingAppointmentPage() {
                             </p>
                           </div>
                         </div>
+                        {status === "Finished" && !leftReview ? (
+                          <Button
+                            onClick={() =>
+                              onClickWriteReview(
+                                designer.baseAccount.id,
+                                designer.baseAccount.firstName,
+                                id,
+                              )
+                            }
+                          >
+                            Write A Review
+                          </Button>
+                        ) : null}
                       </CardContent>
                     </Card>
                   ))
@@ -288,6 +323,13 @@ export default function ComingAppointmentPage() {
                 image={upcomingImg}
               />
             )}
+            <WriteAReview
+              appointmentId={reviewdEntity.appointmentId}
+              designerId={reviewdEntity.designerId}
+              isOpen={isReviewOpen}
+              designerName={reviewdEntity.designerName}
+              onOpenChange={setIsReviewOpen}
+            />
           </TabsContent>
         </Tabs>
       </div>

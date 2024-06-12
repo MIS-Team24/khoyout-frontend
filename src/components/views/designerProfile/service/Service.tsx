@@ -6,7 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui";
 import { Button } from "@/components/ui";
-import Team from "./team/Team";
 import Reviews from "./reviews/Reviews";
 import BookingCard from "./stickyBookingCard/StickyBookingCard";
 import { SectionHeader } from "@/components/custom";
@@ -16,6 +15,7 @@ import {
   TeamMember,
   WorkingDay,
 } from "@/API/types/designer/designer";
+import { useState } from "react";
 
 type ServiceProps = {
   services: ServiceBody[];
@@ -32,13 +32,14 @@ type ServiceProps = {
 
 export default function Service({
   services,
-  teamMembers,
   reviews,
   ratingDetails,
   name,
   workingDays,
   designerId,
 }: ServiceProps) {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="main-container">
       <SectionHeader title="Services" />
@@ -64,11 +65,12 @@ export default function Service({
                     </CardHeader>
                     <CardFooter className="flex place-items-center justify-between">
                       <p className="text-xl font-medium text-foreground">
-                        From <span>{item.price}</span>
+                        From <span>{item.price}</span> EGP
                       </p>
                       <Button
                         variant="outline"
                         className="rounded-2xl px-6 py-3 text-xl font-medium text-primary "
+                        onClick={() => setOpen(true)}
                       >
                         Book
                       </Button>
@@ -78,7 +80,6 @@ export default function Service({
               </div>
             </div>
           </section>
-          <Team teamMembers={teamMembers} />
           <Reviews reviews={reviews} ratingDetails={ratingDetails} />
         </div>
         <div className="sticky top-24 lg:w-2/5">
@@ -91,6 +92,8 @@ export default function Service({
               services,
               designerId,
             }}
+            open={open}
+            setOpen={setOpen}
           />
         </div>
       </div>
