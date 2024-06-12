@@ -115,7 +115,7 @@ export function CreateServiceModal(props: createServiceProps) {
                 <Loading /> Creating...
               </>
             ) : (
-              "Create"
+              "Create Service"
             )}
           </Button>
         </DialogFooter>
