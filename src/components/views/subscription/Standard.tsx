@@ -1,48 +1,11 @@
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-import {
-  Button,
-  Checkbox,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-  Input,
-} from "@/components/ui";
+import { Button, Checkbox, Input } from "@/components/ui";
 import { initiateCheckout } from "@/API/subscriptions/subscriptions";
 import { useMutation } from "@tanstack/react-query";
 import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
 import Loading from "@/components/custom/Loading";
-
-const formSchema = z.object({
-  designer_name: z
-    .string()
-    .min(2, {
-      message: "Input must be between 2 characters and 50 characters",
-    })
-    .max(50),
-  email: z.string().email({
-    message: "Invalid email format. Please provide a valid email address.",
-  }),
-  phone_number: z
-    .string()
-    .regex(/^\+20\d{10}$/, {
-      message:
-        "Invalid phone number format. Please provide a valid phone number with the +20 country code.",
-    })
-    .trim(),
-  location: z
-    .string()
-    .min(2, {
-      message: "Input must be between 2 characters and 50 characters",
-    })
-    .max(50),
-});
 
 function Standard() {
   const [fieldAppear, setFieldAppear] = useState(false);
@@ -71,20 +34,6 @@ function Standard() {
       );
     },
   });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      designer_name: "",
-      email: "",
-      phone_number: "",
-      location: "",
-    },
-  });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
 
   function onClickCheckout() {
     checkoutMutation.mutate();
@@ -171,86 +120,6 @@ function Standard() {
                   <p className="text-xl font-normal leading-8">200 EGP</p>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="mb-8">
-            <div className="mb-4 h-8 w-[14.0625rem] lg:mb-6">
-              <h2 className="text-2xl font-normal leading-8">
-                Personal information
-              </h2>
-            </div>
-            <div>
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
-                >
-                  <FormField
-                    control={form.control}
-                    name="designer_name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            placeholder="Designer Name"
-                            {...field}
-                            className="h-14 w-full items-center gap-2 rounded border border-[#B1B1B1] bg-transparent p-4 text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            placeholder="Email"
-                            {...field}
-                            className="h-14 w-full items-center gap-2 rounded border border-[#B1B1B1] bg-transparent p-4 text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="phone_number"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            placeholder="Phone Number"
-                            {...field}
-                            className="h-14 w-full items-center gap-2 rounded border border-[#B1B1B1] bg-transparent p-4 text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="location"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            placeholder="Location"
-                            {...field}
-                            className="h-14 w-full items-center gap-2 rounded border border-[#B1B1B1] bg-transparent p-4 text-base font-normal leading-6 text-foreground ring-0 ring-transparent placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </form>
-              </Form>
             </div>
           </div>
         </div>

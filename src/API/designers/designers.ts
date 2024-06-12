@@ -23,3 +23,29 @@ export function getDesigners(
     },
   });
 }
+
+export function createNewService(access_token: string, serviceTitle: string, serviceDescription: string, servicePrice: number)
+{
+  return client.post("/designer/services", {
+    title: serviceTitle,
+    description: serviceDescription,
+    price: servicePrice
+  }, {
+    headers: {
+      Authorization: `Bearer ${access_token}`
+    }
+  })
+}
+
+export function modifyExistingService(access_token: string, serviecId: string, serviceTitle: string, serviceDescription: string, servicePrice: number)
+{
+  return client.patch(`/designer/services/${serviecId}`, {
+    title: serviceTitle,
+    description: serviceDescription,
+    price: servicePrice
+  }, {
+    headers: {
+      Authorization: `Bearer ${access_token}`
+    }
+  })
+}

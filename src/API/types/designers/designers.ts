@@ -11,6 +11,7 @@ export type API_Designer = {
   name: string;
   openNow: boolean;
   openUntil: string;
+  reviewCount: number;
 };
 
 export type API_DesignersResponse = {

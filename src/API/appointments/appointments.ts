@@ -21,7 +21,7 @@ export function bookAppointment(
   availableTimeId: number,
   requestDescription: string,
   date: string,
-  //   service: string,
+  service: string,
   //   img: string,
 ) {
   return client.post(
@@ -30,6 +30,7 @@ export function bookAppointment(
       availableTimeId,
       requestDescription,
       date,
+      serviceId: service
       //   service,
       // img,
     },
@@ -47,4 +48,16 @@ export function getAppointments(access_token: string) {
       Authorization: `Bearer ${access_token}`,
     },
   });
+}
+
+export function writeReviewForAppointment(access_token: string, designerId: string, appointmentId: number, comment: string, rate: number)
+{
+  return client.post(`/appointments/${designerId}/${appointmentId}/reviews`, {
+    rate: rate,
+    comment: comment
+  }, {
+    headers: {
+      Authorization: `Bearer ${access_token}`
+    }
+  })
 }

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Rating } from "react-simple-star-rating";
 import {
   Card,
@@ -21,11 +21,15 @@ type BookingCardProps = {
     workingDays: WorkingDay[];
     services: Service[];
   };
+  open: boolean;
+  setOpen: (v: boolean) => void;
 };
 
-export default function BookingCard({ bookingDetails }: BookingCardProps) {
-  const [open, setOpen] = useState(false);
-
+export default function BookingCard({
+  bookingDetails,
+  open,
+  setOpen,
+}: BookingCardProps) {
   const filteredOpenedTimes = useMemo(() => {
     return bookingDetails.workingDays.filter((x) => x.hours !== "Closed");
   }, [bookingDetails.workingDays]);
@@ -54,11 +58,6 @@ export default function BookingCard({ bookingDetails }: BookingCardProps) {
               allowFraction={true}
               size={32}
             />
-            <div className="flex gap-4">
-              <p className="text-2xl font-medium text-primary">
-                ({bookingDetails.ordersFinished}) Finished Orders
-              </p>
-            </div>
           </div>
           {filteredOpenedTimes.map(({ day, hours }) => {
             const hoursArr = hours.split(" - ");

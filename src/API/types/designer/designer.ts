@@ -22,6 +22,7 @@ export type Service = {
   title: string;
   description: string;
   price: number;
+  id: string;
 };
 
 export type TeamMember = {

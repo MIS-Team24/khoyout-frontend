@@ -47,11 +47,15 @@ export type API_AppointmentBody = {
   designerId: string;
   designer: Designer;
   userId: string;
+  leftReview: boolean;
   user: User;
   startTime: string;
   endTime: string;
   description: string;
   status: string;
+  service?: {
+    title: string
+  }
 };
 
 export type API_AppointmentsResponse = {

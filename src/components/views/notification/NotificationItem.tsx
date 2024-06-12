@@ -30,7 +30,7 @@ export default function NotificationItem(
         <p className="ml-4 text-xl font-normal text-[#1F1F29]">
           <span className="text-xl font-semibold text-[#8C236C]">
             {props.sender?.name}
-          </span>
+          </span>{" "}
           Has requested an appointment with you.
         </p>
       );
@@ -53,7 +53,7 @@ export default function NotificationItem(
         <p className="ml-4 text-xl font-normal text-[#1F1F29]">
           <span className="text-xl font-semibold text-[#8C236C]">
             {props.sender?.name}
-          </span>
+          </span>{" "}
           requested for a reschedule.
         </p>
       );

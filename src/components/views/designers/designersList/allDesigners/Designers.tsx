@@ -17,7 +17,6 @@ export default function Designers({ desigenrs }: DesignerProps) {
         {desigenrs?.map(
           ({
             baseAccountId,
-            ordersFinished,
             address,
             yearsExperience,
             rating,
@@ -26,13 +25,14 @@ export default function Designers({ desigenrs }: DesignerProps) {
             name,
             openNow,
             openUntil,
+            reviewCount,
           }) => (
             <DesignerCard
               id={baseAccountId}
               name={name}
               // address={{ city: location, province: location }}
               address={address}
-              ratings={{ average: rating, totalCount: ordersFinished }}
+              ratings={{ average: rating, totalCount: reviewCount }}
               wishlisted={false}
               yearsOfExperienceCount={yearsExperience}
               key={baseAccountId}

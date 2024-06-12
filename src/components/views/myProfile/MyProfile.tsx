@@ -4,15 +4,7 @@ import {
 } from "@/API/profile/profile";
 import { PersonalForm, ProfileVideos } from ".";
 
-import {
-  edit,
-  design2,
-  design3,
-  design4,
-  member1,
-  member2,
-  member3,
-} from "@/assets";
+import { edit, design2, design3, design4 } from "@/assets";
 import { Button, Input, Label } from "@/components/ui";
 import useAuth from "@/hooks/useAuth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -23,6 +15,8 @@ import toast from "react-hot-toast";
 import { User } from "lucide-react";
 import { bodyMeasurementsType } from "../clientProfile/BodyMeasurmentform";
 import { cn } from "@/lib/utils";
+import { CreateServiceModal } from "./CreateServiceModal";
+import { useState } from "react";
 
 export type fullUserType = {
   id: string;
@@ -64,6 +58,7 @@ function MyProfile() {
   const getMe = () => getUserFullProfile(auth.access_token() ?? "");
   const queryClient = useQueryClient();
   const userFetch = useQuery({ queryKey: ["user-me"], queryFn: getMe });
+  const [isCreateOpen, setCreateOpen] = useState<boolean>(false);
 
   const uploadPFPMutation = useMutation({
     mutationKey: ["upload-pfp-mutation"],
@@ -269,102 +264,17 @@ function MyProfile() {
                   Services
                 </h2>
               </div>
-              <div>
-                <Button
-                  variant={"ghost"}
-                  className="inline-flex h-[1.75rem] w-[6.8rem] text-2xl font-medium text-[#8C236C] hover:bg-transparent hover:text-[#8C236C]"
-                >
-                  Edit
-                  <img src={edit} alt="Edit Icon" className="pl-2" />
-                </Button>
-              </div>
             </div>
             <div className="mb-8 h-6 w-full">
               <p className="text-base font-normal leading-6 text-[#6C6C6C]">
-                Visualize Your Craft: upload video to share your process
+                Let others know what you can offer them
               </p>
             </div>
-          </div>
-          <div className="mb-8 rounded-2xl bg-[#F3EBF1] p-6">
-            <div className="flex items-center justify-between pb-2">
-              <div className="h-[2.375rem] w-[14rem]">
-                <h2 className="text-[2rem] font-normal leading-normal">
-                  Team Members
-                </h2>
-              </div>
-              <div>
-                <Button
-                  variant={"ghost"}
-                  className="inline-flex h-[1.75rem] w-[6.8rem] text-2xl font-medium text-[#8C236C] hover:bg-transparent hover:text-[#8C236C]"
-                >
-                  Edit
-                  <img src={edit} alt="Edit Icon" className="pl-2" />
-                </Button>
-              </div>
-            </div>
-            <div className="mb-8 h-6 w-full">
-              <p className="text-base font-normal leading-6 text-[#6C6C6C]">
-                Visualize Your Craft: upload video to share your process
-              </p>
-            </div>
-            <div className="grid grid-cols-3 gap-6">
-              <div>
-                <div>
-                  <img
-                    className="h-[27.8125rem] w-[22rem] rounded-[0.5rem] object-cover"
-                    src={member1}
-                    alt="Team Member-1"
-                  />
-                </div>
-                <div className="h-[2.375] w-full pb-4 pt-4">
-                  <h3 className="text-center text-[2rem] font-medium leading-normal">
-                    Nada
-                  </h3>
-                </div>
-                <div className="h-6 w-full">
-                  <p className="text-basw text-center font-normal leading-6 text-[#6C6C6C]">
-                    Hand made specialist
-                  </p>
-                </div>
-              </div>
-              <div>
-                <div>
-                  <img
-                    className="h-[27.8125rem] w-[22rem] rounded-[0.5rem] object-cover"
-                    src={member2}
-                    alt="Team Member-2"
-                  />
-                </div>
-                <div className="h-[2.375] w-full pb-4 pt-4">
-                  <h3 className="text-center text-[2rem] font-medium leading-normal">
-                    Mona
-                  </h3>
-                </div>
-                <div className="h-6 w-full">
-                  <p className="text-basw text-center font-normal leading-6 text-[#6C6C6C]">
-                    Redesign specialist
-                  </p>
-                </div>
-              </div>
-              <div>
-                <div>
-                  <img
-                    className="h-[27.8125rem] w-[22rem] rounded-[0.5rem] object-cover"
-                    src={member3}
-                    alt="Team Member-3"
-                  />
-                </div>
-                <div className="h-[2.375] w-full pb-4 pt-4">
-                  <h3 className="text-center text-[2rem] font-medium leading-normal">
-                    Mariam
-                  </h3>
-                </div>
-                <div className="h-6 w-full">
-                  <p className="text-basw text-center font-normal leading-6 text-[#6C6C6C]">
-                    Sewing specialist
-                  </p>
-                </div>
-              </div>
+            <div>
+              <CreateServiceModal
+                isOpen={isCreateOpen}
+                setIsOpen={setCreateOpen}
+              />
             </div>
           </div>
         </div>

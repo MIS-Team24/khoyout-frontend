@@ -31,7 +31,7 @@ import { z } from "zod";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarDays, CircleCheck, Clock, FileUp } from "lucide-react";
+import { CalendarDays, CircleCheck, Clock } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
@@ -58,7 +58,7 @@ const formSchema = z.object({
     required_error: "A time is required.",
   }),
   timeId: z.coerce.number(),
-  service: z.string().optional(),
+  service: z.string(),
   message: z.string(),
   photo: z.union([
     z
@@ -96,7 +96,7 @@ type FormKey = keyof typeof formSchema.shape;
 const fieldOfSegments: FormKey[][] = [
   ["date"],
   ["time"],
-  ["service", "photo", "message"],
+  ["service", "message"],
 ];
 
 export default function BookingDialog({
@@ -135,6 +135,7 @@ export default function BookingDialog({
       values.timeId,
       values.message,
       format(values.date, "yyyy-MM-dd"),
+      values.service,
     );
 
   const bookAppointmentMutation = useMutation({
@@ -204,7 +205,7 @@ export default function BookingDialog({
               <Segmentator currentSegment={currentSegment}>
                 <Segment>
                   <h1 className="pb-[2.5rem] pt-2 text-center text-[2.5rem] font-normal leading-normal text-gray-800">
-                    Book an appointment with your{" "}
+                    Book an appointment with{" "}
                     <span className="font-medium text-primary">
                       {designerName ?? "Designer"}
                     </span>
@@ -263,7 +264,7 @@ export default function BookingDialog({
                 </Segment>
                 <Segment>
                   <h1 className="pb-[2.5rem] pt-2 text-center text-[2.5rem] font-normal leading-normal text-gray-800">
-                    Book an appointment with your{" "}
+                    Book an appointment with{" "}
                     <span className="font-medium text-primary">
                       {" "}
                       {designerName ?? "Designer"}
@@ -379,7 +380,7 @@ export default function BookingDialog({
                 </Segment>
                 <Segment>
                   <h1 className="pb-[2.5rem] pt-2 text-center text-[2.5rem] font-normal leading-normal text-gray-800">
-                    Book an appointment with your{" "}
+                    Book an appointment with{" "}
                     <span className="font-medium text-primary">
                       {" "}
                       {designerName ?? "Designer"}
@@ -439,50 +440,15 @@ export default function BookingDialog({
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {services.map(({ title }) => (
-                              <SelectItem key={title} value={title}>
-                                {title}
-                              </SelectItem>
-                            ))}
+                            {services.map((service) => {
+                              return (
+                                <SelectItem key={service.id} value={service.id}>
+                                  {service.title}
+                                </SelectItem>
+                              );
+                            })}
                           </SelectContent>
                         </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="photo"
-                    render={({ field }) => (
-                      <FormItem className="mx-auto flex w-[23rem] flex-col">
-                        <FormControl>
-                          <label
-                            className="group flex w-full cursor-pointer appearance-none justify-center rounded-md border border-[#B1B1B1] px-3 py-4 transition hover:border-gray-400 hover:border-primary focus:border-solid focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75"
-                            tabIndex={0}
-                          >
-                            <span className="flex items-center space-x-2">
-                              <span className="text-base font-normal text-secondary transition group-hover:text-primary">
-                                {field.value?.name
-                                  ? field.value?.name
-                                  : "Upload a photo for the design inspired you"}
-                              </span>
-                              <FileUp
-                                size={24}
-                                className="text-secondary transition group-hover:text-primary"
-                              />
-                            </span>
-                            <Input
-                              id="photo-dropbox"
-                              type="file"
-                              className="sr-only"
-                              onChange={(e) =>
-                                field.onChange(
-                                  e.target?.files && e.target?.files[0],
-                                )
-                              }
-                            />
-                          </label>
-                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -549,7 +515,7 @@ export default function BookingDialog({
                     <div className="flex w-full justify-center gap-8 pt-[3.95rem]">
                       <Link
                         // TODO: Replace this with the actual link to the user id of the designer
-                        to="/"
+                        to="/coming-appointment"
                         onClick={() => {
                           onChange(false);
                           setCurrentSegment(0);
