@@ -25,8 +25,11 @@ import { getNotifications } from "@/API/notification/notification";
 import { API_NotificationResponse } from "@/API/types/notifications/notifications";
 import { logout } from "@/API/auth/login/login";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { stateSetLogout } from "@/store/features/user";
 
 const NavigationBar = forwardRef(function (_, ref) {
+  const dispatch = useDispatch();
   const router = useRouterState();
   const matches = router.matches;
   const [isExpanded, setIsExpanded] = useState<boolean>();
@@ -85,6 +88,7 @@ const NavigationBar = forwardRef(function (_, ref) {
 
   function onClickLogout() {
     logoutMutation.mutate();
+    dispatch(stateSetLogout());
   }
 
   const toBeUsedTabs =
@@ -174,69 +178,93 @@ const NavigationBar = forwardRef(function (_, ref) {
           {userQuery.isPending ? (
             <UserSkeleton />
           ) : userQuery.isSuccess ? (
-            <div className="flex items-center gap-5">
-              <div>
-                <Link
-                  className="relative m-0 h-[24px] w-[17px] rounded-none bg-transparent px-4 py-0 hover:bg-transparent"
-                  to="/notifications"
-                >
-                  <img src={bell} />
-                  {hasNotifications ? (
-                    <div className="absolute bottom-[40px] right-[-2px] h-1.5 w-1.5 rounded-full bg-[#b3261e] outline outline-2 outline-white"></div>
-                  ) : null}
+            access_token() ? (
+              <div className="flex items-center gap-5">
+                <div>
+                  <Link
+                    className="relative m-0 h-[24px] w-[17px] rounded-none bg-transparent px-4 py-0 hover:bg-transparent"
+                    to="/notifications"
+                  >
+                    <img src={bell} />
+                    {hasNotifications ? (
+                      <div className="absolute bottom-[40px] right-[-2px] h-1.5 w-1.5 rounded-full bg-[#b3261e] outline outline-2 outline-white"></div>
+                    ) : null}
+                  </Link>
+                </div>
+                <div className="flex items-center gap-4">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <div className="flex cursor-pointer items-center gap-2">
+                        {processedData?.avatarURL ? (
+                          <img
+                            src={
+                              processedData?.avatarURL + "?q=" + Math.random()
+                            }
+                            className="aspect-square w-12 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f3ebf1]">
+                            <User />
+                          </div>
+                        )}
+                        <h1>
+                          {/* {processedData?.firstName ?? "Unknown"}{" "}
+                          {processedData?.lastName ?? "Unknown"} */}
+                          {auth.user?.user.fullName ?? "Unknown User"}
+                        </h1>
+                        <Button className="cursor-pointer border-none bg-transparent text-black outline-none hover:bg-transparent">
+                          <ChevronDown />
+                        </Button>
+                      </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56">
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem asChild className="cursor-pointer">
+                          <Link to="/my-profile" className="flex">
+                            <User className="mr-2 h-4 w-4" />
+                            <span>Profile</span>
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild className="cursor-pointer">
+                          <Link to="/coming-appointment" className="flex">
+                            <NotepadText className="mr-2 h-4 w-4" />
+                            <span>Booking</span>
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="cursor-pointer"
+                          onClick={onClickLogout}
+                        >
+                          <LogOut className="mr-2 h-4 w-4" />
+                          <span>Log out</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center gap-4">
+                <Link to="/login">
+                  <Button
+                    variant={"ghost"}
+                    className="py-7 text-xl text-primary hover:text-primary"
+                  >
+                    Log In
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button
+                    variant={"default"}
+                    className="rounded-2xl px-4 py-7 text-xl"
+                  >
+                    Sign Up
+                  </Button>
                 </Link>
               </div>
-              <div className="flex items-center gap-4">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <div className="flex cursor-pointer items-center gap-2">
-                      {processedData?.avatarURL ? (
-                        <img
-                          src={processedData?.avatarURL + "?q=" + Math.random()}
-                          className="aspect-square w-12 rounded-full object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f3ebf1]">
-                          <User />
-                        </div>
-                      )}
-                      <h1>
-                        {processedData?.firstName ?? "Unknown"}{" "}
-                        {processedData?.lastName ?? "Unknown"}
-                      </h1>
-                      <Button className="cursor-pointer border-none bg-transparent text-black outline-none hover:bg-transparent">
-                        <ChevronDown />
-                      </Button>
-                    </div>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem asChild className="cursor-pointer">
-                        <Link to="/my-profile" className="flex">
-                          <User className="mr-2 h-4 w-4" />
-                          <span>Profile</span>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild className="cursor-pointer">
-                        <Link to="/coming-appointment" className="flex">
-                          <NotepadText className="mr-2 h-4 w-4" />
-                          <span>Booking</span>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer"
-                        onClick={onClickLogout}
-                      >
-                        <LogOut className="mr-2 h-4 w-4" />
-                        <span>Log out</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            </div>
+            )
           ) : (
             <div className="flex items-center gap-4">
               <Link to="/login">
