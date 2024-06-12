@@ -5,7 +5,16 @@ import {
 import { PersonalForm, ProfileVideos } from ".";
 
 import { edit, design2, design3, design4 } from "@/assets";
-import { Button, Input, Label } from "@/components/ui";
+import {
+  Button,
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
+} from "@/components/ui";
 import useAuth from "@/hooks/useAuth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AvailableTimeBody } from "@/API/types/appointments/appointments";
@@ -105,6 +114,14 @@ function MyProfile() {
     const theUser: fullUserType = userFetch.data.data as fullUserType;
     const doesDesignerHaveLocation =
       theUser.designer?.longtitude && theUser.designer?.latitude;
+
+    const services: {
+      description: string;
+      designerId: string;
+      id: string;
+      price: number;
+      title: string;
+    }[] = theUser.designer?.services ?? [];
 
     return (
       <section>
@@ -270,11 +287,37 @@ function MyProfile() {
                 Let others know what you can offer them
               </p>
             </div>
-            <div>
+            <div className="my-2">
               <CreateServiceModal
                 isOpen={isCreateOpen}
                 setIsOpen={setCreateOpen}
               />
+            </div>
+            <div className="flex flex-col gap-4">
+              {services.map((service) => {
+                return (
+                  <Card
+                    className="rounded-2xl"
+                    key={`
+                service-${service.id}
+              `}
+                  >
+                    <CardHeader className="gap-4">
+                      <CardTitle className="font-medium text-foreground">
+                        {service.title}
+                      </CardTitle>
+                      <CardDescription className="text-xl text-secondary">
+                        {service.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardFooter className="flex place-items-center justify-between">
+                      <p className="text-xl font-medium text-foreground">
+                        From <span>{service.price}</span> EGP
+                      </p>
+                    </CardFooter>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </div>
