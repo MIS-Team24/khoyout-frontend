@@ -31,7 +31,7 @@ import {
   API_AppointmentBody,
 } from "@/API/types/appointments/appointments";
 import useAuth from "@/hooks/useAuth";
-import { Error } from "@/components/custom";
+import { Error, LoadingState } from "@/components/custom";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { getAppointments } from "@/API/appointments/appointments";
@@ -143,9 +143,21 @@ export default function DesignerAppointmentsPage() {
                   page: "Request",
                 })
               }
-              className="rounded-none text-lg text-[#49454F] text-foreground data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!bg-transparent data-[state='active']:text-foreground data-[state='active']:!shadow-none data-[state='active']:ring-0 lg:text-[2rem]"
+              className="relative rounded-none text-lg text-[#49454F] text-foreground data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!bg-transparent data-[state='active']:text-foreground data-[state='active']:!shadow-none data-[state='active']:ring-0 lg:text-[2rem]"
             >
               Request
+              <span className="absolute -right-5 top-0 flex h-[1.7rem] w-[1.7rem] items-center justify-center rounded-full bg-primary text-base font-medium text-white">
+                {getRequestsQuery.isPending ? (
+                  <LoadingState className="mx-auto h-4 w-4" />
+                ) : getRequestsQuery.isSuccess ? (
+                  (
+                    (getRequestsQuery.data?.data as API_AppointmentsResponse)
+                      .data as API_AppointmentBody[]
+                  ).filter((x) => x.status === "Waiting").length
+                ) : (
+                  0
+                )}
+              </span>
             </TabsTrigger>
             <hr className="h-6 w-0.5 rounded bg-border" />
             <TabsTrigger
@@ -155,9 +167,25 @@ export default function DesignerAppointmentsPage() {
                   page: "Upcoming appointments",
                 })
               }
-              className="rounded-none text-lg text-[#49454F] text-foreground data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!bg-transparent data-[state='active']:text-foreground data-[state='active']:!shadow-none data-[state='active']:ring-0 lg:text-[2rem]"
+              className="relative rounded-none text-lg text-[#49454F] text-foreground data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!bg-transparent data-[state='active']:text-foreground data-[state='active']:!shadow-none data-[state='active']:ring-0 lg:text-[2rem]"
             >
               Upcoming
+              <span className="absolute -right-5 top-0 flex h-[1.7rem] w-[1.7rem] items-center justify-center rounded-full bg-primary text-base font-medium text-white">
+                {getAppointmentsQuery.isError ? (
+                  <div className="hidden"></div>
+                ) : getAppointmentsQuery.isPending ? (
+                  <LoadingState className="mx-auto h-4 w-4" />
+                ) : getAppointmentsQuery.isSuccess ? (
+                  (
+                    (
+                      getAppointmentsQuery.data
+                        ?.data as API_AppointmentsResponse
+                    ).data as API_AppointmentBody[]
+                  ).filter((x) => x.status === "Booked").length
+                ) : (
+                  0
+                )}
+              </span>
             </TabsTrigger>
             <hr className="h-6 w-0.5 rounded bg-border" />
             <TabsTrigger
@@ -167,9 +195,27 @@ export default function DesignerAppointmentsPage() {
                   page: "History",
                 })
               }
-              className="rounded-none text-lg text-[#49454F] text-foreground data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!bg-transparent data-[state='active']:text-foreground data-[state='active']:!shadow-none data-[state='active']:ring-0 lg:text-[2rem]"
+              className="relative rounded-none text-lg text-[#49454F] text-foreground data-[state='active']:border-b-[3px] data-[state='active']:border-primary data-[state='active']:!bg-transparent data-[state='active']:text-foreground data-[state='active']:!shadow-none data-[state='active']:ring-0 lg:text-[2rem]"
             >
               History
+              <span className="absolute -right-5 top-0 flex h-[1.7rem] w-[1.7rem] items-center justify-center rounded-full bg-primary text-base font-medium text-white">
+                {getAppointmentsQuery.isError ? (
+                  <div className="hidden"></div>
+                ) : getAppointmentsQuery.isPending ? (
+                  <LoadingState className="mx-auto h-4 w-4" />
+                ) : getAppointmentsQuery.isSuccess ? (
+                  (
+                    (
+                      getAppointmentsQuery.data
+                        ?.data as API_AppointmentsResponse
+                    ).data as API_AppointmentBody[]
+                  ).filter(
+                    (x) => x.status === "Finished" || x.status === "Missed",
+                  ).length
+                ) : (
+                  0
+                )}
+              </span>
             </TabsTrigger>
           </TabsList>
           <TabsContent
