@@ -32,8 +32,8 @@ export default function Inspiration({
       <div className="rounded-[0.5rem] pt-8">
         <Carousel
           plugins={[autoplay.current]}
-          onMouseEnter={autoplay.current.stop}
-          onMouseLeave={autoplay.current.play}
+          // onMouseEnter={autoplay.current.stop}
+          // onMouseLeave={autoplay.current.play}
           className="h-full w-full rounded-[0.5rem]"
         >
           <CarouselContent>

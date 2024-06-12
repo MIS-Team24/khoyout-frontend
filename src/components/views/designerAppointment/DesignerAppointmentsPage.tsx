@@ -480,7 +480,7 @@ export default function DesignerAppointmentsPage() {
                   .filter(
                     (x) => x.status === "Finished" || x.status === "Missed",
                   )
-                  .map(({ designer, startTime, id, status }) => (
+                  .map(({ startTime, id, status, user }) => (
                     <Card
                       key={`
                 upcoming-appointment-id-${id}
@@ -491,8 +491,8 @@ export default function DesignerAppointmentsPage() {
                         <CardDescription className="text-base text-foreground lg:text-xl">
                           Your past appointment with{" "}
                           <span className="font-semibold text-primary lg:text-xl">
-                            {designer.baseAccount.firstName}{" "}
-                            {designer.baseAccount.lastName}
+                            {user.baseAccount.firstName}{" "}
+                            {user.baseAccount.lastName}
                           </span>
                         </CardDescription>
                       </CardHeader>
