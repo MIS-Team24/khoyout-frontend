@@ -48,15 +48,3 @@ export function getAppointments(access_token: string) {
     },
   });
 }
-
-export function cancelRequest(
-  access_token: string,
-  designerId: string,
-  requestId: number,
-) {
-  return client.delete(`/appointments/${designerId}/requests/${requestId}`, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
-}
