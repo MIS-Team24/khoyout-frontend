@@ -3,9 +3,11 @@ import { designerNotFound } from "@/assets";
 const Error = ({
   title,
   description,
+  image,
 }: {
   title: string;
   description: string;
+  image?: string;
 }) => (
   <div className="flex w-full flex-col items-center gap-y-4">
     <div className="flex flex-col space-y-0.5 text-center">
@@ -16,9 +18,9 @@ const Error = ({
     </div>
     <div className="h-[25rem] w-[33rem]">
       <img
-        src={designerNotFound}
+        src={image ?? designerNotFound}
         className="h-full w-full object-cover"
-        alt="designer-not-found"
+        alt={"designer-not-found " + `${image}`}
       />
     </div>
   </div>
